@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: #383838;
+}
+
+/********** Menu style **********/
+.menu-bar {
+    -fx-background-color: #282828;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #080808;
+}
+.menu .label {
+    -fx-text-fill: white;
+}
+.menu-button:hover {
+    -fx-background-color: #282828;
+}
+.menu-button:showing {
+    -fx-background-color: steelblue;
+}
+.menu-item .label {
+    -fx-text-fill: white;
+}
+.menu-item:focused {
+    -fx-background-color: steelblue;
+}
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: #282828;
+    -fx-border-width: 1;
+    -fx-border-color: #484848;
+    -fx-padding: 0 0 0 0;
+}
+.separator *.line{
+    -fx-border-width: 0.5;
+    -fx-border-color: #484848;
+}
+/********** End of menu style **********/
