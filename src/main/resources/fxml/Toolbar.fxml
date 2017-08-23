@@ -1,72 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToolBar?>
-
-<?import org.controlsfx.glyphfont.Glyph?>
 <?import javafx.scene.control.Separator?>
-<ToolBar xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
-         fx:controller="com.github.marnow955.yourview.ToolbarController">
-    <Button mnemonicParsing="false">
+<?import javafx.scene.control.ToolBar?>
+<?import org.controlsfx.glyphfont.Glyph?>
+
+<ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.marnow955.yourview.ToolbarController">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="chevron_left"/>
+            <Glyph fontFamily="FontAwesome" icon="chevron_left" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_alt"/>
+            <Glyph fontFamily="FontAwesome" icon="arrows_alt" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="chevron_right"/>
+            <Glyph fontFamily="FontAwesome" icon="chevron_right" />
         </graphic>
     </Button>
-    <Separator/>
-    <Button mnemonicParsing="false">
+    <Separator />
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search_minus"/>
+            <Glyph fontFamily="FontAwesome" icon="search_minus" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search_plus"/>
+            <Glyph fontFamily="FontAwesome" icon="search_plus" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search"/>
+            <Glyph fontFamily="FontAwesome" icon="search" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_h"/>
+            <Glyph fontFamily="FontAwesome" icon="arrows_h" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_v"/>
+            <Glyph fontFamily="FontAwesome" icon="arrows_v" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="expand"/>
+            <Glyph fontFamily="FontAwesome" icon="expand" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="compress"/>
+            <Glyph fontFamily="FontAwesome" icon="compress" />
         </graphic>
     </Button>
-    <Separator/>
-    <Button mnemonicParsing="false">
+    <Separator />
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="repeat"/>
+            <Glyph fontFamily="FontAwesome" icon="repeat" />
         </graphic>
     </Button>
-    <Button mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="undo"/>
+            <Glyph fontFamily="FontAwesome" icon="undo" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="sort" />
+        </graphic>
+    </Button>
+    <Separator />
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="th_large" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="desktop" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="delicious" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="floppy_alt" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="trash_alt" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="print" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="info" />
+        </graphic>
+    </Button>
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="cog" />
         </graphic>
     </Button>
 </ToolBar>

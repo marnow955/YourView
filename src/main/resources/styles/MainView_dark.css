@@ -12,7 +12,7 @@
     -fx-text-fill: white;
 }
 .menu-button:hover {
-    -fx-background-color: #282828;
+    -fx-background-color: #383838;
 }
 .menu-button:showing {
     -fx-background-color: steelblue;
@@ -27,11 +27,28 @@
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-background-color: #282828;
     -fx-border-width: 1;
-    -fx-border-color: #484848;
+    -fx-border-color: #585858;
     -fx-padding: 0 0 0 0;
 }
 .separator *.line{
     -fx-border-width: 0.5;
-    -fx-border-color: #484848;
+    -fx-border-color: #585858;
 }
 /********** End of menu style **********/
+
+/********** Toolbar **********/
+.tool-bar {
+    -fx-background-color: #383838;
+}
+.tool-bar .button {
+    -fx-background-color: #383838;
+}
+.tool-bar .button:hover {
+    -fx-background-color: steelblue;
+}
+.tool-bar .button:pressed {
+    -fx-background-color: #5793C5;
+}
+.tool-bar .button .label {
+    -fx-text-fill: #DDD;
+}
