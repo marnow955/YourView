@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -27,6 +28,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         String theme = properties.getProperty("theme");
         scene.getStylesheets().add(getClass().getResource("/styles/MainView_" + theme + ".css").toExternalForm());
+        primaryStage.getIcons().add(new Image(getClass().getResource("/images/YV_logo.png").toExternalForm()));
         primaryStage.setTitle("Your View");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
