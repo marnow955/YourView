@@ -16,16 +16,16 @@
                 <BorderPane.margin>
                     <Insets bottom="10.0"/>
                 </BorderPane.margin>
-                <Menu text="%file">
-                    <MenuItem text="%open_file" onAction="#openFile"/>
-                    <MenuItem text="%save" accelerator="Shortcut+S"/>
+                <Menu text="%menu_file">
+                    <MenuItem text="%menu_open_file" onAction="#openFile"/>
+                    <MenuItem text="%menu_save" accelerator="Shortcut+S"/>
                     <SeparatorMenuItem/>
-                    <MenuItem text="%exit"/>
+                    <MenuItem text="%menu_exit"/>
                 </Menu>
-                <Menu text="%edit">
+                <Menu text="%menu_edit">
                 </Menu>
-                <Menu text="%help">
-                    <MenuItem text="%about"/>
+                <Menu text="%menu_help">
+                    <MenuItem text="%menu_about"/>
                 </Menu>
             </MenuBar>
             <fx:include fx:id="toolbar" source="Toolbar.fxml"/>
