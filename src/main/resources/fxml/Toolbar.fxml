@@ -5,7 +5,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.marnow955.yourview.ToolbarController">
+<ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.marnow955.yourview.controllers.ToolbarController">
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="chevron_left" />
