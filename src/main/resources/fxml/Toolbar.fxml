@@ -5,118 +5,211 @@
 <?import javafx.scene.control.ToolBar?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
+<?import javafx.scene.control.Tooltip?>
 <ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.marnow955.yourview.ToolbarController">
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="chevron_left" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%prev_img"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_alt" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%full_scr"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="chevron_right" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%next_img"/>
+        </tooltip>
     </Button>
+
     <Separator />
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_minus" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%zoom_out"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_plus" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%zoom_in"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%zoom_0"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_h" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%width_scale"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_v" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%height_scale"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="expand" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%image_adjust"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="compress" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%window_adjust"/>
+        </tooltip>
     </Button>
+
     <Separator />
-    <Button focusTraversable="false" mnemonicParsing="false">
-        <graphic>
-            <Glyph fontFamily="FontAwesome" icon="repeat" />
-        </graphic>
-    </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="undo" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%rotate_left"/>
+        </tooltip>
     </Button>
+
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="repeat" />
+        </graphic>
+        <tooltip>
+            <Tooltip text="%rotate_right"/>
+        </tooltip>
+    </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%flip_h"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%flip_v"/>
+        </tooltip>
     </Button>
+
     <Separator />
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="th_large" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%show_th"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="desktop" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%slideshow"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="delicious" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%show_background"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="floppy_alt" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%save"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="trash_alt" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%delete"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="print" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%print"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="info" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%info"/>
+        </tooltip>
     </Button>
+
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="cog" />
         </graphic>
+        <tooltip>
+            <Tooltip text="%settings"/>
+        </tooltip>
     </Button>
+
 </ToolBar>

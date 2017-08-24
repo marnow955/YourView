@@ -21,6 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Properties properties = loadProperties();
+        CustomTooltipBehavior.updateTooltipBehavior(300, 5000, 200, false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(properties.getProperty("language"))));
         Parent root = loader.load();
