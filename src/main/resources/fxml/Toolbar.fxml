@@ -6,11 +6,14 @@
 <?import org.controlsfx.glyphfont.Glyph?>
 
 <?import javafx.scene.control.Tooltip?>
-<ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.marnow955.yourview.controllers.ToolbarController">
+<?import javafx.scene.control.ToggleButton?>
+
+<ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="com.github.marnow955.yourview.controllers.ToolbarController">
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="chevron_left" />
+            <Glyph fontFamily="FontAwesome" icon="chevron_left"/>
         </graphic>
         <tooltip>
             <Tooltip text="%prev_img"/>
@@ -19,7 +22,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_alt" />
+            <Glyph fontFamily="FontAwesome" icon="arrows_alt"/>
         </graphic>
         <tooltip>
             <Tooltip text="%full_scr"/>
@@ -28,18 +31,18 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="chevron_right" />
+            <Glyph fontFamily="FontAwesome" icon="chevron_right"/>
         </graphic>
         <tooltip>
             <Tooltip text="%next_img"/>
         </tooltip>
     </Button>
 
-    <Separator />
+    <Separator/>
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search_minus" />
+            <Glyph fontFamily="FontAwesome" icon="search_minus"/>
         </graphic>
         <tooltip>
             <Tooltip text="%zoom_out"/>
@@ -48,7 +51,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search_plus" />
+            <Glyph fontFamily="FontAwesome" icon="search_plus"/>
         </graphic>
         <tooltip>
             <Tooltip text="%zoom_in"/>
@@ -57,7 +60,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="search" />
+            <Glyph fontFamily="FontAwesome" icon="search"/>
         </graphic>
         <tooltip>
             <Tooltip text="%zoom_0"/>
@@ -66,7 +69,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_h" />
+            <Glyph fontFamily="FontAwesome" icon="arrows_h"/>
         </graphic>
         <tooltip>
             <Tooltip text="%width_scale"/>
@@ -75,7 +78,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="arrows_v" />
+            <Glyph fontFamily="FontAwesome" icon="arrows_v"/>
         </graphic>
         <tooltip>
             <Tooltip text="%height_scale"/>
@@ -84,7 +87,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="expand" />
+            <Glyph fontFamily="FontAwesome" icon="expand"/>
         </graphic>
         <tooltip>
             <Tooltip text="%image_adjust"/>
@@ -93,18 +96,18 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="compress" />
+            <Glyph fontFamily="FontAwesome" icon="compress"/>
         </graphic>
         <tooltip>
             <Tooltip text="%window_adjust"/>
         </tooltip>
     </Button>
 
-    <Separator />
+    <Separator/>
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="undo" />
+            <Glyph fontFamily="FontAwesome" icon="undo"/>
         </graphic>
         <tooltip>
             <Tooltip text="%rotate_left"/>
@@ -113,7 +116,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="repeat" />
+            <Glyph fontFamily="FontAwesome" icon="repeat"/>
         </graphic>
         <tooltip>
             <Tooltip text="%rotate_right"/>
@@ -122,7 +125,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;" />
+            <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;"/>
         </graphic>
         <tooltip>
             <Tooltip text="%flip_h"/>
@@ -131,18 +134,18 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="sort" />
+            <Glyph fontFamily="FontAwesome" icon="sort"/>
         </graphic>
         <tooltip>
             <Tooltip text="%flip_v"/>
         </tooltip>
     </Button>
 
-    <Separator />
+    <Separator/>
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="th_large" />
+            <Glyph fontFamily="FontAwesome" icon="th_large"/>
         </graphic>
         <tooltip>
             <Tooltip text="%show_th"/>
@@ -151,25 +154,25 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="desktop" />
+            <Glyph fontFamily="FontAwesome" icon="desktop"/>
         </graphic>
         <tooltip>
             <Tooltip text="%slideshow"/>
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <ToggleButton fx:id="shBackgroundBtn" focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="delicious" />
+            <Glyph fontFamily="FontAwesome" icon="delicious"/>
         </graphic>
         <tooltip>
             <Tooltip text="%show_background"/>
         </tooltip>
-    </Button>
+    </ToggleButton>
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="floppy_alt" />
+            <Glyph fontFamily="FontAwesome" icon="floppy_alt"/>
         </graphic>
         <tooltip>
             <Tooltip text="%save"/>
@@ -178,7 +181,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="trash_alt" />
+            <Glyph fontFamily="FontAwesome" icon="trash_alt"/>
         </graphic>
         <tooltip>
             <Tooltip text="%delete"/>
@@ -187,7 +190,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="print" />
+            <Glyph fontFamily="FontAwesome" icon="print"/>
         </graphic>
         <tooltip>
             <Tooltip text="%print"/>
@@ -196,7 +199,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="info" />
+            <Glyph fontFamily="FontAwesome" icon="info"/>
         </graphic>
         <tooltip>
             <Tooltip text="%info"/>
@@ -205,7 +208,7 @@
 
     <Button focusTraversable="false" mnemonicParsing="false">
         <graphic>
-            <Glyph fontFamily="FontAwesome" icon="cog" />
+            <Glyph fontFamily="FontAwesome" icon="cog"/>
         </graphic>
         <tooltip>
             <Tooltip text="%settings"/>

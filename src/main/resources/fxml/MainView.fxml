@@ -7,6 +7,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.CheckMenuItem?>
+
 <BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.github.marnow955.yourview.controllers.MainController">
 
@@ -23,6 +25,9 @@
                     <MenuItem text="%menu_exit"/>
                 </Menu>
                 <Menu text="%menu_edit">
+                </Menu>
+                <Menu text="%menu_view">
+                    <CheckMenuItem fx:id="chBackground" text="%menu_ch_background"/>
                 </Menu>
                 <Menu text="%menu_help">
                     <MenuItem text="%menu_about"/>

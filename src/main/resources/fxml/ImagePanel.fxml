@@ -5,8 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 
 <ScrollPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.github.marnow955.yourview.controllers.ImagePanelController">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.marnow955.yourview.controllers.ImagePanelController">
 
     <StackPane fx:id="stackPane" prefWidth="${stackPane.parent.width}" prefHeight="${stackPane.parent.height}">
         <ImageView fx:id="imageView"/>

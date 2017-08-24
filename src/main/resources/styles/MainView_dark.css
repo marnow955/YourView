@@ -8,21 +8,27 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #080808;
 }
+
 .menu .label {
     -fx-text-fill: white;
 }
+
 .menu-button:hover {
     -fx-background-color: #383838;
 }
+
 .menu-button:showing {
     -fx-background-color: steelblue;
 }
+
 .menu-item .label {
     -fx-text-fill: white;
 }
+
 .menu-item:focused {
     -fx-background-color: steelblue;
 }
+
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-background-color: #282828;
@@ -30,39 +36,52 @@
     -fx-border-color: #585858;
     -fx-padding: 0 0 0 0;
 }
-.separator *.line{
+
+.separator *.line {
     -fx-border-width: 0.5;
     -fx-border-color: #585858;
 }
+
 /********** End of menu style **********/
 
 /********** Toolbar **********/
 .tool-bar {
     -fx-background-color: #383838;
 }
-.tool-bar .button {
+
+.tool-bar .button, .toggle-button {
     -fx-background-color: #383838;
 }
-.tool-bar .button:hover {
+
+.tool-bar .button:hover, .toggle-button:hover {
     -fx-background-color: steelblue;
 }
-.tool-bar .button:pressed {
+
+.tool-bar .button:pressed, .toggle-button:pressed {
     -fx-background-color: #5793C5;
 }
-.tool-bar .button .label {
+
+.tool-bar .button .label, .toggle-button .label {
     -fx-text-fill: #DDD;
 }
+
+.tool-bar .toggle-button:selected {
+    -fx-background-color: steelblue;
+}
+
 /********** End of toolbar style **********/
 
 /********** Image Panel **********/
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+
 .scroll-pane {
     -fx-background-color: transparent;
 }
-/*#stackPane {*/
-    /*-fx-background-color: #000;*/
-    /*!*-fx-background-image: url('../ps-neutral.png');*!*/
-    /*!*-fx-background-repeat: repeat;*!*/
-/*}*/
+
+.checked {
+    -fx-background-color: #000;
+    -fx-background-image: url('../images/ps-neutral.png');
+    -fx-background-repeat: repeat;
+}

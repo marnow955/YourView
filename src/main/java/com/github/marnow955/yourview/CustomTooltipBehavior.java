@@ -10,14 +10,15 @@ public class CustomTooltipBehavior {
 
     /**
      * Hack allowing to modify the default behavior of the tooltips.
-     * @param openDelay The open delay, knowing that by default it is set to 1000.
+     *
+     * @param openDelay       The open delay, knowing that by default it is set to 1000.
      * @param visibleDuration The visible duration, knowing that by default it is set to 5000.
-     * @param closeDelay The close delay, knowing that by default it is set to 200.
-     * @param hideOnExit Indicates whether the tooltip should be hide on exit,
-     * knowing that by default it is set to false.
+     * @param closeDelay      The close delay, knowing that by default it is set to 200.
+     * @param hideOnExit      Indicates whether the tooltip should be hide on exit,
+     *                        knowing that by default it is set to false.
      */
     public static void updateTooltipBehavior(double openDelay, double visibleDuration,
-                                              double closeDelay, boolean hideOnExit) {
+                                             double closeDelay, boolean hideOnExit) {
         try {
             // Get the non public field "BEHAVIOR"
             Field fieldBehavior = Tooltip.class.getDeclaredField("BEHAVIOR");
