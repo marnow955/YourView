@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class OpenSaveImageDialog {
 
+    private Stage display;
+    private FileChooser fileChooser;
+
     private FileChooser.ExtensionFilter[] filters = {
             new FileChooser.ExtensionFilter("Image (*.png, *.jpg, *.gif, *.bmp)", "*.png", "*.jpg", "*.gif", "*.bmp", "*.jpeg",
                     "*.PNG", "*.JPG", "*.GIF", "*.BMP", "*.JPEG"),
@@ -21,20 +24,23 @@ public class OpenSaveImageDialog {
             new FileChooser.ExtensionFilter(".bmp", "*.bmp", "*.BMP")
     };
 
-    private boolean checkFileExtension(File file) {
-        for (String filter : filters[0].getExtensions()) {
-            if (file.getName().endsWith(filter.substring(1))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Image openImage(Stage displayWindow) {
-        FileChooser fileChooser = new FileChooser();
+    public OpenSaveImageDialog(Stage display) {
+        this.display = display;
+        fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(filters);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        File file = fileChooser.showOpenDialog(displayWindow);
+    }
+
+    public File showOpenDialog() {
+        return fileChooser.showOpenDialog(display);
+    }
+
+    public File showSaveDialog() {
+        fileChooser.setInitialFileName("*.png");
+        return fileChooser.showSaveDialog(display);
+    }
+
+    public Image openImage(File file) {
         if (file != null) {
             if (checkFileExtension(file)) {
                 return new Image(file.toURI().toString());
@@ -45,24 +51,29 @@ public class OpenSaveImageDialog {
         return null;
     }
 
-    public void saveImage(Image image, Stage displayWindow) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(filters);
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setInitialFileName("*.png");
-        File file = fileChooser.showSaveDialog(displayWindow);
-        if (file != null) {
+    public void saveImage(Image image, File path) {
+        if (path != null) {
             try {
-                if (checkFileExtension(file)) {
-                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), file.getName().substring(
-                            file.getName().lastIndexOf(".") + 1), file);
+                if (checkFileExtension(path)) {
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), path.getName().substring(
+                            path.getName().lastIndexOf(".") + 1), path);
                 } else {
-                    new Alert(Alert.AlertType.ERROR, file.getName() + " has no valid file-extension").show();
+                    new Alert(Alert.AlertType.ERROR, path.getName() + " has no valid file-extension").show();
                 }
             } catch (IOException e) {
-                new Alert(Alert.AlertType.ERROR, String.format("Cannot save file %s", file.getPath())).show();
+                new Alert(Alert.AlertType.ERROR, String.format("Cannot save file %s", path.getPath())).show();
             }
         }
     }
+
+    private boolean checkFileExtension(File file) {
+        for (String filter : filters[0].getExtensions()) {
+            if (file.getName().endsWith(filter.substring(1))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 

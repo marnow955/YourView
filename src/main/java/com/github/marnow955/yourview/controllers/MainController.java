@@ -10,6 +10,8 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class MainController {
 
     @FXML
@@ -24,6 +26,7 @@ public class MainController {
     private CheckMenuItem chBackground;
 
     private Stage window;
+    private File originalImageFile;
     private Image originalImage;
 
     //TODO: change initial to settings value
@@ -44,9 +47,12 @@ public class MainController {
 
     @FXML
     void openFile() {
-        originalImage = new OpenSaveImageDialog().openImage(window);
+        OpenSaveImageDialog opener = new OpenSaveImageDialog(window);
+        originalImageFile = opener.showOpenDialog();
+        originalImage = opener.openImage(originalImageFile);
         if (originalImage != null) {
             imagePanelController.setImage(originalImage);
+            window.setTitle("Your View - " + originalImageFile.getName());
         }
     }
 }
