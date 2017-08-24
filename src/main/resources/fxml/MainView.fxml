@@ -8,7 +8,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.github.marnow955.yourview.MainController">
+            fx:controller="com.github.marnow955.yourview.controllers.MainController">
 
     <top>
         <VBox>
@@ -17,7 +17,7 @@
                     <Insets bottom="10.0"/>
                 </BorderPane.margin>
                 <Menu text="%file">
-                    <MenuItem text="%open_file"/>
+                    <MenuItem text="%open_file" onAction="#openFile"/>
                     <MenuItem text="%save" accelerator="Shortcut+S"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="%exit"/>
@@ -31,5 +31,9 @@
             <fx:include fx:id="toolbar" source="Toolbar.fxml"/>
         </VBox>
     </top>
+
+    <center>
+        <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
+    </center>
 
 </BorderPane>

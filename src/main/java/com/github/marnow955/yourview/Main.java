@@ -1,5 +1,6 @@
 package com.github.marnow955.yourview;
 
+import com.github.marnow955.yourview.controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ public class Main extends Application {
         loader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(properties.getProperty("language"))));
         Parent root = loader.load();
         MainController controller = loader.getController();
+        controller.setStageAndSetupView(primaryStage);
         Scene scene = new Scene(root);
         String theme = properties.getProperty("theme");
         scene.getStylesheets().add(getClass().getResource("/styles/MainView_" + theme + ".css").toExternalForm());

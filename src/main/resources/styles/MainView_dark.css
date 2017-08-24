@@ -52,3 +52,17 @@
 .tool-bar .button .label {
     -fx-text-fill: #DDD;
 }
+/********** End of toolbar style **********/
+
+/********** Image Panel **********/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+/*#stackPane {*/
+    /*-fx-background-color: #000;*/
+    /*!*-fx-background-image: url('../ps-neutral.png');*!*/
+    /*!*-fx-background-repeat: repeat;*!*/
+/*}*/
