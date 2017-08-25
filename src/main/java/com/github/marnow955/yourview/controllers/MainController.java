@@ -55,4 +55,12 @@ public class MainController {
             window.setTitle("Your View - " + originalImageFile.getName());
         }
     }
+
+    void scaleToWidth() {
+        imagePanelController.scaleToWidth(originalImage);
+    }
+
+    void scaleToHeight() {
+        imagePanelController.scaleToHeiht(originalImage);
+    }
 }

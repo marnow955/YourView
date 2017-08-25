@@ -17,4 +17,14 @@ public class ToolbarController {
     void setupView() {
         shBackgroundBtn.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
     }
+
+    @FXML
+    private void scaleToWidth() {
+        mainController.scaleToWidth();
+    }
+
+    @FXML
+    private void scaleToHeight() {
+        mainController.scaleToHeight();
+    }
 }

@@ -67,7 +67,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToWidth">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_h"/>
         </graphic>
@@ -76,7 +76,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToHeight">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_v"/>
         </graphic>
