@@ -61,7 +61,7 @@ public class MainController {
     }
 
     void scaleToHeight() {
-        imagePanelController.scaleToHeiht(originalImage);
+        imagePanelController.scaleToHeight(originalImage);
     }
 
     void adjustImage() {
@@ -71,6 +71,7 @@ public class MainController {
     void adjustWindow() {
         window.setMaximized(false);
         toolbar.setPrefWidth(originalImage.getWidth() + 2);
+        imagePanelController.setImage(originalImage);
         imagePanel.setPrefSize(originalImage.getWidth() + 2, originalImage.getHeight() + 2);
         window.sizeToScene();
     }
