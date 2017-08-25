@@ -40,11 +40,25 @@ public class ImagePanelController {
 
     void scaleToWidth(Image image) {
         setImage(image);
-        imageView.setFitWidth(scrollPane.getWidth()-2);
+        imageView.setFitWidth(scrollPane.getWidth() - 2);
     }
 
     void scaleToHeiht(Image image) {
         setImage(image);
-        imageView.setFitHeight(scrollPane.getHeight()-2);
+        imageView.setFitHeight(scrollPane.getHeight() - 2);
+    }
+
+    void adjustImage(Image image) {
+        setImage(image);
+        imageView.setFitWidth(scrollPane.getWidth() - 2);
+        imageView.setFitHeight(scrollPane.getHeight() - 2);
+    }
+
+    double getImageViewWidth() {
+        return imageView.getFitWidth();
+    }
+
+    double getImageViewHeight() {
+        return imageView.getFitHeight();
     }
 }

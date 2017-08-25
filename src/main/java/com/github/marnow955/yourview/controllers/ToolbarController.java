@@ -27,4 +27,14 @@ public class ToolbarController {
     private void scaleToHeight() {
         mainController.scaleToHeight();
     }
+
+    @FXML
+    private void adjustImage() {
+        mainController.adjustImage();
+    }
+
+    @FXML
+    private void adjustWindow() {
+        mainController.adjustWindow();
+    }
 }
