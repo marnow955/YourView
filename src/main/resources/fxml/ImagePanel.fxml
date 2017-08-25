@@ -6,7 +6,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.github.marnow955.yourview.controllers.ImagePanelController">
+            fx:controller="com.github.marnow955.yourview.controllers.ImagePanelController" fx:id="scrollPane">
 
     <StackPane fx:id="stackPane" prefWidth="${stackPane.parent.width}" prefHeight="${stackPane.parent.height}">
         <ImageView fx:id="imageView"/>

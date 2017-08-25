@@ -55,4 +55,23 @@ public class MainController {
             window.setTitle("Your View - " + originalImageFile.getName());
         }
     }
+
+    void scaleToWidth() {
+        imagePanelController.scaleToWidth(originalImage);
+    }
+
+    void scaleToHeight() {
+        imagePanelController.scaleToHeiht(originalImage);
+    }
+
+    void adjustImage() {
+        imagePanelController.adjustImage(originalImage);
+    }
+
+    void adjustWindow() {
+        window.setMaximized(false);
+        toolbar.setPrefWidth(originalImage.getWidth() + 2);
+        imagePanel.setPrefSize(originalImage.getWidth() + 2, originalImage.getHeight() + 2);
+        window.sizeToScene();
+    }
 }
