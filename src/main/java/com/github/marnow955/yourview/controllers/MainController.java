@@ -1,7 +1,7 @@
 package com.github.marnow955.yourview.controllers;
 
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
-import com.github.marnow955.yourview.data.OpenSaveImageDialog;
+import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -48,15 +48,14 @@ public class MainController {
     @FXML
     private void openFile() {
         //TODO: open on working directory - especially when another image is already selected
-        OpenSaveImageDialog dialog = new OpenSaveImageDialog(window, System.getProperty("user.home"));
-        File imageFile = dialog.showOpenDialog();
+        File imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
         directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         openImage(imageFile);
     }
 
     private void openImage(File imageFile) {
         originalImageFile = imageFile;
-        originalImage = OpenSaveImageDialog.openImage(originalImageFile);
+        originalImage = ImageReaderWriter.openImage(originalImageFile);
         image = originalImage;
         processingController = new ImageManipulationsController();
         if (image != null) {
@@ -68,10 +67,9 @@ public class MainController {
     void saveFile() {
         //TODO: check selected flag (its no sense to check if it is null now
         //TODO: check null condition (also in openFile) - transfer code to setImage?
-        OpenSaveImageDialog dialog = new OpenSaveImageDialog(window, originalImageFile.getParent());
         //TODO: check is not null
-        originalImageFile = dialog.showSaveDialog(originalImageFile);
-        dialog.saveImage(image, originalImageFile);
+        originalImageFile = ImageReaderWriter.showSaveDialog(window, originalImageFile);
+        ImageReaderWriter.saveImage(image, originalImageFile);
         originalImage = image;
         processingController = new ImageManipulationsController();
         if (image != null) {

@@ -10,10 +10,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class OpenSaveImageDialog {
-
-    private Stage display;
-    private FileChooser fileChooser;
+public class ImageReaderWriter {
 
     private static final FileChooser.ExtensionFilter[] filters = {
             new FileChooser.ExtensionFilter("Image (*.png, *.jpg, *.gif, *.bmp)", "*.png", "*.jpg", "*.gif", "*.bmp", "*.jpeg",
@@ -24,18 +21,17 @@ public class OpenSaveImageDialog {
             new FileChooser.ExtensionFilter(".bmp", "*.bmp", "*.BMP")
     };
 
-    public OpenSaveImageDialog(Stage display, String directory) {
-        this.display = display;
-        fileChooser = new FileChooser();
+    public static File showOpenDialog(Stage display, String directory) {
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(filters);
         fileChooser.setInitialDirectory(new File(directory));
-    }
-
-    public File showOpenDialog() {
         return fileChooser.showOpenDialog(display);
     }
 
-    public File showSaveDialog(File originalImageFile) {
+    public static File showSaveDialog(Stage display, File originalImageFile) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(filters);
+        fileChooser.setInitialDirectory(new File(originalImageFile.getParent()));
         fileChooser.setInitialFileName(originalImageFile.getName());
         return fileChooser.showSaveDialog(display);
     }
@@ -66,7 +62,7 @@ public class OpenSaveImageDialog {
         }
     }
 
-    static boolean checkFileExtension(File file) {
+    public static boolean checkFileExtension(File file) {
         for (String filter : filters[0].getExtensions()) {
             if (file.getName().endsWith(filter.substring(1))) {
                 return true;
