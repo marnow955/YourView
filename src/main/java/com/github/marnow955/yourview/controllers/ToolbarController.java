@@ -48,4 +48,14 @@ public class ToolbarController {
     private void rotateRight() {
         mainController.rotateRight();
     }
+
+    @FXML
+    private void horizontalFlip() {
+        mainController.horizontalFlip();
+    }
+
+    @FXML
+    private void verticalFlip() {
+        mainController.verticalFlip();
+    }
 }

@@ -92,4 +92,15 @@ public class MainController {
         image = processingController.rotateRight(image);
         imagePanelController.setImage(image);
     }
+
+    void horizontalFlip() {
+        //TODO: check if exif flags exist
+        image = processingController.horizontalFlip(image);
+        imagePanelController.setImage(image);
+    }
+
+    void verticalFlip() {
+        image = processingController.verticalFlip(image);
+        imagePanelController.setImage(image);
+    }
 }
