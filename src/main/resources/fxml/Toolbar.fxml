@@ -170,7 +170,7 @@
         </tooltip>
     </ToggleButton>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#saveFile">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="floppy_alt"/>
         </graphic>

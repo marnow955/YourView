@@ -24,19 +24,19 @@ public class OpenSaveImageDialog {
             new FileChooser.ExtensionFilter(".bmp", "*.bmp", "*.BMP")
     };
 
-    public OpenSaveImageDialog(Stage display) {
+    public OpenSaveImageDialog(Stage display, String directory) {
         this.display = display;
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(filters);
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialDirectory(new File(directory));
     }
 
     public File showOpenDialog() {
         return fileChooser.showOpenDialog(display);
     }
 
-    public File showSaveDialog() {
-        fileChooser.setInitialFileName("*.png");
+    public File showSaveDialog(File originalImageFile) {
+        fileChooser.setInitialFileName(originalImageFile.getName());
         return fileChooser.showSaveDialog(display);
     }
 

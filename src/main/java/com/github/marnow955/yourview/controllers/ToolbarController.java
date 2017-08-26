@@ -58,4 +58,9 @@ public class ToolbarController {
     private void verticalFlip() {
         mainController.verticalFlip();
     }
+
+    @FXML
+    private void saveFile() {
+        mainController.saveFile();
+    }
 }

@@ -44,18 +44,33 @@ public class MainController {
     }
 
     private void showCheckedBackground(Boolean newValue) {
-        isChBackgroundSelectedProperty.set(newValue);
         imagePanelController.showCheckedBackground(newValue);
     }
 
     @FXML
-    void openFile() {
-        OpenSaveImageDialog opener = new OpenSaveImageDialog(window);
-        originalImageFile = opener.showOpenDialog();
-        originalImage = opener.openImage(originalImageFile);
+    private void openFile() {
+        //TODO: open on working directory - especially when another image is already selected
+        OpenSaveImageDialog dialog = new OpenSaveImageDialog(window, System.getProperty("user.home"));
+        originalImageFile = dialog.showOpenDialog();
+        originalImage = dialog.openImage(originalImageFile);
         image = originalImage;
         processingController = new ImageManipulationsController();
-        if (originalImage != null) {
+        if (image != null) {
+            imagePanelController.setImage(image);
+            window.setTitle("Your View - " + originalImageFile.getName());
+        }
+    }
+
+    void saveFile() {
+        //TODO: check selected flag (its no sense to check if it is null now
+        //TODO: check null condition (also in openFile) - transfer code to setImage?
+        OpenSaveImageDialog dialog = new OpenSaveImageDialog(window, originalImageFile.getParent());
+        //TODO: check is not null
+        originalImageFile = dialog.showSaveDialog(originalImageFile);
+        dialog.saveImage(image, originalImageFile);
+        originalImage = image;
+        processingController = new ImageManipulationsController();
+        if (image != null) {
             imagePanelController.setImage(image);
             window.setTitle("Your View - " + originalImageFile.getName());
         }
