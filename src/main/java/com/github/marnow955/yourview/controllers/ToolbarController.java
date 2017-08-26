@@ -1,6 +1,5 @@
 package com.github.marnow955.yourview.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
 
@@ -72,5 +71,10 @@ public class ToolbarController {
     @FXML
     private void nextImage() {
         mainController.nextImage();
+    }
+
+    @FXML
+    private void printImage() {
+        mainController.printImage();
     }
 }

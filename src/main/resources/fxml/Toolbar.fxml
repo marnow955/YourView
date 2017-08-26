@@ -188,7 +188,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#printImage">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="print"/>
         </graphic>

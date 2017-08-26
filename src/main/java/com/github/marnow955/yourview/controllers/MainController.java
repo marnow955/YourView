@@ -6,16 +6,21 @@ import com.github.marnow955.yourview.data.processing.ImageManipulationsControlle
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.print.PrinterJob;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ResourceBundle;
 
 public class MainController {
 
+    @FXML
+    ResourceBundle resources;
     @FXML
     private ToolBar toolbar;
     @FXML
@@ -131,5 +136,19 @@ public class MainController {
 
     private void showCheckedBackground(Boolean newValue) {
         imagePanelController.showCheckedBackground(newValue);
+    }
+
+    void printImage() {
+        ImageView printableContener = new ImageView(image);
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob != null) {
+            boolean confirm = printerJob.showPrintDialog(window);
+            if (confirm) {
+                boolean succeeded = printerJob.printPage(printableContener);
+                if (succeeded) {
+                    printerJob.endJob();
+                }
+            }
+        }
     }
 }
