@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview.image.processing;
+package com.github.marnow955.yourview.data.processing;
 
 import javafx.scene.image.Image;
 
@@ -22,13 +22,13 @@ public class OperationsResults {
     public Image undo() throws Exception {
         if (historyIndex >= 0) {
             historyIndex--;
-            return history.get(historyIndex+1);
+            return history.get(historyIndex + 1);
         }
         throw new Exception();
     }
 
     public Image redo() throws Exception {
-        if (historyIndex < history.size()-1) {
+        if (historyIndex < history.size() - 1) {
             historyIndex++;
             history.get(historyIndex);
         }

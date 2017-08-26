@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview.image.processing;
+package com.github.marnow955.yourview.data.processing;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;

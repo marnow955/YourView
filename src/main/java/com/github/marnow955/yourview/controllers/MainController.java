@@ -2,7 +2,7 @@ package com.github.marnow955.yourview.controllers;
 
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.OpenSaveImageDialog;
-import com.github.marnow955.yourview.image.processing.ImageManipulationsController;
+import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;

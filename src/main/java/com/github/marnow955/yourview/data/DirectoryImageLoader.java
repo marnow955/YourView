@@ -13,7 +13,7 @@ public class DirectoryImageLoader {
         File[] filesInDirectory = directory.listFiles();
         for (int i = 0; i < filesInDirectory.length; i++) {
             if (filesInDirectory[i].isFile()) {
-                if (OpenSaveImageDialog.checkFileExtension(filesInDirectory[i])){
+                if (OpenSaveImageDialog.checkFileExtension(filesInDirectory[i])) {
                     listOfImagesFiles.add(filesInDirectory[i]);
                 }
             }
@@ -25,13 +25,13 @@ public class DirectoryImageLoader {
         if (index > 0) {
             return listOfImagesFiles.get(--index);
         } else {
-            return listOfImagesFiles.get(listOfImagesFiles.size()-1);
+            return listOfImagesFiles.get(listOfImagesFiles.size() - 1);
         }
     }
 
     public File getNextImage(File file) {
         int index = listOfImagesFiles.indexOf(file);
-        if (index < listOfImagesFiles.size()-1) {
+        if (index < listOfImagesFiles.size() - 1) {
             return listOfImagesFiles.get(++index);
         } else {
             return listOfImagesFiles.get(0);
