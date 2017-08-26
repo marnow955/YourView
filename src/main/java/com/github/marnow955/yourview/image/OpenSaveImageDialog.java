@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview;
+package com.github.marnow955.yourview.image;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;

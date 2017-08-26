@@ -105,7 +105,7 @@
 
     <Separator/>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateLeft">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="undo"/>
         </graphic>
@@ -114,7 +114,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateRight">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="repeat"/>
         </graphic>
@@ -123,7 +123,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#horizontalFlip">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;"/>
         </graphic>
@@ -132,7 +132,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#verticalFlip">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort"/>
         </graphic>

@@ -1,5 +1,6 @@
 package com.github.marnow955.yourview.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
 
@@ -36,5 +37,25 @@ public class ToolbarController {
     @FXML
     private void adjustWindow() {
         mainController.adjustWindow();
+    }
+
+    @FXML
+    private void rotateLeft() {
+        mainController.rotateLeft();
+    }
+
+    @FXML
+    private void rotateRight() {
+        mainController.rotateRight();
+    }
+
+    @FXML
+    private void horizontalFlip() {
+        mainController.horizontalFlip();
+    }
+
+    @FXML
+    private void verticalFlip() {
+        mainController.verticalFlip();
     }
 }
