@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview.image;
+package com.github.marnow955.yourview.data;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
@@ -15,7 +15,7 @@ public class OpenSaveImageDialog {
     private Stage display;
     private FileChooser fileChooser;
 
-    private FileChooser.ExtensionFilter[] filters = {
+    private static final FileChooser.ExtensionFilter[] filters = {
             new FileChooser.ExtensionFilter("Image (*.png, *.jpg, *.gif, *.bmp)", "*.png", "*.jpg", "*.gif", "*.bmp", "*.jpeg",
                     "*.PNG", "*.JPG", "*.GIF", "*.BMP", "*.JPEG"),
             new FileChooser.ExtensionFilter(".png", "*.png", "*.PNG"),
@@ -40,7 +40,7 @@ public class OpenSaveImageDialog {
         return fileChooser.showSaveDialog(display);
     }
 
-    public Image openImage(File file) {
+    public static Image openImage(File file) {
         if (file != null) {
             if (checkFileExtension(file)) {
                 return new Image(file.toURI().toString());
@@ -51,7 +51,7 @@ public class OpenSaveImageDialog {
         return null;
     }
 
-    public void saveImage(Image image, File path) {
+    public static void saveImage(Image image, File path) {
         if (path != null) {
             try {
                 if (checkFileExtension(path)) {
@@ -66,7 +66,7 @@ public class OpenSaveImageDialog {
         }
     }
 
-    private boolean checkFileExtension(File file) {
+    static boolean checkFileExtension(File file) {
         for (String filter : filters[0].getExtensions()) {
             if (file.getName().endsWith(filter.substring(1))) {
                 return true;

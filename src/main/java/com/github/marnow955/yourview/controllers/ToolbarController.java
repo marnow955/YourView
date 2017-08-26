@@ -63,4 +63,14 @@ public class ToolbarController {
     private void saveFile() {
         mainController.saveFile();
     }
+
+    @FXML
+    private void previousImage() {
+        mainController.previousImage();
+    }
+
+    @FXML
+    private void nextImage() {
+        mainController.nextImage();
+    }
 }
