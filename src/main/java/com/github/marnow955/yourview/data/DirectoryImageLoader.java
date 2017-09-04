@@ -42,4 +42,11 @@ public class DirectoryImageLoader {
     public int getNrOfImagesInDirectory() {
         return listOfImagesFiles.size();
     }
+
+    public boolean hasAnotherImage() {
+        if (listOfImagesFiles.size() > 1)
+            return true;
+        else
+            return false;
+    }
 }

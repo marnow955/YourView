@@ -179,7 +179,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#deleteFile">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="trash_alt"/>
         </graphic>

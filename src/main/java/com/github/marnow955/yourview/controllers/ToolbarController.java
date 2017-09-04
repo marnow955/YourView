@@ -77,4 +77,9 @@ public class ToolbarController {
     private void printImage() {
         mainController.printImage();
     }
+
+    @FXML
+    private void deleteFile() {
+        mainController.deleteFile();
+    }
 }

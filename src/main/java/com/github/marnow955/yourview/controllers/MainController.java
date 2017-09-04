@@ -3,18 +3,19 @@ package com.github.marnow955.yourview.controllers;
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
+import com.sun.jna.platform.FileUtils;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController {
@@ -54,11 +55,11 @@ public class MainController {
     private void openFile() {
         //TODO: open on working directory - especially when another image is already selected
         File imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
-        directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         openImage(imageFile);
     }
 
     private void openImage(File imageFile) {
+        directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         originalImageFile = imageFile;
         originalImage = ImageReaderWriter.openImage(originalImageFile);
         image = originalImage;
@@ -83,12 +84,46 @@ public class MainController {
         }
     }
 
-    void previousImage() {
-        openImage(directory.getPreviousImage(originalImageFile));
+    void deleteFile() {
+        //TODO: check selected img flag
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage alertWindow = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertWindow.getIcons().addAll(window.getIcons());
+        alert.setTitle(resources.getString("del_conf_title"));
+        alert.setHeaderText(null);
+        alert.setContentText(resources.getString("del_conf_content"));
+        ButtonType deleteBT = new ButtonType(resources.getString("w_delete"), ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBT = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(deleteBT, cancelBT);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == deleteBT) {
+            FileUtils fileUtils = FileUtils.getInstance();
+            if (fileUtils.hasTrash()) {
+                try {
+                    fileUtils.moveToTrash(new File[]{originalImageFile});
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                originalImageFile.delete();
+            }
+            if (directory.hasAnotherImage()) {
+                openImage(directory.getNextImage(originalImageFile));
+            } else {
+                //TODO: clearImage (delete file, image set flag, clear view etc
+            }
+        }
     }
 
+    void previousImage() {
+        if (directory.hasAnotherImage())
+            openImage(directory.getPreviousImage(originalImageFile));
+    }
+    
     void nextImage() {
-        openImage(directory.getNextImage(originalImageFile));
+        if (directory.hasAnotherImage())
+            openImage(directory.getNextImage(originalImageFile));
     }
 
     void scaleToWidth() {
