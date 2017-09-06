@@ -105,7 +105,7 @@ public class MainController {
             if (directory.hasAnotherImage()) {
                 openImage(directory.getNextImage(originalImageFile));
             } else {
-                //TODO: clearImage (delete file, image set flag, clear view etc
+                clearWorkspace();
             }
         }
     }
@@ -123,6 +123,17 @@ public class MainController {
         alert.getButtonTypes().addAll(deleteBT, cancelBT);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == deleteBT;
+    }
+
+    void clearWorkspace() {
+        originalImageFile = null;
+        directory = null;
+        originalImage = null;
+        image = null;
+        processingController = null;
+        isImageSelectedProperty.set(false);
+        imagePanelController.setImage(null);
+        window.setTitle("Your View");
     }
 
     void previousImage() {
