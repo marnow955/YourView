@@ -11,7 +11,7 @@
 <ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="com.github.marnow955.yourview.controllers.ToolbarController">
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#previousImage">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#previousImage" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="chevron_left"/>
         </graphic>
@@ -20,7 +20,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_alt"/>
         </graphic>
@@ -29,7 +29,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#nextImage">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#nextImage" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="chevron_right"/>
         </graphic>
@@ -40,7 +40,7 @@
 
     <Separator/>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_minus"/>
         </graphic>
@@ -49,7 +49,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_plus"/>
         </graphic>
@@ -58,7 +58,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search"/>
         </graphic>
@@ -67,7 +67,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToWidth">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToWidth" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_h"/>
         </graphic>
@@ -76,7 +76,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToHeight">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#scaleToHeight" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_v"/>
         </graphic>
@@ -85,7 +85,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#adjustImage">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#adjustImage" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="expand"/>
         </graphic>
@@ -94,7 +94,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#adjustWindow">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#adjustWindow" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="compress"/>
         </graphic>
@@ -105,7 +105,7 @@
 
     <Separator/>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateLeft">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateLeft" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="undo"/>
         </graphic>
@@ -114,7 +114,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateRight">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#rotateRight" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="repeat"/>
         </graphic>
@@ -123,7 +123,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#horizontalFlip">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#horizontalFlip" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort" style="-fx-rotate: 90;"/>
         </graphic>
@@ -132,7 +132,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#verticalFlip">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#verticalFlip" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="sort"/>
         </graphic>
@@ -152,7 +152,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="desktop"/>
         </graphic>
@@ -170,7 +170,7 @@
         </tooltip>
     </ToggleButton>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#saveFile">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#saveFile" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="floppy_alt"/>
         </graphic>
@@ -179,7 +179,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#deleteFile">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#deleteFile" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="trash_alt"/>
         </graphic>
@@ -188,7 +188,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#printImage">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#printImage" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="print"/>
         </graphic>
@@ -197,7 +197,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="info"/>
         </graphic>

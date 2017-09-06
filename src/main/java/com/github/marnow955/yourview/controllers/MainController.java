@@ -42,6 +42,7 @@ public class MainController {
 
     //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
 
     public void setStageAndSetupView(Stage primaryStage) {
         window = primaryStage;
@@ -66,6 +67,7 @@ public class MainController {
         processingController = new ImageManipulationsController();
         if (image != null) {
             imagePanelController.setImage(image);
+            isImageSelectedProperty.set(true);
             window.setTitle("Your View - " + originalImageFile.getName());
         }
     }
@@ -120,7 +122,7 @@ public class MainController {
         if (directory.hasAnotherImage())
             openImage(directory.getPreviousImage(originalImageFile));
     }
-    
+
     void nextImage() {
         if (directory.hasAnotherImage())
             openImage(directory.getNextImage(originalImageFile));

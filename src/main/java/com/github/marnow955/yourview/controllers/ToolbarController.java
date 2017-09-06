@@ -1,5 +1,7 @@
 package com.github.marnow955.yourview.controllers;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
 
@@ -10,11 +12,22 @@ public class ToolbarController {
 
     private MainController mainController;
 
+    private BooleanProperty isDisabled = new SimpleBooleanProperty(false);
+
+    public boolean getIsDisabled() {
+        return isDisabled.get();
+    }
+
+    public BooleanProperty isDisabledProperty() {
+        return isDisabled;
+    }
+
     void injectMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
     void setupView() {
+        isDisabled.bind(mainController.isImageSelectedProperty.not());
         shBackgroundBtn.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
     }
 
