@@ -8,7 +8,7 @@
 
     <Menu text="%menu_file">
         <MenuItem text="%menu_open_file" onAction="#openFile"/>
-        <MenuItem text="%menu_save" accelerator="Shortcut+S"/>
+        <MenuItem text="%menu_save" onAction="#saveFile" disable="${controller.isDisabled}" accelerator="Shortcut+S"/>
         <SeparatorMenuItem/>
         <MenuItem text="%menu_exit"/>
     </Menu>
