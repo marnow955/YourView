@@ -68,7 +68,8 @@ public class MainController {
     }
 
     private void openImage(File imageFile) {
-        //TODO: check is imageFile not null
+        if (imageFile == null)
+            return;
         directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         originalImageFile = imageFile;
         originalImage = ImageReaderWriter.openImage(originalImageFile);
@@ -82,21 +83,14 @@ public class MainController {
     }
 
     void saveFile() {
-        //TODO: check selected flag (its no sense to check if it is null now
-        //TODO: check null condition (also in openFile) - transfer code to setImage?
-        //TODO: check is not null
         originalImageFile = ImageReaderWriter.showSaveDialog(window, originalImageFile);
+        if (originalImageFile == null)
+            return;
         ImageReaderWriter.saveImage(image, originalImageFile);
-        originalImage = image;
-        processingController = new ImageManipulationsController();
-        if (image != null) {
-            imagePanelController.setImage(image);
-            window.setTitle("Your View - " + originalImageFile.getName());
-        }
+        openImage(originalImageFile);
     }
 
     void deleteFile() {
-        //TODO: check selected img flag
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Stage alertWindow = (Stage) alert.getDialogPane().getScene().getWindow();
         alertWindow.getIcons().addAll(window.getIcons());
@@ -170,7 +164,6 @@ public class MainController {
     }
 
     void horizontalFlip() {
-        //TODO: check if exif flags exist
         image = processingController.horizontalFlip(image);
         imagePanelController.setImage(image);
     }

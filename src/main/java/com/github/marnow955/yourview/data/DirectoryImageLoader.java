@@ -11,7 +11,6 @@ public class DirectoryImageLoader {
     public DirectoryImageLoader(File directory) {
         listOfImagesFiles = new ArrayList<>();
         File[] filesInDirectory = directory.listFiles();
-        //TODO: check null warning
         for (int i = 0; i < filesInDirectory.length; i++) {
             if (filesInDirectory[i].isFile()) {
                 if (ImageReaderWriter.checkFileExtension(filesInDirectory[i])) {
