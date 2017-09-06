@@ -91,18 +91,7 @@ public class MainController {
     }
 
     void deleteFile() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage alertWindow = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertWindow.getIcons().addAll(window.getIcons());
-        alert.setTitle(resources.getString("del_conf_title"));
-        alert.setHeaderText(null);
-        alert.setContentText(resources.getString("del_conf_content"));
-        ButtonType deleteBT = new ButtonType(resources.getString("w_delete"), ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelBT = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(deleteBT, cancelBT);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == deleteBT) {
+        if (deleteConfirm()) {
             FileUtils fileUtils = FileUtils.getInstance();
             if (fileUtils.hasTrash()) {
                 try {
@@ -119,6 +108,21 @@ public class MainController {
                 //TODO: clearImage (delete file, image set flag, clear view etc
             }
         }
+    }
+
+    private boolean deleteConfirm() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage alertWindow = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertWindow.getIcons().addAll(window.getIcons());
+        alert.setTitle(resources.getString("del_conf_title"));
+        alert.setHeaderText(null);
+        alert.setContentText(resources.getString("del_conf_content"));
+        ButtonType deleteBT = new ButtonType(resources.getString("w_delete"), ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelBT = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(deleteBT, cancelBT);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == deleteBT;
     }
 
     void previousImage() {
