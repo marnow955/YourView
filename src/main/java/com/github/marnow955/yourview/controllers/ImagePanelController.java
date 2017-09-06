@@ -24,7 +24,6 @@ public class ImagePanelController {
     private ImageView imageView;
 
     private BooleanProperty isZoom = new SimpleBooleanProperty(false);
-    private final DoubleProperty zoomProperty = new SimpleDoubleProperty(200);
 
     public void initialize() {
         //TODO: only if image selected and zoomed
@@ -32,17 +31,8 @@ public class ImagePanelController {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        zoomProperty.addListener(arg0 -> {
-            if (isZoom.get()) {
-                imageView.setFitWidth(zoomProperty.get()*4);
-                imageView.setFitHeight(zoomProperty.get()*3);
-            }
-        });
-
         scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
             isZoom.set(true);
-            imageView.fitWidthProperty().unbind();
-            imageView.fitHeightProperty().unbind();
             if (event.getDeltaY() > 0) {
                 zoomIn();
             } else if (event.getDeltaY() < 0) {
@@ -53,17 +43,18 @@ public class ImagePanelController {
 
     void zoomIn() {
         isZoom.set(true);
-        zoomProperty.set(zoomProperty.get()*1.1);
+        imageView.setFitWidth(imageView.getFitWidth()*1.1);
+        imageView.setFitHeight(imageView.getFitHeight()*1.1);
     }
 
     void zoomOut() {
         isZoom.set(true);
-        zoomProperty.set(zoomProperty.get()/1.1);
+        imageView.setFitWidth(imageView.getFitWidth()/1.1);
+        imageView.setFitHeight(imageView.getFitHeight()/1.1);
     }
 
     void clearZoom() {
         isZoom.set(false);
-        zoomProperty.set(200);
     }
 
     void setImage(Image image) {
@@ -73,6 +64,8 @@ public class ImagePanelController {
         stackPane.getChildren().add(imageView);
         imageView.setPreserveRatio(true);
         imageView.setImage(image);
+        imageView.setFitWidth(image.getWidth());
+        imageView.setFitHeight(image.getHeight());
     }
 
     void showCheckedBackground(Boolean newValue) {
@@ -86,10 +79,12 @@ public class ImagePanelController {
     void scaleToWidth(Image image) {
         setImage(image);
         imageView.setFitWidth(scrollPane.getWidth() - 2);
+        imageView.setFitHeight(0);
     }
 
     void scaleToHeight(Image image) {
         setImage(image);
+        imageView.setFitWidth(0);
         imageView.setFitHeight(scrollPane.getHeight() - 2);
     }
 
