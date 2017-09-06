@@ -58,12 +58,17 @@ public class MainController {
     }
 
     void openFile() {
-        //TODO: open on working directory - especially when another image is already selected
-        File imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
+        File imageFile;
+        if (isImageSelectedProperty.get()) {
+            imageFile = ImageReaderWriter.showOpenDialog(window, originalImageFile.getParent());
+        } else {
+            imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
+        }
         openImage(imageFile);
     }
 
     private void openImage(File imageFile) {
+        //TODO: check is imageFile not null
         directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         originalImageFile = imageFile;
         originalImage = ImageReaderWriter.openImage(originalImageFile);
