@@ -95,4 +95,14 @@ public class ToolbarController {
     private void deleteFile() {
         mainController.deleteFile();
     }
+
+    @FXML
+    private void zoomOut() {
+        mainController.zoomOut();
+    }
+
+    @FXML
+    private void zoomIn() {
+        mainController.zoomIn();
+    }
 }

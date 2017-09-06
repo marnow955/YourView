@@ -146,6 +146,14 @@ public class MainController {
             openImage(directory.getNextImage(originalImageFile));
     }
 
+    void zoomOut() {
+        imagePanelController.zoomOut();
+    }
+
+    void zoomIn() {
+        imagePanelController.zoomIn();
+    }
+
     void scaleToWidth() {
         imagePanelController.scaleToWidth(image);
     }

@@ -40,7 +40,7 @@
 
     <Separator/>
 
-    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#zoomOut" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_minus"/>
         </graphic>
@@ -49,7 +49,7 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#zoomIn" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="search_plus"/>
         </graphic>
