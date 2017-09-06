@@ -26,7 +26,7 @@ public class ImagePanelController {
     private BooleanProperty isZoom = new SimpleBooleanProperty(false);
 
     public void initialize() {
-        //TODO: only if image selected and zoomed
+        //TODO: only if is needed
         scrollPane.setPannable(true);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -55,6 +55,10 @@ public class ImagePanelController {
 
     void clearZoom() {
         isZoom.set(false);
+    }
+
+    int getZoomPercent() {
+        return (int) ((imageView.getFitHeight()/imageView.getImage().getHeight())*100);
     }
 
     void setImage(Image image) {
