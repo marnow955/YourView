@@ -33,8 +33,10 @@ public class ImagePanelController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         zoomProperty.addListener(arg0 -> {
-            imageView.setFitWidth(zoomProperty.get()*4);
-            imageView.setFitHeight(zoomProperty.get()*3);
+            if (isZoom.get()) {
+                imageView.setFitWidth(zoomProperty.get()*4);
+                imageView.setFitHeight(zoomProperty.get()*3);
+            }
         });
 
         scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
@@ -50,14 +52,22 @@ public class ImagePanelController {
     }
 
     void zoomIn() {
+        isZoom.set(true);
         zoomProperty.set(zoomProperty.get()*1.1);
     }
 
     void zoomOut() {
+        isZoom.set(true);
         zoomProperty.set(zoomProperty.get()/1.1);
     }
 
+    void clearZoom() {
+        isZoom.set(false);
+        zoomProperty.set(200);
+    }
+
     void setImage(Image image) {
+        clearZoom();
         stackPane.getChildren().remove(imageView);
         imageView = new ImageView();
         stackPane.getChildren().add(imageView);

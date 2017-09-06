@@ -105,4 +105,9 @@ public class ToolbarController {
     private void zoomIn() {
         mainController.zoomIn();
     }
+
+    @FXML
+    private void actualSize() {
+        mainController.actualSize();
+    }
 }

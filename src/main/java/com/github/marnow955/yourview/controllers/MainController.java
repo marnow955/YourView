@@ -154,6 +154,10 @@ public class MainController {
         imagePanelController.zoomIn();
     }
 
+    void actualSize() {
+        imagePanelController.setImage(image);
+    }
+
     void scaleToWidth() {
         imagePanelController.scaleToWidth(image);
     }
