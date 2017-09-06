@@ -23,6 +23,10 @@ public class MainController {
     @FXML
     ResourceBundle resources;
     @FXML
+    private MenuBar menuBar;
+    @FXML
+    private MenuBarController menuBarController;
+    @FXML
     private ToolBar toolbar;
     @FXML
     private ToolbarController toolbarController;
@@ -46,14 +50,14 @@ public class MainController {
 
     public void setStageAndSetupView(Stage primaryStage) {
         window = primaryStage;
+        menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
+        menuBarController.setupView();
         toolbarController.setupView();
-        chBackground.selectedProperty().bindBidirectional(isChBackgroundSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
     }
 
-    @FXML
-    private void openFile() {
+    void openFile() {
         //TODO: open on working directory - especially when another image is already selected
         File imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
         openImage(imageFile);
