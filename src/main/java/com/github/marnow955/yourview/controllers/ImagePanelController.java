@@ -19,6 +19,7 @@ public class ImagePanelController {
     private ImageView imageView;
 
     private BooleanProperty isZoom = new SimpleBooleanProperty(false);
+    private MainController mainController;
 
     public void initialize() {
         //TODO: only if is needed
@@ -26,6 +27,7 @@ public class ImagePanelController {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        //TODO: check is image displayed
         scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
             isZoom.set(true);
             if (event.getDeltaY() > 0) {
@@ -33,7 +35,12 @@ public class ImagePanelController {
             } else if (event.getDeltaY() < 0) {
                 zoomOut();
             }
+            mainController.updateWindowTitle();
         });
+    }
+
+    void injectMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     void zoomIn() {

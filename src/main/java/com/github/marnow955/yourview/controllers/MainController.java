@@ -52,6 +52,7 @@ public class MainController {
         window = primaryStage;
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
+        imagePanelController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
@@ -78,8 +79,14 @@ public class MainController {
         if (image != null) {
             imagePanelController.setImage(image);
             isImageSelectedProperty.set(true);
-            window.setTitle("Your View - " + originalImageFile.getName());
+            updateWindowTitle();
         }
+    }
+
+    void updateWindowTitle() {
+        window.setTitle("Your View - " +
+                directory.getImageIndex(originalImageFile) + "/" + directory.getNrOfImagesInDirectory() + " - " +
+                originalImageFile.getName() + " | " + imagePanelController.getZoomPercent() + "%");
     }
 
     void saveFile() {
@@ -148,10 +155,12 @@ public class MainController {
 
     void zoomOut() {
         imagePanelController.zoomOut();
+        updateWindowTitle();
     }
 
     void zoomIn() {
         imagePanelController.zoomIn();
+        updateWindowTitle();
     }
 
     void actualSize() {

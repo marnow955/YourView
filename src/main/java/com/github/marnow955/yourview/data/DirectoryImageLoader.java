@@ -48,4 +48,8 @@ public class DirectoryImageLoader {
         else
             return false;
     }
+
+    public int getImageIndex(File file) {
+        return listOfImagesFiles.indexOf(file) + 1;
+    }
 }
