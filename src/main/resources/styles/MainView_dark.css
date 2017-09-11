@@ -85,3 +85,31 @@
     -fx-background-image: url('../images/ps-neutral.png');
     -fx-background-repeat: repeat;
 }
+
+/*********Image Info Panel ***********/
+#imageInfoPanel {
+    -fx-background-color: #181818;
+    -fx-padding: 0 0 0 10;
+}
+
+.mainLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.textButton{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 20;
+    -fx-text-fill: steelblue;
+}
+
+.textButton:hover {
+    -fx-text-fill: #585858;
+}
+
+.textButton:pressed {
+    -fx-text-fill: #383838;
+}

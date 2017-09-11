@@ -11,6 +11,8 @@ import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -20,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class MainController {
 
+    @FXML
+    private BorderPane root;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -225,5 +229,9 @@ public class MainController {
                 }
             }
         }
+    }
+
+    void showImageInfo() {
+       root.getLeft().setVisible(true);
     }
 }

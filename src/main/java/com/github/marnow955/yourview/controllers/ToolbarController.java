@@ -110,4 +110,9 @@ public class ToolbarController {
     private void actualSize() {
         mainController.actualSize();
     }
+
+    @FXML
+    private void showImageInfo() {
+        mainController.showImageInfo();
+    }
 }
