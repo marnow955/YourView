@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -36,6 +38,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
+        if (validArgs()) {
+            controller.openImage(new File(getParameters().getRaw().get(0)));
+        }
     }
 
     private Properties loadProperties() {
@@ -47,5 +52,15 @@ public class Main extends Application {
             e.printStackTrace();
         }
         return properties;
+    }
+
+    private boolean validArgs() {
+        Parameters parameters = getParameters();
+        List<String> rawArguments = parameters.getRaw();
+        if (rawArguments.isEmpty())
+            return false;
+        String filePath = rawArguments.get(0);
+        File file = new File(filePath);
+        return file.isFile();
     }
 }

@@ -68,12 +68,12 @@ public class MainController {
         openImage(imageFile);
     }
 
-    private void openImage(File imageFile) {
+    public void openImage(File imageFile) {
         if (imageFile == null)
             return;
         directory = new DirectoryImageLoader(new File(imageFile.getParent()));
         originalImageFile = imageFile;
-        originalImage = ImageReaderWriter.openImage(originalImageFile);
+        originalImage = ImageReaderWriter.openImage(window, originalImageFile);
         image = originalImage;
         processingController = new ImageManipulationsController();
         if (image != null) {
@@ -93,7 +93,7 @@ public class MainController {
         originalImageFile = ImageReaderWriter.showSaveDialog(window, originalImageFile);
         if (originalImageFile == null)
             return;
-        ImageReaderWriter.saveImage(image, originalImageFile);
+        ImageReaderWriter.saveImage(window, image, originalImageFile);
         openImage(originalImageFile);
     }
 

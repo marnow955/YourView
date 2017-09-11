@@ -36,28 +36,28 @@ public class ImageReaderWriter {
         return fileChooser.showSaveDialog(display);
     }
 
-    public static Image openImage(File file) {
+    public static Image openImage(Stage display, File file) {
         if (file != null) {
             if (checkFileExtension(file)) {
                 return new Image(file.toURI().toString());
             } else {
-                new Alert(Alert.AlertType.ERROR, file.getName() + " has no valid file-extension").show();
+                displayAlert(display, file.getName() + " has no valid file-extension");
             }
         }
         return null;
     }
 
-    public static void saveImage(Image image, File path) {
+    public static void saveImage(Stage display, Image image, File path) {
         if (path != null) {
             try {
                 if (checkFileExtension(path)) {
                     ImageIO.write(SwingFXUtils.fromFXImage(image, null), path.getName().substring(
                             path.getName().lastIndexOf(".") + 1), path);
                 } else {
-                    new Alert(Alert.AlertType.ERROR, path.getName() + " has no valid file-extension").show();
+                    displayAlert(display, path.getName() + " has no valid file-extension");
                 }
             } catch (IOException e) {
-                new Alert(Alert.AlertType.ERROR, String.format("Cannot save file %s", path.getPath())).show();
+                displayAlert(display, String.format("Cannot save file %s", path.getPath()));
             }
         }
     }
@@ -69,6 +69,14 @@ public class ImageReaderWriter {
             }
         }
         return false;
+    }
+
+    private static void displayAlert(Stage display, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(content);
+        Stage alertWindow = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertWindow.getIcons().addAll(display.getIcons());
+        alert.show();
     }
 
 }
