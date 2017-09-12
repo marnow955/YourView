@@ -35,6 +35,10 @@ public class MainController {
     @FXML
     private ToolbarController toolbarController;
     @FXML
+    private VBox imageInfoPanel;
+    @FXML
+    private ImageInfoPanelController imageInfoPanelController;
+    @FXML
     private ScrollPane imagePanel;
     @FXML
     private ImagePanelController imagePanelController;
@@ -84,6 +88,7 @@ public class MainController {
             imagePanelController.setImage(image);
             isImageSelectedProperty.set(true);
             updateWindowTitle();
+            imageInfoPanelController.setInfo(originalImageFile);
         }
     }
 

@@ -11,8 +11,17 @@
       prefWidth="300.0">
 
     <HBox alignment="CENTER_LEFT">
-        <Label styleClass="mainLabel">File info</Label>
+        <Label text="%file_info_panel_label" styleClass="mainLabel"/>
         <Pane HBox.hgrow="SOMETIMES" />
-        <Button styleClass="textButton" focusTraversable="false" mnemonicParsing="false">Close</Button>
+        <Button text="%w_close" styleClass="textButton" focusTraversable="false" mnemonicParsing="false">Close</Button>
     </HBox>
+
+    <Label text="%file_name" styleClass="infoLabel"/>
+    <Label styleClass="infoContent" fx:id="fileName"/>
+
+    <Label text="%w_date" styleClass="infoLabel"/>
+    <Label styleClass="infoContent" fx:id="fileModificationDate"/>
+
+    <Label text="%w_size" styleClass="infoLabel"/>
+    <Label styleClass="infoContent" fx:id="fileSize"/>
 </VBox>

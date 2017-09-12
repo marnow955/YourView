@@ -97,6 +97,15 @@
     -fx-font-size: 20;
 }
 
+.infoLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+}
+
+.infoContent {
+    -fx-text-fill: white;
+}
+
 .textButton{
     -fx-border-color: transparent;
     -fx-border-width: 0;
