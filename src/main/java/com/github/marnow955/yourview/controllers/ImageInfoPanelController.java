@@ -14,6 +14,7 @@ import com.drew.metadata.jpeg.JpegDirectory;
 import com.drew.metadata.png.PngDirectory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class ImageInfoPanelController {
 
+    @FXML
+    private VBox imageInfoPanel;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -41,11 +44,30 @@ public class ImageInfoPanelController {
     @FXML
     private void initialize() {
         dateFormatter = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", resources.getLocale());
+        imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
     }
 
     void setInfo(File imageFile) {
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
+            for (Directory directory : metadata.getDirectories()) {
+
+                //
+                // Each Directory stores values in Tag objects
+                //
+                for (Tag tag : directory.getTags()) {
+                    System.out.println(tag);
+                }
+
+                //
+                // Each Directory may also contain error messages
+                //
+                if (directory.hasErrors()) {
+                    for (String error : directory.getErrors()) {
+                        System.err.println("ERROR: " + error);
+                    }
+                }
+            }
             setFileMetadata(metadata);
             FileInputStream fis = new FileInputStream(imageFile);
             BufferedInputStream bis = new BufferedInputStream(fis);
@@ -92,5 +114,10 @@ public class ImageInfoPanelController {
             height = fileTypeDirectory.getInteger(GifHeaderDirectory.TAG_IMAGE_HEIGHT);
         }
         dimensions.setText(width + " x " + height);
+    }
+
+    @FXML
+    void togglePanelVisibility() {
+        imageInfoPanel.setVisible(!imageInfoPanel.isVisible());
     }
 }

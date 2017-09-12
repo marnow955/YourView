@@ -23,8 +23,6 @@ import java.util.ResourceBundle;
 public class MainController {
 
     @FXML
-    private BorderPane root;
-    @FXML
     ResourceBundle resources;
     @FXML
     private MenuBar menuBar;
@@ -237,6 +235,6 @@ public class MainController {
     }
 
     void showImageInfo() {
-       root.getLeft().setVisible(true);
+       imageInfoPanelController.togglePanelVisibility();
     }
 }

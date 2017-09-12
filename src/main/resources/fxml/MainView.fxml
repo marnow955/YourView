@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1"
-            fx:id="root" fx:controller="com.github.marnow955.yourview.controllers.MainController">
+            fx:controller="com.github.marnow955.yourview.controllers.MainController">
 
     <top>
         <VBox>
@@ -14,7 +14,7 @@
     </top>
 
     <left>
-        <fx:include fx:id="imageInfoPanel" source="ImageInfoPanel.fxml"/>
+        <fx:include fx:id="imageInfoPanel" source="ImageInfoPanel.fxml" visible="false"/>
     </left>
 
     <center>
