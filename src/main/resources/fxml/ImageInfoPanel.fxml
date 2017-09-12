@@ -24,4 +24,7 @@
 
     <Label text="%w_size" styleClass="infoLabel"/>
     <Label styleClass="infoContent" fx:id="fileSize"/>
+
+    <Label text="%w_dimensions" styleClass="infoLabel"/>
+    <Label styleClass="infoContent" fx:id="dimensions"/>
 </VBox>
