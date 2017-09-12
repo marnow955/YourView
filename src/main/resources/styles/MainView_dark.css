@@ -106,7 +106,7 @@
     -fx-text-fill: white;
 }
 
-.textButton{
+.textButton, .smallTextButton {
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-background-radius: 0;
@@ -115,10 +115,15 @@
     -fx-text-fill: steelblue;
 }
 
-.textButton:hover {
+.smallTextButton {
+    -fx-font-size: 16;
+    -fx-padding: 0;
+}
+
+.textButton:hover, .smallTextButton:hover {
     -fx-text-fill: #585858;
 }
 
-.textButton:pressed {
+.textButton:pressed, .smallTextButton:pressed {
     -fx-text-fill: #383838;
 }

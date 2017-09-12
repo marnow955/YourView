@@ -5,27 +5,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:id="imageInfoPanel" fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
-      prefWidth="300.0">
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="imageInfoPanel" fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
+            prefWidth="315.0" hbarPolicy="NEVER">
 
-    <HBox alignment="CENTER_LEFT">
-        <Label text="%file_info_panel_label" styleClass="mainLabel"/>
-        <Pane HBox.hgrow="SOMETIMES" />
-        <Button text="%w_close" styleClass="textButton" onAction="#togglePanelVisibility"
+    <VBox prefWidth="300.0">
+        <HBox alignment="CENTER_LEFT">
+            <Label text="%file_info_panel_label" styleClass="mainLabel"/>
+            <Pane HBox.hgrow="SOMETIMES"/>
+            <Button text="%w_close" styleClass="textButton" onAction="#togglePanelVisibility"
+                    focusTraversable="false" mnemonicParsing="false"/>
+        </HBox>
+
+        <Label text="%file_name" styleClass="infoLabel"/>
+        <Label styleClass="infoContent" fx:id="fileName"/>
+
+        <Label text="%w_date" styleClass="infoLabel"/>
+        <Label styleClass="infoContent" fx:id="fileModificationDate"/>
+
+        <Label text="%w_size" styleClass="infoLabel"/>
+        <Label styleClass="infoContent" fx:id="fileSize"/>
+
+        <Label text="%w_dimensions" styleClass="infoLabel"/>
+        <Label styleClass="infoContent" fx:id="dimensions"/>
+
+        <Button text="%show_metadata" styleClass="smallTextButton" onAction="#showAllMetadata"
                 focusTraversable="false" mnemonicParsing="false"/>
-    </HBox>
-
-    <Label text="%file_name" styleClass="infoLabel"/>
-    <Label styleClass="infoContent" fx:id="fileName"/>
-
-    <Label text="%w_date" styleClass="infoLabel"/>
-    <Label styleClass="infoContent" fx:id="fileModificationDate"/>
-
-    <Label text="%w_size" styleClass="infoLabel"/>
-    <Label styleClass="infoContent" fx:id="fileSize"/>
-
-    <Label text="%w_dimensions" styleClass="infoLabel"/>
-    <Label styleClass="infoContent" fx:id="dimensions"/>
-</VBox>
+        <Text fx:id="allMetadataText" visible="false"/>
+    </VBox>
+</ScrollPane>

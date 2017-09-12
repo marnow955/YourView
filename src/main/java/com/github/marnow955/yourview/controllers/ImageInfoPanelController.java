@@ -14,7 +14,8 @@ import com.drew.metadata.jpeg.JpegDirectory;
 import com.drew.metadata.png.PngDirectory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.text.Text;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 public class ImageInfoPanelController {
 
     @FXML
-    private VBox imageInfoPanel;
+    private ScrollPane imageInfoPanel;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -38,6 +39,8 @@ public class ImageInfoPanelController {
     private Label fileSize;
     @FXML
     private Label dimensions;
+    @FXML
+    private Text allMetadataText;
 
     private SimpleDateFormat dateFormatter;
 
@@ -45,34 +48,18 @@ public class ImageInfoPanelController {
     private void initialize() {
         dateFormatter = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", resources.getLocale());
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
+        allMetadataText.managedProperty().bind(allMetadataText.visibleProperty());
     }
 
     void setInfo(File imageFile) {
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
-            for (Directory directory : metadata.getDirectories()) {
-
-                //
-                // Each Directory stores values in Tag objects
-                //
-                for (Tag tag : directory.getTags()) {
-                    System.out.println(tag);
-                }
-
-                //
-                // Each Directory may also contain error messages
-                //
-                if (directory.hasErrors()) {
-                    for (String error : directory.getErrors()) {
-                        System.err.println("ERROR: " + error);
-                    }
-                }
-            }
             setFileMetadata(metadata);
             FileInputStream fis = new FileInputStream(imageFile);
             BufferedInputStream bis = new BufferedInputStream(fis);
             FileType fileType = FileTypeDetector.detectFileType(bis);
             setFileTypeMetadata(metadata, fileType);
+            setAllMetadataText(metadata);
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();
         }
@@ -116,8 +103,30 @@ public class ImageInfoPanelController {
         dimensions.setText(width + " x " + height);
     }
 
+    private void setAllMetadataText(Metadata metadata) {
+        StringBuilder metadataTextBuilder = new StringBuilder();
+        for (Directory directory : metadata.getDirectories()) {
+            for (Tag tag : directory.getTags()) {
+                metadataTextBuilder.append(tag.getTagName() + " ");
+                metadataTextBuilder.append("["+tag.getDirectoryName()+"]\n");
+                metadataTextBuilder.append(tag.getDescription() + "\n");
+            }
+            if (directory.hasErrors()) {
+                for (String error : directory.getErrors()) {
+                    System.err.println("ERROR: " + error);
+                }
+            }
+        }
+        allMetadataText.setText(metadataTextBuilder.toString());
+    }
+
     @FXML
     void togglePanelVisibility() {
         imageInfoPanel.setVisible(!imageInfoPanel.isVisible());
+    }
+
+    @FXML
+    private void showAllMetadata() {
+        allMetadataText.setVisible(!allMetadataText.isVisible());
     }
 }
