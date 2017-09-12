@@ -13,9 +13,11 @@ import com.drew.metadata.gif.GifHeaderDirectory;
 import com.drew.metadata.jpeg.JpegDirectory;
 import com.drew.metadata.png.PngDirectory;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -40,7 +42,7 @@ public class ImageInfoPanelController {
     @FXML
     private Label dimensions;
     @FXML
-    private Text allMetadataText;
+    private VBox allMetadataBox;
 
     private SimpleDateFormat dateFormatter;
 
@@ -48,7 +50,7 @@ public class ImageInfoPanelController {
     private void initialize() {
         dateFormatter = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", resources.getLocale());
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
-        allMetadataText.managedProperty().bind(allMetadataText.visibleProperty());
+        allMetadataBox.managedProperty().bind(allMetadataBox.visibleProperty());
     }
 
     void setInfo(File imageFile) {
@@ -104,20 +106,20 @@ public class ImageInfoPanelController {
     }
 
     private void setAllMetadataText(Metadata metadata) {
-        StringBuilder metadataTextBuilder = new StringBuilder();
         for (Directory directory : metadata.getDirectories()) {
             for (Tag tag : directory.getTags()) {
-                metadataTextBuilder.append(tag.getTagName() + " ");
-                metadataTextBuilder.append("["+tag.getDirectoryName()+"]\n");
-                metadataTextBuilder.append(tag.getDescription() + "\n");
-            }
-            if (directory.hasErrors()) {
-                for (String error : directory.getErrors()) {
-                    System.err.println("ERROR: " + error);
-                }
+                Label tagName = new Label(tag.getTagName());
+                tagName.getStyleClass().add("infoLabel");
+                Label directoryName = new Label("[" + tag.getDirectoryName() + "]");
+                directoryName.getStyleClass().add("infoContent");
+                HBox label = new HBox(tagName, directoryName);
+                label.setSpacing(5);
+                label.setAlignment(Pos.CENTER_LEFT);
+                Label description = new Label(tag.getDescription());
+                description.getStyleClass().add("infoContent");
+                allMetadataBox.getChildren().addAll(label, description);
             }
         }
-        allMetadataText.setText(metadataTextBuilder.toString());
     }
 
     @FXML
@@ -127,6 +129,6 @@ public class ImageInfoPanelController {
 
     @FXML
     private void showAllMetadata() {
-        allMetadataText.setVisible(!allMetadataText.isVisible());
+        allMetadataBox.setVisible(!allMetadataBox.isVisible());
     }
 }
