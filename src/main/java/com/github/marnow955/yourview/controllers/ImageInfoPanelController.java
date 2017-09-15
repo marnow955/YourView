@@ -13,6 +13,7 @@ import com.drew.metadata.gif.GifHeaderDirectory;
 import com.drew.metadata.jpeg.JpegDirectory;
 import com.drew.metadata.png.PngDirectory;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -121,7 +122,7 @@ public class ImageInfoPanelController {
                 tagName.getStyleClass().add("infoLabel");
                 tagName.setWrapText(true);
                 Label directoryName = new Label("[" + tag.getDirectoryName() + "]");
-                directoryName.getStyleClass().add("infoContent");
+                directoryName.getStyleClass().add("directoryName");
                 directoryName.setWrapText(true);
                 HBox label = new HBox(tagName, directoryName);
                 label.setSpacing(5);
@@ -129,7 +130,9 @@ public class ImageInfoPanelController {
                 Label description = new Label(tag.getDescription());
                 description.getStyleClass().add("infoContent");
                 description.setWrapText(true);
-                allMetadataBox.getChildren().addAll(label, description);
+                VBox container = new VBox(label, description);
+                container.setPadding(new Insets(0, 0, 10, 0));
+                allMetadataBox.getChildren().addAll(container);
             }
         }
     }

@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="imageInfoPanel" fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
@@ -19,20 +21,33 @@
                     focusTraversable="false" mnemonicParsing="false"/>
         </HBox>
 
-        <Label text="%file_name" styleClass="infoLabel"/>
-        <Label styleClass="infoContent" fx:id="fileName"/>
+        <VBox>
+            <padding><Insets top="10" bottom="10"/></padding>
+            <Label text="%file_name" styleClass="infoLabel"/>
+            <Label styleClass="infoContent" fx:id="fileName"/>
+        </VBox>
 
-        <Label text="%w_date" styleClass="infoLabel"/>
-        <Label styleClass="infoContent" fx:id="fileModificationDate"/>
+        <VBox>
+            <padding><Insets bottom="10"/></padding>
+            <Label text="%w_date" styleClass="infoLabel"/>
+            <Label styleClass="infoContent" fx:id="fileModificationDate"/>
+        </VBox>
 
-        <Label text="%w_size" styleClass="infoLabel"/>
-        <Label styleClass="infoContent" fx:id="fileSize"/>
+        <VBox>
+            <padding><Insets bottom="10"/></padding>
+            <Label text="%w_size" styleClass="infoLabel"/>
+            <Label styleClass="infoContent" fx:id="fileSize"/>
+        </VBox>
 
-        <Label text="%w_dimensions" styleClass="infoLabel"/>
-        <Label styleClass="infoContent" fx:id="dimensions"/>
+        <VBox>
+            <padding><Insets bottom="10"/></padding>
+            <Label text="%w_dimensions" styleClass="infoLabel"/>
+            <Label styleClass="infoContent" fx:id="dimensions"/>
+        </VBox>
 
         <Button text="%show_metadata" styleClass="smallTextButton" onAction="#showAllMetadata"
                 focusTraversable="false" mnemonicParsing="false"/>
         <VBox fx:id="allMetadataBox" visible="false"/>
+
     </VBox>
 </ScrollPane>

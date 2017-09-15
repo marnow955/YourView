@@ -1,11 +1,11 @@
 .root {
-    -fx-background-color: #383838;
+    -fx-background-color: #181818;
 }
 
 /********** Menu style **********/
 .menu-bar {
-    -fx-background-color: #282828;
-    -fx-border-width: 0 0 1 0;
+    -fx-background-color: #383838;
+    -fx-border-width: 0 0 0.5 0;
     -fx-border-color: #080808;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .menu-button:hover {
-    -fx-background-color: #383838;
+    -fx-background-color: #484848;
 }
 
 .menu-button:showing {
@@ -31,8 +31,8 @@
 
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-background-color: #282828;
-    -fx-border-width: 1;
+    -fx-background-color: #383838;
+    -fx-border-width: 0.5;
     -fx-border-color: #585858;
     -fx-padding: 0 0 0 0;
 }
@@ -47,6 +47,8 @@
 /********** Toolbar **********/
 .tool-bar {
     -fx-background-color: #383838;
+    -fx-border-width: 0.5 0 0.5 0;
+    -fx-border-color: #585858 #000 #080808 #000;
 }
 
 .tool-bar .button, .toggle-button {
@@ -88,8 +90,10 @@
 
 /*********Image Info Panel ***********/
 #imageInfoPanel {
-    -fx-background-color: #181818;
+    -fx-background-color: #282828;
     -fx-padding: 0 0 0 10;
+    -fx-border-width: 0 0.5 0 0;
+    -fx-border-color: #585858;
 }
 
 .mainLabel {
@@ -98,12 +102,18 @@
 }
 
 .infoLabel {
-    -fx-text-fill: white;
-    -fx-font-size: 16;
+    -fx-text-fill: #888;
+    -fx-font-size: 17;
 }
 
 .infoContent {
     -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+.directoryName {
+    -fx-text-fill: #DDD;
+    -fx-font-size: 16;
 }
 
 .textButton, .smallTextButton {
