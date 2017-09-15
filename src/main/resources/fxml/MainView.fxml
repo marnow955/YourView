@@ -13,6 +13,10 @@
         </VBox>
     </top>
 
+    <left>
+        <fx:include fx:id="imageInfoPanel" source="ImageInfoPanel.fxml" visible="false"/>
+    </left>
+
     <center>
         <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
     </center>
