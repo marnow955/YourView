@@ -137,3 +137,31 @@
 .textButton:pressed, .smallTextButton:pressed {
     -fx-text-fill: #383838;
 }
+
+/************ Scroll Bar *************/
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:hover {
+    -fx-background-color: #2D2D2D;
+}
+
+.scroll-bar:pressed {
+    -fx-background-color: #2D2D2D;
+}
+
+.scroll-bar .thumb {
+    -fx-background-radius: 0;
+    -fx-background-color: #777;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
