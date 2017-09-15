@@ -54,6 +54,7 @@ public class ImageInfoPanelController {
     }
 
     void setInfo(File imageFile) {
+        clearInfoPanel();
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
             setFileMetadata(metadata);
@@ -65,6 +66,14 @@ public class ImageInfoPanelController {
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void clearInfoPanel() {
+        fileName.setText("");
+        fileModificationDate.setText("");
+        fileSize.setText("");
+        dimensions.setText("");
+        allMetadataBox.getChildren().clear();
     }
 
     private void setFileMetadata(Metadata metadata) {
@@ -110,13 +119,16 @@ public class ImageInfoPanelController {
             for (Tag tag : directory.getTags()) {
                 Label tagName = new Label(tag.getTagName());
                 tagName.getStyleClass().add("infoLabel");
+                tagName.setWrapText(true);
                 Label directoryName = new Label("[" + tag.getDirectoryName() + "]");
                 directoryName.getStyleClass().add("infoContent");
+                directoryName.setWrapText(true);
                 HBox label = new HBox(tagName, directoryName);
                 label.setSpacing(5);
                 label.setAlignment(Pos.CENTER_LEFT);
                 Label description = new Label(tag.getDescription());
                 description.getStyleClass().add("infoContent");
+                description.setWrapText(true);
                 allMetadataBox.getChildren().addAll(label, description);
             }
         }

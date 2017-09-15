@@ -5,12 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ScrollPane?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="imageInfoPanel" fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
-            prefWidth="315.0" hbarPolicy="NEVER">
+            prefWidth="320.0" hbarPolicy="NEVER">
 
     <VBox prefWidth="300.0">
         <HBox alignment="CENTER_LEFT">
