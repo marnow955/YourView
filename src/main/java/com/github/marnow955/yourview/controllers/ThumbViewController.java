@@ -14,7 +14,6 @@ public class ThumbViewController {
     @FXML
     private TilePane thumbView;
 
-    private int selectedIndex = -1;
     private MainController mainController;
     private double cellWidth = 65.0;
     private double cellHeight = 65.0;
@@ -44,7 +43,6 @@ public class ThumbViewController {
     }
 
     void setSelected(int index) {
-        selectedIndex = index;
         Node cell = thumbView.getChildren().get(index);
         cell.getStyleClass().add("thumbViewCellSelected");
     }
