@@ -1,5 +1,9 @@
 package com.github.marnow955.yourview.data;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +11,11 @@ import java.util.List;
 public class DirectoryImageLoader {
 
     private List<File> listOfImagesFiles;
+    private List<Image> listOfImages;
 
     public DirectoryImageLoader(File directory) {
         listOfImagesFiles = new ArrayList<>();
+        listOfImages = new ArrayList<>();
         File[] filesInDirectory = directory.listFiles();
         for (int i = 0; i < filesInDirectory.length; i++) {
             if (filesInDirectory[i].isFile()) {
@@ -18,6 +24,13 @@ public class DirectoryImageLoader {
                 }
             }
         }
+    }
+
+    public ObservableList<Image> getObservableListOfImages() {
+        for (int i = 0; i < listOfImagesFiles.size(); i++) {
+            listOfImages.add(ImageReaderWriter.openImage(listOfImagesFiles.get(i)));
+        }
+        return FXCollections.observableList(listOfImages);
     }
 
     public File getPreviousImage(File file) {
