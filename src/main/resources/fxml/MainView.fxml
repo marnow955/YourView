@@ -22,7 +22,7 @@
     </center>
 
     <bottom>
-        <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="85"/>
+        <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
     </bottom>
 
 </BorderPane>

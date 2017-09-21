@@ -4,17 +4,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.TilePane;
 
 public class ThumbViewController {
 
     @FXML
-    private FlowPane thumbView;
+    private TilePane thumbView;
 
     private double cellWidth = 65.0;
     private double cellHeight = 65.0;
 
     void setThumbView(ObservableList<Image> thumbList) {
+        thumbView.getChildren().clear();
         for (Image image : thumbList) {
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(cellWidth);
