@@ -8,6 +8,8 @@ import javafx.scene.control.CheckMenuItem;
 public class MenuBarController {
 
     @FXML
+    private CheckMenuItem thView;
+    @FXML
     private CheckMenuItem chBackground;
 
     private MainController mainController;
@@ -28,6 +30,7 @@ public class MenuBarController {
 
     void setupView() {
         isDisabled.bind(mainController.isImageSelectedProperty.not());
+        thView.selectedProperty().bindBidirectional(mainController.isThumbViewSelectedProperty);
         chBackground.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
     }
 

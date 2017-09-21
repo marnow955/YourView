@@ -143,14 +143,14 @@
 
     <Separator/>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
-        <graphic>
+    <ToggleButton fx:id="shThumbView" focusTraversable="false" mnemonicParsing="false">
+    <graphic>
             <Glyph fontFamily="FontAwesome" icon="th_large"/>
         </graphic>
         <tooltip>
             <Tooltip text="%show_th"/>
         </tooltip>
-    </Button>
+    </ToggleButton>
 
     <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>

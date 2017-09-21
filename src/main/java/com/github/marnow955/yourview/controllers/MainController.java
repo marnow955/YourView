@@ -59,6 +59,7 @@ public class MainController {
     //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
 
     public void setStageAndSetupView(Stage primaryStage) {
         window = primaryStage;
@@ -67,6 +68,8 @@ public class MainController {
         imagePanelController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
+        thumbView.managedProperty().bind(thumbView.visibleProperty());
+        thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
     }
 

@@ -8,6 +8,8 @@ import javafx.scene.control.ToggleButton;
 public class ToolbarController {
 
     @FXML
+    private ToggleButton shThumbView;
+    @FXML
     private ToggleButton shBackgroundBtn;
 
     private MainController mainController;
@@ -28,6 +30,7 @@ public class ToolbarController {
 
     void setupView() {
         isDisabled.bind(mainController.isImageSelectedProperty.not());
+        shThumbView.selectedProperty().bindBidirectional(mainController.isThumbViewSelectedProperty);
         shBackgroundBtn.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
     }
 
