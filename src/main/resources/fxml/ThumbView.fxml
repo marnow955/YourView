@@ -9,9 +9,9 @@
             fx:controller="com.github.marnow955.yourview.controllers.ThumbViewController"
             hbarPolicy="NEVER">
 
-    <TilePane fx:id="thumbView" hgap="10" vgap="10" prefWidth="${thumbView.parent.width}">
+    <TilePane fx:id="thumbView" hgap="5" vgap="5" prefWidth="${thumbView.parent.width}">
         <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
+            <Insets top="5" bottom="5" left="5" right="5"/>
         </padding>
     </TilePane>
 

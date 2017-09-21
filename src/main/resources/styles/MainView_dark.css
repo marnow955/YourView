@@ -181,3 +181,19 @@
     -fx-border-width: 1 0 0 0;
     -fx-border-color: #585858;
 }
+
+.thumbViewCell {
+    -fx-background-color: rgba(56,56,56,0.5);
+}
+
+.thumbViewCell:hover {
+    -fx-background-color: rgba(50,110,160,0.5);
+}
+
+.thumbViewCell:pressed {
+    -fx-background-color: rgba(70,130,180,0.5);
+}
+
+.thumbViewCellSelected {
+    -fx-background-color: rgba(50,110,160,0.5);
+}
