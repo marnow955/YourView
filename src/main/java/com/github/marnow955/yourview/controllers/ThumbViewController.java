@@ -34,7 +34,7 @@ public class ThumbViewController {
             cellContainer.setPadding(new Insets(cellContainerPadding));
             cellContainer.getStyleClass().add("thumbViewCell");
 
-            imageView.setOnMouseClicked(event ->
+            cellContainer.setOnMouseClicked(event ->
                     mainController.selectImage(image)
             );
 
