@@ -33,6 +33,10 @@ public class DirectoryImageLoader {
         return FXCollections.observableList(listOfImages);
     }
 
+    public File getImageFile(Image image) {
+        return listOfImagesFiles.get(listOfImages.indexOf(image));
+    }
+
     public File getPreviousImage(File file) {
         int index = listOfImagesFiles.indexOf(file);
         if (index > 0) {

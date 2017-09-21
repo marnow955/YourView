@@ -66,6 +66,7 @@ public class MainController {
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
+        thumbViewController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
         thumbView.managedProperty().bind(thumbView.visibleProperty());
@@ -96,14 +97,19 @@ public class MainController {
             isImageSelectedProperty.set(true);
             updateWindowTitle();
             imageInfoPanelController.setInfo(originalImageFile);
-            Platform.runLater(this::loadDirectory);
+            Platform.runLater(this::loadThumbView);
         }
     }
 
-    private void loadDirectory() {
+    void selectImage(Image image) {
+        openImage(directory.getImageFile(image));
+    }
+
+    private void loadThumbView() {
         thumbList.clear();
         thumbList.addAll(directory.getObservableListOfImages());
         thumbViewController.setThumbView(thumbList);
+        thumbViewController.setSelected(directory.getImageIndex(originalImageFile) - 1);
     }
 
     void updateWindowTitle() {
