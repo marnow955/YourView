@@ -4,8 +4,11 @@ import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
@@ -40,6 +43,10 @@ public class MainController {
     private ImagePanelController imagePanelController;
     @FXML
     private CheckMenuItem chBackground;
+    @FXML
+    private ScrollPane thumbView;
+    @FXML
+    private ThumbViewController thumbViewController;
 
     private Stage window;
     private File originalImageFile;
@@ -47,18 +54,23 @@ public class MainController {
     private Image originalImage;
     private Image image;
     private ImageManipulationsController processingController;
+    private ObservableList<Image> thumbList = FXCollections.observableArrayList();
 
     //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
 
     public void setStageAndSetupView(Stage primaryStage) {
         window = primaryStage;
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
+        thumbViewController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
+        thumbView.managedProperty().bind(thumbView.visibleProperty());
+        thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
     }
 
@@ -85,7 +97,19 @@ public class MainController {
             isImageSelectedProperty.set(true);
             updateWindowTitle();
             imageInfoPanelController.setInfo(originalImageFile);
+            Platform.runLater(this::loadThumbView);
         }
+    }
+
+    void selectImage(Image image) {
+        openImage(directory.getImageFile(image));
+    }
+
+    private void loadThumbView() {
+        thumbList.clear();
+        thumbList.addAll(directory.getObservableListOfImages());
+        thumbViewController.setThumbView(thumbList);
+        thumbViewController.setSelected(directory.getImageIndex(originalImageFile) - 1);
     }
 
     void updateWindowTitle() {
@@ -233,6 +257,6 @@ public class MainController {
     }
 
     void showImageInfo() {
-       imageInfoPanelController.togglePanelVisibility();
+        imageInfoPanelController.togglePanelVisibility();
     }
 }

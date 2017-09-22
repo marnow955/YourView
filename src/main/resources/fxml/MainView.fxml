@@ -21,4 +21,8 @@
         <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
     </center>
 
+    <bottom>
+        <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
+    </bottom>
+
 </BorderPane>

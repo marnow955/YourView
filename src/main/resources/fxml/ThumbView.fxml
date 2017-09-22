@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.TilePane?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.marnow955.yourview.controllers.ThumbViewController"
+            hbarPolicy="NEVER">
+
+    <TilePane fx:id="thumbView" hgap="5" vgap="5" prefWidth="${thumbView.parent.width}">
+        <padding>
+            <Insets top="5" bottom="5" left="5" right="5"/>
+        </padding>
+    </TilePane>
+
+</ScrollPane>
