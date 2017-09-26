@@ -36,10 +36,10 @@ public class ImageReaderWriter {
         return fileChooser.showSaveDialog(display);
     }
 
-    public static Image openImage(File file) {
+    public static Image openImage(File file, boolean backgroundLoading) {
         if (file != null) {
             if (checkFileExtension(file)) {
-                return new Image(file.toURI().toString());
+                return new Image(file.toURI().toString(), backgroundLoading);
             } else {
                 new Alert(Alert.AlertType.ERROR, file.getName() + " has no valid file-extension").show();
             }

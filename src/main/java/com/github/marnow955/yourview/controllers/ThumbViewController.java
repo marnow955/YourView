@@ -1,5 +1,7 @@
 package com.github.marnow955.yourview.controllers;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -18,6 +20,7 @@ public class ThumbViewController {
     private double cellWidth = 65.0;
     private double cellHeight = 65.0;
     private double cellContainerPadding = 5.0;
+    private IntegerProperty selectedIndex = new SimpleIntegerProperty(-1);
 
     void injectMainController(MainController mainController) {
         this.mainController = mainController;
@@ -43,8 +46,14 @@ public class ThumbViewController {
     }
 
     void setSelected(int index) {
-        Node cell = thumbView.getChildren().get(index);
+        Node cell;
+        if (selectedIndex.get() >= 0) {
+            cell = thumbView.getChildren().get(selectedIndex.get());
+            cell.getStyleClass().remove("thumbViewCellSelected");
+        }
+        cell = thumbView.getChildren().get(index);
         cell.getStyleClass().add("thumbViewCellSelected");
+        selectedIndex.set(index);
     }
 
     double getCellWidth() {

@@ -4,11 +4,10 @@ import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
@@ -49,16 +48,15 @@ public class MainController {
     private ThumbViewController thumbViewController;
 
     private Stage window;
-    private File originalImageFile;
+    private File imageFile;
     private DirectoryImageLoader directory;
-    private Image originalImage;
     private Image image;
     private ImageManipulationsController processingController;
-    private ObservableList<Image> thumbList = FXCollections.observableArrayList();
 
+    BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
+    private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
     //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
-    BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
 
     public void setStageAndSetupView(Stage primaryStage) {
@@ -77,7 +75,7 @@ public class MainController {
     void openFile() {
         File imageFile;
         if (isImageSelectedProperty.get()) {
-            imageFile = ImageReaderWriter.showOpenDialog(window, originalImageFile.getParent());
+            imageFile = ImageReaderWriter.showOpenDialog(window, this.imageFile.getParent());
         } else {
             imageFile = ImageReaderWriter.showOpenDialog(window, System.getProperty("user.home"));
         }
@@ -87,43 +85,50 @@ public class MainController {
     private void openImage(File imageFile) {
         if (imageFile == null)
             return;
-        directory = new DirectoryImageLoader(new File(imageFile.getParent()));
-        originalImageFile = imageFile;
-        originalImage = ImageReaderWriter.openImage(originalImageFile);
-        image = originalImage;
+        this.imageFile = imageFile;
+        image = ImageReaderWriter.openImage(this.imageFile, false);
         processingController = new ImageManipulationsController();
         if (image != null) {
             imagePanelController.setImage(image);
+            imagePanelController.adjustImage(image);
             isImageSelectedProperty.set(true);
+            imageInfoPanelController.setInfo(this.imageFile);
+            directory = new DirectoryImageLoader(new File(MainController.this.imageFile.getParent()));
+            imageIndex.set(directory.getImageIndex(MainController.this.imageFile));
             updateWindowTitle();
-            imageInfoPanelController.setInfo(originalImageFile);
-            Platform.runLater(this::loadThumbView);
+            loadThumbView();
         }
     }
 
     void selectImage(Image image) {
-        openImage(directory.getImageFile(image));
+        imageFile = directory.getImageFile(image);
+        imageIndex.set(directory.getImageIndex(imageFile));
+        this.image = image;
+        imagePanelController.setImage(image);
+        imagePanelController.adjustImage(image);
+        isImageSelectedProperty.set(true);
+        imageInfoPanelController.setInfo(imageFile);
+        updateWindowTitle();
+        thumbViewController.setSelected(imageIndex.get());
     }
 
     private void loadThumbView() {
-        thumbList.clear();
-        thumbList.addAll(directory.getObservableListOfImages());
-        thumbViewController.setThumbView(thumbList);
-        thumbViewController.setSelected(directory.getImageIndex(originalImageFile) - 1);
+        thumbViewController.setThumbView(directory.getObservableListOfImages());
+        thumbViewController.setSelected(imageIndex.get());
     }
 
     void updateWindowTitle() {
         window.setTitle("Your View - " +
-                directory.getImageIndex(originalImageFile) + "/" + directory.getNrOfImagesInDirectory() + " - " +
-                originalImageFile.getName() + " | " + imagePanelController.getZoomPercent() + "%");
+                (imageIndex.get() + 1) + "/" + directory.getNrOfImagesInDirectory() + " - " +
+                imageFile.getName() + " | " + imagePanelController.getZoomPercent() + "%");
     }
 
     void saveFile() {
-        originalImageFile = ImageReaderWriter.showSaveDialog(window, originalImageFile);
-        if (originalImageFile == null)
+        imageFile = ImageReaderWriter.showSaveDialog(window, imageFile);
+        if (imageFile == null)
             return;
-        ImageReaderWriter.saveImage(image, originalImageFile);
-        openImage(originalImageFile);
+        ImageReaderWriter.saveImage(image, imageFile);
+        openImage(imageFile);
     }
 
     void deleteFile() {
@@ -131,15 +136,16 @@ public class MainController {
             FileUtils fileUtils = FileUtils.getInstance();
             if (fileUtils.hasTrash()) {
                 try {
-                    fileUtils.moveToTrash(new File[]{originalImageFile});
+                    fileUtils.moveToTrash(new File[]{imageFile});
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
-                originalImageFile.delete();
+                imageFile.delete();
             }
             if (directory.hasAnotherImage()) {
-                openImage(directory.getNextImage(originalImageFile));
+                Image nextImage = directory.getNextImage(imageIndex.get());
+                openImage(directory.getImageFile(nextImage));
             } else {
                 clearWorkspace();
             }
@@ -162,9 +168,9 @@ public class MainController {
     }
 
     void clearWorkspace() {
-        originalImageFile = null;
+        imageFile = null;
+        imageIndex.set(-1);
         directory = null;
-        originalImage = null;
         image = null;
         processingController = null;
         isImageSelectedProperty.set(false);
@@ -174,12 +180,12 @@ public class MainController {
 
     void previousImage() {
         if (directory.hasAnotherImage())
-            openImage(directory.getPreviousImage(originalImageFile));
+            selectImage(directory.getPreviousImage(imageIndex.get()));
     }
 
     void nextImage() {
         if (directory.hasAnotherImage())
-            openImage(directory.getNextImage(originalImageFile));
+            selectImage(directory.getNextImage(imageIndex.get()));
     }
 
     void zoomOut() {
@@ -194,18 +200,22 @@ public class MainController {
 
     void actualSize() {
         imagePanelController.setImage(image);
+        updateWindowTitle();
     }
 
     void scaleToWidth() {
         imagePanelController.scaleToWidth(image);
+        updateWindowTitle();
     }
 
     void scaleToHeight() {
         imagePanelController.scaleToHeight(image);
+        updateWindowTitle();
     }
 
     void adjustImage() {
         imagePanelController.adjustImage(image);
+        updateWindowTitle();
     }
 
     void adjustWindow() {
@@ -214,28 +224,33 @@ public class MainController {
         imagePanelController.setImage(image);
         imagePanel.setPrefSize(image.getWidth() + 2, image.getHeight() + 2);
         window.sizeToScene();
+        updateWindowTitle();
     }
 
     void rotateLeft() {
         //TODO: change to imageview rotate and save exif rotate flag tag (if user click save roate permanently)
         image = processingController.rotateLeft(image);
         imagePanelController.setImage(image);
+        updateWindowTitle();
     }
 
     void rotateRight() {
         //TODO: same as rotateLeft
         image = processingController.rotateRight(image);
         imagePanelController.setImage(image);
+        updateWindowTitle();
     }
 
     void horizontalFlip() {
         image = processingController.horizontalFlip(image);
         imagePanelController.setImage(image);
+        updateWindowTitle();
     }
 
     void verticalFlip() {
         image = processingController.verticalFlip(image);
         imagePanelController.setImage(image);
+        updateWindowTitle();
     }
 
     private void showCheckedBackground(Boolean newValue) {

@@ -21,15 +21,13 @@ public class DirectoryImageLoader {
             if (filesInDirectory[i].isFile()) {
                 if (ImageReaderWriter.checkFileExtension(filesInDirectory[i])) {
                     listOfImagesFiles.add(filesInDirectory[i]);
+                    listOfImages.add(ImageReaderWriter.openImage(filesInDirectory[i], true));
                 }
             }
         }
     }
 
     public ObservableList<Image> getObservableListOfImages() {
-        for (int i = 0; i < listOfImagesFiles.size(); i++) {
-            listOfImages.add(ImageReaderWriter.openImage(listOfImagesFiles.get(i)));
-        }
         return FXCollections.observableList(listOfImages);
     }
 
@@ -37,21 +35,19 @@ public class DirectoryImageLoader {
         return listOfImagesFiles.get(listOfImages.indexOf(image));
     }
 
-    public File getPreviousImage(File file) {
-        int index = listOfImagesFiles.indexOf(file);
+    public Image getPreviousImage(int index) {
         if (index > 0) {
-            return listOfImagesFiles.get(--index);
+            return listOfImages.get(--index);
         } else {
-            return listOfImagesFiles.get(listOfImagesFiles.size() - 1);
+            return listOfImages.get(listOfImages.size() - 1);
         }
     }
 
-    public File getNextImage(File file) {
-        int index = listOfImagesFiles.indexOf(file);
-        if (index < listOfImagesFiles.size() - 1) {
-            return listOfImagesFiles.get(++index);
+    public Image getNextImage(int index) {
+        if (index < listOfImages.size() - 1) {
+            return listOfImages.get(++index);
         } else {
-            return listOfImagesFiles.get(0);
+            return listOfImages.get(0);
         }
     }
 
@@ -67,6 +63,10 @@ public class DirectoryImageLoader {
     }
 
     public int getImageIndex(File file) {
-        return listOfImagesFiles.indexOf(file) + 1;
+        return listOfImagesFiles.indexOf(file);
+    }
+
+    public Image getImage(int index) {
+        return listOfImages.get(index);
     }
 }

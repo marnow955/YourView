@@ -60,7 +60,11 @@ public class ImagePanelController {
     }
 
     int getZoomPercent() {
-        return (int) ((imageView.getFitHeight()/imageView.getImage().getHeight())*100);
+        int zoomPercent = (int) ((imageView.getFitHeight()/imageView.getImage().getHeight())*100);
+        if (zoomPercent <= 0) {
+            zoomPercent = (int) ((imageView.getFitWidth()/imageView.getImage().getWidth())*100);
+        }
+        return zoomPercent;
     }
 
     void setImage(Image image) {
