@@ -47,6 +47,18 @@ public class ImageReaderWriter {
         return null;
     }
 
+    public static Image openImage(File file, boolean backgroundLoading, double requestedWidth, double requestedHeight) {
+        if (file != null) {
+            if (checkFileExtension(file)) {
+                return new Image(file.toURI().toString(), requestedWidth, requestedHeight,
+                        false, false,  backgroundLoading);
+            } else {
+                new Alert(Alert.AlertType.ERROR, file.getName() + " has no valid file-extension").show();
+            }
+        }
+        return null;
+    }
+
     public static void saveImage(Image image, File path) {
         if (path != null) {
             try {
