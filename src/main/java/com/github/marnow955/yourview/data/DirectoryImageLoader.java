@@ -27,6 +27,15 @@ public class DirectoryImageLoader {
         }
     }
 
+    public ObservableList<Image> getThumbnails(double requestedWidth, double requestedHeight) {
+        List<Image> thumbnails = new ArrayList<>();
+        for (int i = 0; i < listOfImagesFiles.size(); i++) {
+            thumbnails.add(ImageReaderWriter.openImage(listOfImagesFiles.get(i), true,
+                    requestedWidth, requestedHeight));
+        }
+        return FXCollections.observableList(thumbnails);
+    }
+
     public ObservableList<Image> getObservableListOfImages() {
         return FXCollections.observableList(listOfImages);
     }
