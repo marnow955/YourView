@@ -4,10 +4,13 @@ import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
@@ -17,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -93,27 +97,28 @@ public class MainController {
             imagePanelController.adjustImage(image);
             isImageSelectedProperty.set(true);
             imageInfoPanelController.setInfo(this.imageFile);
-            directory = new DirectoryImageLoader(new File(MainController.this.imageFile.getParent()));
+            directory = new DirectoryImageLoader(new File(MainController.this.imageFile.getParent()),
+                    thumbViewController.getCellWidth(), thumbViewController.getCellHeight());
             imageIndex.set(directory.getImageIndex(MainController.this.imageFile));
             updateWindowTitle();
             loadThumbView();
         }
     }
 
-    void selectImage(Image image) {
-        imageFile = directory.getImageFile(image);
-        imageIndex.set(directory.getImageIndex(imageFile));
-        this.image = image;
+    void selectImage(int index) {
+        imageIndex.set(index);
+        imageFile = directory.getImageFile(index);
+        image = ImageReaderWriter.openImage(imageFile, false);
         imagePanelController.setImage(image);
         imagePanelController.adjustImage(image);
         isImageSelectedProperty.set(true);
         imageInfoPanelController.setInfo(imageFile);
         updateWindowTitle();
-        thumbViewController.setSelected(imageIndex.get());
+        thumbViewController.setSelected(index);
     }
 
     private void loadThumbView() {
-        thumbViewController.setThumbView(directory.getObservableListOfImages());
+        thumbViewController.setThumbView(directory.getThumbnails());
         thumbViewController.setSelected(imageIndex.get());
     }
 
@@ -144,8 +149,7 @@ public class MainController {
                 imageFile.delete();
             }
             if (directory.hasAnotherImage()) {
-                Image nextImage = directory.getNextImage(imageIndex.get());
-                openImage(directory.getImageFile(nextImage));
+                openImage(directory.getImageFile(directory.getNextImageIndex(imageIndex.get())));
             } else {
                 clearWorkspace();
             }
@@ -174,18 +178,19 @@ public class MainController {
         image = null;
         processingController = null;
         isImageSelectedProperty.set(false);
+        thumbViewController.setThumbView(FXCollections.observableList(new ArrayList<>()));
         imagePanelController.setImage(null);
         window.setTitle("Your View");
     }
 
     void previousImage() {
         if (directory.hasAnotherImage())
-            selectImage(directory.getPreviousImage(imageIndex.get()));
+            selectImage(directory.getPreviousImageIndex(imageIndex.get()));
     }
 
     void nextImage() {
         if (directory.hasAnotherImage())
-            selectImage(directory.getNextImage(imageIndex.get()));
+            selectImage(directory.getNextImageIndex(imageIndex.get()));
     }
 
     void zoomOut() {

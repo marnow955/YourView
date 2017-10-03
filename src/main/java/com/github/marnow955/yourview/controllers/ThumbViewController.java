@@ -28,6 +28,7 @@ public class ThumbViewController {
 
     void setThumbView(ObservableList<Image> thumbList) {
         thumbView.getChildren().clear();
+        selectedIndex.set(-1);
         for (Image image : thumbList) {
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(cellWidth);
@@ -37,7 +38,7 @@ public class ThumbViewController {
             cellContainer.getStyleClass().add("thumbViewCell");
 
             cellContainer.setOnMouseClicked(event ->
-                    mainController.selectImage(image)
+                    mainController.selectImage(thumbList.indexOf(image))
             );
 
             thumbView.getChildren().add(cellContainer);

@@ -11,52 +11,61 @@ import java.util.List;
 public class DirectoryImageLoader {
 
     private List<File> listOfImagesFiles;
-    private List<Image> listOfImages;
+    private List<Image> thumbnails;
 
-    public DirectoryImageLoader(File directory) {
+    public DirectoryImageLoader(File directory, double thumbnailsRequestedWidth, double thumbnailsRequestedHeight) {
         listOfImagesFiles = new ArrayList<>();
-        listOfImages = new ArrayList<>();
+        thumbnails = new ArrayList<>();
         File[] filesInDirectory = directory.listFiles();
         for (int i = 0; i < filesInDirectory.length; i++) {
             if (filesInDirectory[i].isFile()) {
                 if (ImageReaderWriter.checkFileExtension(filesInDirectory[i])) {
                     listOfImagesFiles.add(filesInDirectory[i]);
-                    listOfImages.add(ImageReaderWriter.openImage(filesInDirectory[i], true));
+                    thumbnails.add(ImageReaderWriter.openImage(filesInDirectory[i], true,
+                            thumbnailsRequestedWidth, thumbnailsRequestedHeight));
                 }
             }
         }
     }
 
-    public ObservableList<Image> getThumbnails(double requestedWidth, double requestedHeight) {
-        List<Image> thumbnails = new ArrayList<>();
-        for (int i = 0; i < listOfImagesFiles.size(); i++) {
-            thumbnails.add(ImageReaderWriter.openImage(listOfImagesFiles.get(i), true,
-                    requestedWidth, requestedHeight));
-        }
+    public ObservableList<Image> getThumbnails() {
         return FXCollections.observableList(thumbnails);
     }
 
-    public ObservableList<Image> getObservableListOfImages() {
-        return FXCollections.observableList(listOfImages);
+    public File getImageFile(int index) {
+        return listOfImagesFiles.get(index);
     }
 
-    public File getImageFile(Image image) {
-        return listOfImagesFiles.get(listOfImages.indexOf(image));
-    }
 
-    public Image getPreviousImage(int index) {
+    public int getPreviousImageIndex(int index) {
         if (index > 0) {
-            return listOfImages.get(--index);
+            return --index;
         } else {
-            return listOfImages.get(listOfImages.size() - 1);
+            return listOfImagesFiles.size() - 1;
         }
     }
 
-    public Image getNextImage(int index) {
-        if (index < listOfImages.size() - 1) {
-            return listOfImages.get(++index);
+    public File getPreviousImageFile(int index) {
+        if (index > 0) {
+            return listOfImagesFiles.get(--index);
         } else {
-            return listOfImages.get(0);
+            return listOfImagesFiles.get(listOfImagesFiles.size() - 1);
+        }
+    }
+
+    public int getNextImageIndex(int index) {
+        if (index < listOfImagesFiles.size() - 1) {
+            return ++index;
+        } else {
+            return 0;
+        }
+    }
+
+    public File getNextImageFile(int index) {
+        if (index < listOfImagesFiles.size() - 1) {
+            return listOfImagesFiles.get(++index);
+        } else {
+            return listOfImagesFiles.get(0);
         }
     }
 
@@ -75,7 +84,4 @@ public class DirectoryImageLoader {
         return listOfImagesFiles.indexOf(file);
     }
 
-    public Image getImage(int index) {
-        return listOfImages.get(index);
-    }
 }

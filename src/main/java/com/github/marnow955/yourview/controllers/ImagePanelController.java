@@ -73,9 +73,11 @@ public class ImagePanelController {
         imageView = new ImageView();
         stackPane.getChildren().add(imageView);
         imageView.setPreserveRatio(true);
-        imageView.setImage(image);
-        imageView.setFitWidth(image.getWidth());
-        imageView.setFitHeight(image.getHeight());
+        if (image != null) {
+            imageView.setImage(image);
+            imageView.setFitWidth(image.getWidth());
+            imageView.setFitHeight(image.getHeight());
+        }
     }
 
     void showCheckedBackground(Boolean newValue) {
