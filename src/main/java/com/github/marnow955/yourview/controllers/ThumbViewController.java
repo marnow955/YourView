@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -13,6 +14,8 @@ import javafx.scene.layout.TilePane;
 
 public class ThumbViewController {
 
+    @FXML
+    private ScrollPane thumbViewScrollPane;
     @FXML
     private TilePane thumbView;
 
@@ -55,6 +58,15 @@ public class ThumbViewController {
         cell = thumbView.getChildren().get(index);
         cell.getStyleClass().add("thumbViewCellSelected");
         selectedIndex.set(index);
+        centerCellInScrollPane(thumbViewScrollPane, cell);
+    }
+
+    private void centerCellInScrollPane(ScrollPane thumbViewScrollPane, Node node) {
+        double h = thumbViewScrollPane.getContent().getBoundsInLocal().getHeight();
+        double y = (node.getBoundsInParent().getMaxY() +
+                node.getBoundsInParent().getMinY()) / 2.0;
+        double v = thumbViewScrollPane.getViewportBounds().getHeight();
+        thumbViewScrollPane.setVvalue(thumbViewScrollPane.getVmax() * ((y - 0.5 * v) / (h - v)));
     }
 
     double getCellWidth() {
