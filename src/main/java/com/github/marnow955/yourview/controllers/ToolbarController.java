@@ -118,4 +118,9 @@ public class ToolbarController {
     private void showImageInfo() {
         mainController.showImageInfo();
     }
+
+    @FXML
+    private void showSettingsPanel() {
+        mainController.showSettings();
+    }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+
+<?import javafx.scene.control.Label?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="settingsPanel" fx:controller="com.github.marnow955.yourview.controllers.SettingsPanelController"
+            prefWidth="320.0" hbarPolicy="NEVER">
+
+    <Label styleClass="mainLabel" text="%settings"/>
+
+</ScrollPane>

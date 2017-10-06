@@ -41,6 +41,10 @@ public class MainController {
     @FXML
     private ImageInfoPanelController imageInfoPanelController;
     @FXML
+    private ScrollPane settingsPanel;
+    @FXML
+    private SettingsPanelController settingsPanelController;
+    @FXML
     private ScrollPane imagePanel;
     @FXML
     private ImagePanelController imagePanelController;
@@ -278,5 +282,9 @@ public class MainController {
 
     void showImageInfo() {
         imageInfoPanelController.togglePanelVisibility();
+    }
+
+    void showSettings() {
+        settingsPanelController.togglePanelVisibility();
     }
 }

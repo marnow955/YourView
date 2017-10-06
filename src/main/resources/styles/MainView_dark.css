@@ -197,3 +197,11 @@
 .thumbViewCellSelected {
     -fx-background-color: rgba(50,110,160,0.5);
 }
+
+/*********** Settings Panel *****************/
+#settingsPanel{
+    -fx-background-color: #282828;
+    -fx-padding: 0 0 0 10;
+    -fx-border-width: 0 0 0 0.5;
+    -fx-border-color: #585858;
+}
