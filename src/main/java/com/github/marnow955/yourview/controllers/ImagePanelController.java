@@ -27,15 +27,16 @@ public class ImagePanelController {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        //TODO: check is image displayed
         scrollPane.addEventFilter(ScrollEvent.ANY, event -> {
-            isZoom.set(true);
-            if (event.getDeltaY() > 0) {
-                zoomIn();
-            } else if (event.getDeltaY() < 0) {
-                zoomOut();
+            if (mainController.isImageSelectedProperty.get()) {
+                isZoom.set(true);
+                if (event.getDeltaY() > 0) {
+                    zoomIn();
+                } else if (event.getDeltaY() < 0) {
+                    zoomOut();
+                }
+                mainController.updateWindowTitle();
             }
-            mainController.updateWindowTitle();
         });
     }
 
