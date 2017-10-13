@@ -4,18 +4,21 @@ import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.print.PrinterJob;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -40,10 +43,6 @@ public class MainController {
     private ScrollPane imageInfoPanel;
     @FXML
     private ImageInfoPanelController imageInfoPanelController;
-    @FXML
-    private ScrollPane settingsPanel;
-    @FXML
-    private SettingsPanelController settingsPanelController;
     @FXML
     private ScrollPane imagePanel;
     @FXML
@@ -285,6 +284,24 @@ public class MainController {
     }
 
     void showSettings() {
-        settingsPanelController.togglePanelVisibility();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SettingsPanel.fxml"), resources);
+        Parent root = null;
+        try {
+            root = loader.load();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().addAll(window.getScene().getStylesheets());
+            Stage stage = new Stage();
+            stage.setTitle(resources.getString("settings"));
+            stage.getIcons().addAll(window.getIcons());
+            stage.setScene(scene);
+            stage.initOwner(window);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+            GaussianBlur blurEffect = new GaussianBlur(5);
+            window.getScene().getRoot().setEffect(blurEffect);
+            stage.setOnCloseRequest(event -> window.getScene().getRoot().setEffect(null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

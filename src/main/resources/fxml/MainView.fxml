@@ -21,10 +21,6 @@
         <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
     </center>
 
-    <right>
-        <fx:include fx:id="settingsPanel" source="SettingsPanel.fxml" visible="false"/>
-    </right>
-
     <bottom>
         <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
     </bottom>

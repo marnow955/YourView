@@ -1,19 +1,22 @@
 package com.github.marnow955.yourview.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ComboBox;
 
 public class SettingsPanelController {
 
     @FXML
-    private ScrollPane settingsPanel;
+    private ComboBox<String> langChoiceBox;
 
     @FXML
     private void initialize() {
-        settingsPanel.managedProperty().bind(settingsPanel.visibleProperty());
+        setLangList();
     }
 
-    void togglePanelVisibility() {
-        settingsPanel.setVisible(!settingsPanel.isVisible());
+    private void setLangList() {
+        langChoiceBox.getItems().addAll(
+                "English",
+                "Polish"
+        );
     }
 }

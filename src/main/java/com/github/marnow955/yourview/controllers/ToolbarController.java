@@ -120,7 +120,7 @@ public class ToolbarController {
     }
 
     @FXML
-    private void showSettingsPanel() {
+    private void showSettings() {
         mainController.showSettings();
     }
 }

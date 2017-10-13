@@ -1,13 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<TabPane xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.github.marnow955.yourview.controllers.SettingsPanelController"
+         prefWidth="450" prefHeight="450" tabClosingPolicy="UNAVAILABLE" tabMinWidth="208">
 
-<?import javafx.scene.control.Label?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:id="settingsPanel" fx:controller="com.github.marnow955.yourview.controllers.SettingsPanelController"
-            prefWidth="320.0" hbarPolicy="NEVER">
+    <fx:define>
+        <ToggleGroup fx:id="themeTG"/>
+    </fx:define>
 
-    <Label styleClass="mainLabel" text="%settings"/>
+    <tabs>
+        <Tab text="General">
+            <VBox>
+                <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets topRightBottomLeft="10.0"/>
+                    </padding>
 
-</ScrollPane>
+                    <Label text="Appearance" styleClass="infoLabel"/>
+
+                    <VBox spacing="5.0">
+                        <padding>
+                            <Insets left="10.0"/>
+                        </padding>
+                        <RadioButton text="Dark theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <RadioButton text="Light theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <CheckBox text="Show checked background" styleClass="infoContent"/>
+                    </VBox>
+
+
+                    <Label text="Language" styleClass="infoLabel"/>
+                    <HBox>
+                        <padding>
+                            <Insets left="10.0"/>
+                        </padding>
+                        <Label text="Choose language: " styleClass="infoContent"/>
+                        <ComboBox fx:id="langChoiceBox"/>
+                    </HBox>
+                </VBox>
+
+                <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
+                    <Button styleClass="textButton, rightBoxBorder" text="Save" HBox.hgrow="ALWAYS"
+                            maxWidth="Infinity"/>
+                    <Button styleClass="textButton" text="Cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                </HBox>
+
+            </VBox>
+        </Tab>
+
+        <Tab text="Menus and toolbars">
+            <VBox>
+                <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets topRightBottomLeft="10.0"/>
+                    </padding>
+
+                    <CheckBox text="Show menu" styleClass="infoContent"/>
+
+                    <CheckBox text="Show status bar" styleClass="infoContent"/>
+
+                    <CheckBox text="Show info panel" styleClass="infoContent"/>
+
+                    <VBox spacing="5.0">
+                        <CheckBox text="Show toolbar" styleClass="infoContent"/>
+                        <HBox>
+                            <Label text="Toolbar position: " styleClass="infoContent"/>
+                            <ComboBox>
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Top"/>
+                                        <String fx:value="Left"/>
+                                        <String fx:value="Right"/>
+                                        <String fx:value="Bottom"/>
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="5.0">
+                        <CheckBox text="Show thumbnail view" styleClass="infoContent"/>
+                        <HBox>
+                            <Label text="Thumb view position: " styleClass="infoContent"/>
+                            <ComboBox>
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Top"/>
+                                        <String fx:value="Left"/>
+                                        <String fx:value="Right"/>
+                                        <String fx:value="Bottom"/>
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
+                    <Button styleClass="textButton, rightBoxBorder" text="Save" HBox.hgrow="ALWAYS"
+                            maxWidth="Infinity"/>
+                    <Button styleClass="textButton" text="Cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                </HBox>
+
+            </VBox>
+        </Tab>
+
+    </tabs>
+
+
+</TabPane>
