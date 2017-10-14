@@ -28,6 +28,7 @@ public class Main extends Application {
         Parent root = loader.load();
         MainController controller = loader.getController();
         controller.setStageAndSetupView(primaryStage);
+        controller.injectProperties(properties);
         Scene scene = new Scene(root);
         String theme = properties.getProperty("theme");
         scene.getStylesheets().add(getClass().getResource("/styles/MainView_" + theme + ".css").toExternalForm());

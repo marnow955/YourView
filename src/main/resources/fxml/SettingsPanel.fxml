@@ -27,8 +27,8 @@
                         <padding>
                             <Insets left="10.0"/>
                         </padding>
-                        <RadioButton text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <RadioButton text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <RadioButton fx:id="dark" text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <RadioButton fx:id="light" text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
                         <CheckBox text="%show_background" styleClass="infoContent"/>
                     </VBox>
 
@@ -39,7 +39,7 @@
                             <Insets left="10.0"/>
                         </padding>
                         <Label text="%choose_language" styleClass="infoContent"/>
-                        <ComboBox fx:id="langChoiceBox"/>
+                        <ComboBox fx:id="langCB"/>
                     </HBox>
                 </VBox>
 

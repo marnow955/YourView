@@ -3,18 +3,24 @@ package com.github.marnow955.yourview.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleGroup;
 
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class SettingsPanelController {
 
+    private Properties properties;
     @FXML
-    ResourceBundle resources;
+    private ResourceBundle resources;
+    @FXML
+    private ToggleGroup themeTG;
     private ObservableList<String> languageOptions;
     private ObservableList<String> positionsOptions;
     @FXML
-    private ComboBox<String> langChoiceBox;
+    private ComboBox<String> langCB;
     @FXML
     private ComboBox<String> toolbarPosition;
     @FXML
@@ -32,8 +38,21 @@ public class SettingsPanelController {
                 resources.getString("w_right"),
                 resources.getString("w_bottom")
         );
-        langChoiceBox.setItems(languageOptions);
+        langCB.setItems(languageOptions);
         toolbarPosition.setItems(positionsOptions);
         thumbViewPosition.setItems(positionsOptions);
+    }
+
+    void injectProperties(Properties properties) {
+        this.properties = properties;
+        setupView();
+    }
+
+    private void setupView() {
+        themeTG.getToggles().forEach(toggle -> {
+            if (((Node) toggle).getId().equals(properties.getProperty("theme")))
+                toggle.setSelected(true);
+        });
+        langCB.getSelectionModel().select(resources.getString("lang_name"));
     }
 }

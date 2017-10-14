@@ -25,10 +25,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MainController {
 
+    private Properties properties;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -77,6 +79,10 @@ public class MainController {
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
+    }
+
+    public void injectProperties(Properties properties) {
+        this.properties = properties;
     }
 
     void openFile() {
@@ -288,6 +294,8 @@ public class MainController {
         Parent root = null;
         try {
             root = loader.load();
+            SettingsPanelController settingsController = loader.getController();
+            settingsController.injectProperties(properties);
             Scene scene = new Scene(root);
             scene.getStylesheets().addAll(window.getScene().getStylesheets());
             Stage stage = new Stage();
