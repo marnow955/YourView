@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.*?>
+
 <TabPane xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          fx:controller="com.github.marnow955.yourview.controllers.SettingsPanelController"
@@ -15,96 +14,78 @@
     </fx:define>
 
     <tabs>
-        <Tab text="General">
+        <Tab text="%general">
             <VBox>
                 <VBox spacing="15.0" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets topRightBottomLeft="10.0"/>
                     </padding>
 
-                    <Label text="Appearance" styleClass="infoLabel"/>
+                    <Label text="%appearance" styleClass="infoLabel"/>
 
                     <VBox spacing="5.0">
                         <padding>
                             <Insets left="10.0"/>
                         </padding>
-                        <RadioButton text="Dark theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <RadioButton text="Light theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <CheckBox text="Show checked background" styleClass="infoContent"/>
+                        <RadioButton text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <RadioButton text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                        <CheckBox text="%show_background" styleClass="infoContent"/>
                     </VBox>
 
 
-                    <Label text="Language" styleClass="infoLabel"/>
+                    <Label text="%language" styleClass="infoLabel"/>
                     <HBox>
                         <padding>
                             <Insets left="10.0"/>
                         </padding>
-                        <Label text="Choose language: " styleClass="infoContent"/>
+                        <Label text="%choose_language" styleClass="infoContent"/>
                         <ComboBox fx:id="langChoiceBox"/>
                     </HBox>
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button styleClass="textButton, rightBoxBorder" text="Save" HBox.hgrow="ALWAYS"
+                    <Button styleClass="textButton, rightBoxBorder" text="%w_save" HBox.hgrow="ALWAYS"
                             maxWidth="Infinity"/>
-                    <Button styleClass="textButton" text="Cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button styleClass="textButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
                 </HBox>
 
             </VBox>
         </Tab>
 
-        <Tab text="Menus and toolbars">
+        <Tab text="%menus_toolbars">
             <VBox>
                 <VBox spacing="15.0" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets topRightBottomLeft="10.0"/>
                     </padding>
 
-                    <CheckBox text="Show menu" styleClass="infoContent"/>
+                    <CheckBox text="%show_menu" styleClass="infoContent"/>
 
-                    <CheckBox text="Show status bar" styleClass="infoContent"/>
+                    <CheckBox text="%show_status_bar" styleClass="infoContent"/>
 
-                    <CheckBox text="Show info panel" styleClass="infoContent"/>
+                    <CheckBox text="%show_info_panel" styleClass="infoContent"/>
 
                     <VBox spacing="5.0">
-                        <CheckBox text="Show toolbar" styleClass="infoContent"/>
+                        <CheckBox text="%show_toolbar" styleClass="infoContent"/>
                         <HBox>
-                            <Label text="Toolbar position: " styleClass="infoContent"/>
-                            <ComboBox>
-                                <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                        <String fx:value="Top"/>
-                                        <String fx:value="Left"/>
-                                        <String fx:value="Right"/>
-                                        <String fx:value="Bottom"/>
-                                    </FXCollections>
-                                </items>
-                            </ComboBox>
+                            <Label text="%toolbar_position" styleClass="infoContent"/>
+                            <ComboBox fx:id="toolbarPosition"/>
                         </HBox>
                     </VBox>
 
                     <VBox spacing="5.0">
-                        <CheckBox text="Show thumbnail view" styleClass="infoContent"/>
+                        <CheckBox text="%show_th" styleClass="infoContent"/>
                         <HBox>
-                            <Label text="Thumb view position: " styleClass="infoContent"/>
-                            <ComboBox>
-                                <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                        <String fx:value="Top"/>
-                                        <String fx:value="Left"/>
-                                        <String fx:value="Right"/>
-                                        <String fx:value="Bottom"/>
-                                    </FXCollections>
-                                </items>
-                            </ComboBox>
+                            <Label text="%thumb_view_position" styleClass="infoContent"/>
+                            <ComboBox fx:id="thumbViewPosition"/>
                         </HBox>
                     </VBox>
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button styleClass="textButton, rightBoxBorder" text="Save" HBox.hgrow="ALWAYS"
+                    <Button styleClass="textButton, rightBoxBorder" text="%w_save" HBox.hgrow="ALWAYS"
                             maxWidth="Infinity"/>
-                    <Button styleClass="textButton" text="Cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button styleClass="textButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
                 </HBox>
 
             </VBox>
