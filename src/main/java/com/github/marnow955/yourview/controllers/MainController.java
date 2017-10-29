@@ -1,5 +1,6 @@
 package com.github.marnow955.yourview.controllers;
 
+import com.github.marnow955.yourview.Settings;
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
@@ -25,12 +26,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MainController {
 
-    private Properties properties;
+    private Settings settings;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -70,6 +70,7 @@ public class MainController {
 
     public void setStageAndSetupView(Stage primaryStage) {
         window = primaryStage;
+        settings = Settings.getSettingsInstance();
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
@@ -79,10 +80,8 @@ public class MainController {
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
-    }
-
-    public void injectProperties(Properties properties) {
-        this.properties = properties;
+        isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+        isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
     }
 
     void openFile() {
@@ -295,7 +294,6 @@ public class MainController {
         try {
             root = loader.load();
             SettingsPanelController settingsController = loader.getController();
-            settingsController.injectProperties(properties);
             Scene scene = new Scene(root);
             scene.getStylesheets().addAll(window.getScene().getStylesheets());
             Stage stage = new Stage();

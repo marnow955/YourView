@@ -29,7 +29,7 @@
                         </padding>
                         <RadioButton fx:id="dark" text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
                         <RadioButton fx:id="light" text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <CheckBox text="%show_background" styleClass="infoContent"/>
+                        <CheckBox fx:id="checked_bg" text="%show_background" styleClass="infoContent"/>
                     </VBox>
 
 
@@ -59,14 +59,14 @@
                         <Insets topRightBottomLeft="10.0"/>
                     </padding>
 
-                    <CheckBox text="%show_menu" styleClass="infoContent"/>
+                    <CheckBox fx:id="menuChBox" text="%show_menu" styleClass="infoContent"/>
 
-                    <CheckBox text="%show_status_bar" styleClass="infoContent"/>
+                    <CheckBox fx:id="statusbarChBox" text="%show_status_bar" styleClass="infoContent"/>
 
-                    <CheckBox text="%show_info_panel" styleClass="infoContent"/>
+                    <CheckBox fx:id="infoPanelChBox" text="%show_info_panel" styleClass="infoContent"/>
 
                     <VBox spacing="5.0">
-                        <CheckBox text="%show_toolbar" styleClass="infoContent"/>
+                        <CheckBox fx:id="toolbarChBox" text="%show_toolbar" styleClass="infoContent"/>
                         <HBox>
                             <Label text="%toolbar_position" styleClass="infoContent"/>
                             <ComboBox fx:id="toolbarPosition"/>
@@ -74,7 +74,7 @@
                     </VBox>
 
                     <VBox spacing="5.0">
-                        <CheckBox text="%show_th" styleClass="infoContent"/>
+                        <CheckBox fx:id="thumbnailsChBox" text="%show_th" styleClass="infoContent"/>
                         <HBox>
                             <Label text="%thumb_view_position" styleClass="infoContent"/>
                             <ComboBox fx:id="thumbViewPosition"/>
