@@ -1,13 +1,17 @@
 package com.github.marnow955.yourview;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class SettingsReader {
 
-    public static Settings getSettingsFromFile(Settings settings, InputStream inputStream) {
+    public static Settings getSettingsFromFile(Settings settings, String fileName) {
         Properties properties = new Properties();
+        File settingsFile = new File(fileName);
         try {
+            InputStream inputStream = new FileInputStream(settingsFile);
             properties.load(inputStream);
         } catch (java.io.IOException e) {
             e.printStackTrace();

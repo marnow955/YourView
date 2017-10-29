@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,7 +21,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Settings settings = Settings.getSettingsInstance();
-        SettingsReader.getSettingsFromFile(settings, getClass().getResourceAsStream("/default_config.properties"));
+        if (new File("settings.properties").exists())
+            SettingsReader.getSettingsFromFile(settings, "settings.properties");
         CustomTooltipBehavior.updateTooltipBehavior(300, 5000, 200, false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(settings.getLanguage())));
@@ -36,4 +38,5 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
+
 }

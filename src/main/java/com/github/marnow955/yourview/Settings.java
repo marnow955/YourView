@@ -3,6 +3,9 @@ package com.github.marnow955.yourview;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Settings {
 
     private static Settings settings = null;
@@ -36,6 +39,32 @@ public class Settings {
             settings = new Settings();
         }
         return settings;
+    }
+
+    public Map<String, String> getDifferencesInSettings() {
+        Map<String, String> diffs = new HashMap<>();
+        Settings defaultSettings = new Settings();
+        if (!settings.getLanguage().equals(defaultSettings.getLanguage()))
+            diffs.put("language", settings.getLanguage());
+        if (!settings.getThemeName().equals(defaultSettings.getThemeName()))
+            diffs.put("theme", settings.getThemeName());
+        if (settings.isMenuVisible() != defaultSettings.isMenuVisible())
+            diffs.put("menu", String.valueOf(settings.isMenuVisible()));
+        if (settings.isStatusbarVisible() != defaultSettings.isStatusbarVisible())
+            diffs.put("statusbar", String.valueOf(settings.isStatusbarVisible()));
+        if (settings.isInfoPanelSelected() != defaultSettings.isInfoPanelSelected())
+            diffs.put("info_panel", String.valueOf(settings.isInfoPanelSelected()));
+        if (settings.isToolbarVisible() != defaultSettings.isToolbarVisible())
+            diffs.put("toolbar", String.valueOf(settings.isToolbarVisible()));
+        if (!settings.getToolbarPosition().equals(defaultSettings.getToolbarPosition()))
+            diffs.put("toolbar_position", settings.getToolbarPosition());
+        if (settings.isThumbViewSelected() != defaultSettings.isThumbViewSelected())
+            diffs.put("thumbnails", String.valueOf(settings.isThumbViewSelected()));
+        if (!settings.getThumbnailsPosition().equals(defaultSettings.getThumbnailsPosition()))
+            diffs.put("thumbnails_position", settings.getThumbnailsPosition());
+        if (settings.isChBackgroundSelected() != defaultSettings.isChBackgroundSelected())
+            diffs.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
+        return diffs;
     }
 
     public String getLanguage() {
