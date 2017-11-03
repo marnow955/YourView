@@ -13,6 +13,7 @@ public class SettingsReader {
         try {
             InputStream inputStream = new FileInputStream(settingsFile);
             properties.load(inputStream);
+            inputStream.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }

@@ -41,7 +41,7 @@ public class Settings {
         return settings;
     }
 
-    public Map<String, String> getDifferencesInSettings() {
+    public Map<String, String> getDifferencesFromDefaults() {
         Map<String, String> diffs = new HashMap<>();
         Settings defaultSettings = new Settings();
         if (!settings.getLanguage().equals(defaultSettings.getLanguage()))
@@ -65,6 +65,34 @@ public class Settings {
         if (settings.isChBackgroundSelected() != defaultSettings.isChBackgroundSelected())
             diffs.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
         return diffs;
+    }
+
+    public Map<String, String> getSettingsAsMap() {
+        Map<String, String> settingsMap = new HashMap<>();
+        settingsMap.put("language", settings.getLanguage());
+        settingsMap.put("theme", settings.getThemeName());
+        settingsMap.put("menu", String.valueOf(settings.isMenuVisible()));
+        settingsMap.put("statusbar", String.valueOf(settings.isStatusbarVisible()));
+        settingsMap.put("info_panel", String.valueOf(settings.isInfoPanelSelected()));
+        settingsMap.put("toolbar", String.valueOf(settings.isToolbarVisible()));
+        settingsMap.put("toolbar_position", settings.getToolbarPosition());
+        settingsMap.put("thumbnails", String.valueOf(settings.isThumbViewSelected()));
+        settingsMap.put("thumbnails_position", settings.getThumbnailsPosition());
+        settingsMap.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
+        return settingsMap;
+    }
+
+    public void setSettingsFromMap(Map<String, String> userSettingsAsMap) {
+        settings.setLanguage(userSettingsAsMap.get("language"));
+        settings.setThemeName(userSettingsAsMap.get("theme"));
+        settings.setMenuVisible(Boolean.parseBoolean(userSettingsAsMap.get("menu")));
+        settings.setStatusbarVisible(Boolean.parseBoolean(userSettingsAsMap.get("statusbar")));
+        settings.setInfoPanelSelected(Boolean.parseBoolean(userSettingsAsMap.get("info_panel")));
+        settings.setToolbarVisible(Boolean.parseBoolean(userSettingsAsMap.get("toolbar")));
+        settings.setToolbarPosition(userSettingsAsMap.get("toolbar_position"));
+        settings.setThumbViewSelected(Boolean.parseBoolean(userSettingsAsMap.get("thumbails")));
+        settings.setThumbnailsPosition(userSettingsAsMap.get("thumbnails_position"));
+        settings.setChBackgroundSelected(Boolean.parseBoolean(userSettingsAsMap.get("checked_bg")));
     }
 
     public String getLanguage() {

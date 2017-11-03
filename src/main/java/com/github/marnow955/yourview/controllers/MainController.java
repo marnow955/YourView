@@ -81,6 +81,9 @@ public class MainController {
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
         isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+        settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+        });
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
     }
 
@@ -173,8 +176,7 @@ public class MainController {
         alert.setContentText(resources.getString("del_conf_content"));
         ButtonType deleteBT = new ButtonType(resources.getString("w_delete"), ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBT = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(deleteBT, cancelBT);
+        alert.getButtonTypes().setAll(deleteBT, cancelBT);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == deleteBT;
     }
@@ -302,10 +304,15 @@ public class MainController {
             stage.setScene(scene);
             stage.initOwner(window);
             stage.initModality(Modality.APPLICATION_MODAL);
+            settingsController.setStage(stage);
             stage.show();
             GaussianBlur blurEffect = new GaussianBlur(5);
             window.getScene().getRoot().setEffect(blurEffect);
-            stage.setOnCloseRequest(event -> window.getScene().getRoot().setEffect(null));
+            stage.setOnHidden(event -> window.getScene().getRoot().setEffect(null));
+            stage.setOnCloseRequest(event -> {
+                event.consume();
+                settingsController.closeSettingsPanel();
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

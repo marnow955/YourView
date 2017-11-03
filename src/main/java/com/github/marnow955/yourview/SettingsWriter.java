@@ -10,7 +10,7 @@ public class SettingsWriter {
     public static void writeSettingsToFile(Settings settings, String fileName) {
         try {
             Properties properties = new Properties();
-            properties.putAll(settings.getDifferencesInSettings());
+            properties.putAll(settings.getDifferencesFromDefaults());
             File settingsFile = new File(fileName);
             if (properties.isEmpty()) {
                 if (settingsFile.exists() && settingsFile.isFile())
@@ -18,6 +18,7 @@ public class SettingsWriter {
             } else {
                 OutputStream outputStream = new FileOutputStream(settingsFile);
                 properties.store(outputStream, "YourView Settings");
+                outputStream.close();
             }
         } catch (java.io.IOException e) {
             e.printStackTrace();
