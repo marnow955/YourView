@@ -28,7 +28,9 @@ public class Main extends Application {
         loader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(settings.getLanguage())));
         Parent root = loader.load();
         MainController controller = loader.getController();
-        controller.setStageAndSetupView(primaryStage);
+        controller.setStage(primaryStage);
+        controller.setupView();
+        controller.loadSettings();
         Scene scene = new Scene(root);
         String theme = settings.getThemeName();
         scene.getStylesheets().add(getClass().getResource("/styles/MainView_" + theme + ".css").toExternalForm());

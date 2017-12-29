@@ -2,6 +2,8 @@ package com.github.marnow955.yourview;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,27 +12,27 @@ public class Settings {
 
     private static Settings settings = null;
 
-    private String language;
-    private String themeName;
+    private StringProperty language;
+    private StringProperty themeName;
     private BooleanProperty isMenuVisible;
     private BooleanProperty isStatusbarVisible;
     private BooleanProperty isInfoPanelSelected;
     private BooleanProperty isToolbarVisible;
-    private String toolbarPosition;
+    private StringProperty toolbarPosition;
     private BooleanProperty isThumbViewSelected;
-    private String thumbnailsPosition;
+    private StringProperty thumbnailsPosition;
     private BooleanProperty isChBackgroundSelected;
 
     private Settings() {
-        language = "en";
-        themeName = "dark";
+        language = new SimpleStringProperty("en");
+        themeName = new SimpleStringProperty("dark");
         isMenuVisible = new SimpleBooleanProperty(true);
         isStatusbarVisible = new SimpleBooleanProperty(false);
         isInfoPanelSelected = new SimpleBooleanProperty(false);
         isToolbarVisible = new SimpleBooleanProperty(true);
-        toolbarPosition = "top";
+        toolbarPosition = new SimpleStringProperty("top");
         isThumbViewSelected = new SimpleBooleanProperty(false);
-        thumbnailsPosition = "bottom";
+        thumbnailsPosition = new SimpleStringProperty("bottom");
         isChBackgroundSelected = new SimpleBooleanProperty(false);
     }
 
@@ -96,19 +98,27 @@ public class Settings {
     }
 
     public String getLanguage() {
+        return language.get();
+    }
+
+    public StringProperty getLanguageProperty() {
         return language;
     }
 
     public void setLanguage(String language) {
-        this.language = language;
+        this.language.set(language);
     }
 
     public String getThemeName() {
+        return themeName.get();
+    }
+
+    public StringProperty getThemeNameProperty() {
         return themeName;
     }
 
     public void setThemeName(String themeName) {
-        this.themeName = themeName;
+        this.themeName.set(themeName);
     }
 
     public boolean isMenuVisible() {
@@ -160,11 +170,15 @@ public class Settings {
     }
 
     public String getToolbarPosition() {
+        return toolbarPosition.get();
+    }
+
+    public StringProperty getToolbarPositionProperty() {
         return toolbarPosition;
     }
 
     public void setToolbarPosition(String toolbarPosition) {
-        this.toolbarPosition = toolbarPosition;
+        this.toolbarPosition.set(toolbarPosition);
     }
 
     public boolean isThumbViewSelected() {
@@ -180,11 +194,15 @@ public class Settings {
     }
 
     public String getThumbnailsPosition() {
+        return thumbnailsPosition.get();
+    }
+
+    public StringProperty getThumbnailsPositionProperty() {
         return thumbnailsPosition;
     }
 
     public void setThumbnailsPosition(String thumbnailsPosition) {
-        this.thumbnailsPosition = thumbnailsPosition;
+        this.thumbnailsPosition.set(thumbnailsPosition);
     }
 
     public boolean isChBackgroundSelected() {

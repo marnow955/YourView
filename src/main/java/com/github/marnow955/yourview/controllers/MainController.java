@@ -5,6 +5,7 @@ import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -64,13 +66,14 @@ public class MainController {
 
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
-    //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
 
-    public void setStageAndSetupView(Stage primaryStage) {
+    public void setStage(Stage primaryStage) {
         window = primaryStage;
-        settings = Settings.getSettingsInstance();
+    }
+
+    public void setupView() {
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
@@ -80,11 +83,39 @@ public class MainController {
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
+    }
+
+    public void loadSettings() {
+        settings = Settings.getSettingsInstance();
         isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
         settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
             isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
         });
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+        settings.getLanguageProperty().addListener((observable, oldValue, newValue) -> {
+            reloadView();
+        });
+        settings.getThemeNameProperty().addListener((observable, oldValue, newValue) -> {
+            String theme = getClass().getResource("/styles/MainView_" + settings.getThemeName() + ".css").toExternalForm();
+            window.getScene().getStylesheets().setAll(theme);
+        });
+    }
+
+    public void reloadView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(settings.getLanguage())));
+            Parent root = fxmlLoader.load();
+            MainController controller = fxmlLoader.getController();
+            controller.setStage(window);
+            controller.setupView();
+            controller.loadSettings();
+            window.getScene().setRoot(root);
+            if (imageFile != null)
+                Platform.runLater(() -> controller.openImage(imageFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void openFile() {
