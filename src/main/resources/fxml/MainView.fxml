@@ -3,26 +3,35 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.github.marnow955.yourview.controllers.MainController">
 
     <top>
-        <VBox>
+        <VBox fx:id="top">
             <fx:include fx:id="menuBar" source="MenuBar.fxml"/>
             <fx:include fx:id="toolbar" source="Toolbar.fxml"/>
         </VBox>
     </top>
 
     <left>
-        <fx:include fx:id="imageInfoPanel" source="ImageInfoPanel.fxml" visible="false"/>
+        <HBox fx:id="left">
+            <fx:include fx:id="imageInfoPanel" source="ImageInfoPanel.fxml" visible="false"/>
+        </HBox>
     </left>
 
     <center>
         <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
     </center>
 
+    <right>
+        <HBox fx:id="right"/>
+    </right>
+
     <bottom>
-        <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
+        <VBox fx:id="bottom">
+            <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
+        </VBox>
     </bottom>
 
 </BorderPane>

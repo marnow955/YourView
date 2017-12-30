@@ -2,17 +2,35 @@ package com.github.marnow955.yourview.controllers;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ToggleGroup;
 
 public class MenuBarController {
 
     @FXML
+    private CheckMenuItem menu;
+    @FXML
+    private CheckMenuItem toolbar;
+    @FXML
+    private CheckMenuItem infoPanel;
+    @FXML
     private CheckMenuItem thView;
     @FXML
     private CheckMenuItem chBackground;
+    @FXML
+    private ToggleGroup toolbarPositionTG;
+    @FXML
+    private ToggleGroup thumbViewPositionTG;
 
     private MainController mainController;
+
+    private StringProperty toolbarPosition = new SimpleStringProperty("top");
+
+    private StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
 
     private BooleanProperty isDisabled = new SimpleBooleanProperty(false);
 
@@ -32,6 +50,47 @@ public class MenuBarController {
         isDisabled.bind(mainController.isImageSelectedProperty.not());
         thView.selectedProperty().bindBidirectional(mainController.isThumbViewSelectedProperty);
         chBackground.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
+        toolbar.selectedProperty().bindBidirectional(mainController.isToolbarSelectedProperty);
+        infoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
+        menu.selectedProperty().bindBidirectional(mainController.isMenuVisibleProperty);
+        toolbarPosition.bindBidirectional(mainController.toolbarPosition);
+        thumbnailsPosition.bindBidirectional(mainController.thumbnailsPosition);
+        selectToolbarPosition();
+        selectThumbnailsPosition();
+        toolbarPosition.addListener((observable, oldValue, newValue) -> {
+            selectToolbarPosition();
+        });
+        thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
+            selectThumbnailsPosition();
+        });
+        toolbarPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                RadioMenuItem selected = (RadioMenuItem) toolbarPositionTG.getSelectedToggle();
+                toolbarPosition.set(selected.getId());
+            }
+        });
+        thumbViewPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                RadioMenuItem selected = (RadioMenuItem) thumbViewPositionTG.getSelectedToggle();
+                thumbnailsPosition.set(selected.getId());
+            }
+        });
+    }
+
+    private void selectToolbarPosition() {
+        toolbarPositionTG.getToggles().forEach(toggle -> {
+            if (((RadioMenuItem) toggle).getId().equals(toolbarPosition.get())) {
+                toggle.setSelected(true);
+            }
+        });
+    }
+
+    private void selectThumbnailsPosition() {
+        thumbViewPositionTG.getToggles().forEach(toggle -> {
+            if (((RadioMenuItem) toggle).getId().equals(thumbnailsPosition.get())) {
+                toggle.setSelected(true);
+            }
+        });
     }
 
     @FXML
@@ -42,5 +101,10 @@ public class MenuBarController {
     @FXML
     private void saveFile() {
         mainController.saveFile();
+    }
+
+    @FXML
+    private void showSettings() {
+        mainController.showSettings();
     }
 }

@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -64,9 +65,9 @@ public class ThumbViewController {
     private void centerCellInScrollPane(ScrollPane thumbViewScrollPane, Node node) {
         double h = thumbViewScrollPane.getContent().getBoundsInLocal().getHeight();
         double y = (node.getBoundsInParent().getMaxY() +
-                node.getBoundsInParent().getMinY()) / 2.0;
+                node.getBoundsInParent().getMinY())/2.0;
         double v = thumbViewScrollPane.getViewportBounds().getHeight();
-        thumbViewScrollPane.setVvalue(thumbViewScrollPane.getVmax() * ((y - 0.5 * v) / (h - v)));
+        thumbViewScrollPane.setVvalue(thumbViewScrollPane.getVmax()*((y - 0.5*v)/(h - v)));
     }
 
     double getCellWidth() {
@@ -83,5 +84,11 @@ public class ThumbViewController {
 
     void setCellHeight(double cellHeight) {
         this.cellHeight = cellHeight;
+    }
+
+    void setOrientation(Orientation orientation) {
+//        thumbView.setOrientation(orientation);
+        if (orientation == Orientation.VERTICAL)
+            thumbViewScrollPane.setPrefViewportWidth(cellWidth + 3*cellContainerPadding);
     }
 }

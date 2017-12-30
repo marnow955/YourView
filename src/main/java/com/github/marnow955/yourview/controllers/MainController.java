@@ -1,31 +1,47 @@
 package com.github.marnow955.yourview.controllers;
 
+import com.github.marnow955.yourview.Settings;
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.print.PrinterJob;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController {
 
+    @FXML
+    private VBox bottom;
+    @FXML
+    private HBox left;
+    @FXML
+    private HBox right;
+    @FXML
+    private VBox top;
+    private Settings settings;
     @FXML
     ResourceBundle resources;
     @FXML
@@ -59,21 +75,149 @@ public class MainController {
 
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
-    //TODO: change initial to settings value
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
+    BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
+    StringProperty toolbarPosition = new SimpleStringProperty("top");
+    StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
 
-    public void setStageAndSetupView(Stage primaryStage) {
+    public void setStage(Stage primaryStage) {
         window = primaryStage;
+    }
+
+    public void setupView() {
         menuBarController.injectMainController(this);
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
         thumbViewController.injectMainController(this);
+        imageInfoPanelController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
+        menuBar.managedProperty().bind(menuBar.visibleProperty());
+        menuBar.visibleProperty().bind(isMenuVisibleProperty);
+        toolbar.managedProperty().bind(toolbar.visibleProperty());
+        toolbar.visibleProperty().bind(isToolbarSelectedProperty);
+        imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
+        imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
+        toolbarPosition.addListener((observable, oldValue, newValue) -> {
+            changeToolbarPosition();
+        });
+        thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
+            changeThumbViewPosition();
+        });
+    }
+
+    public void loadSettings() {
+        settings = Settings.getSettingsInstance();
+        settings = settings.removeListeners();
+        isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+        settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+        });
+        isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+        settings.getLanguageProperty().addListener((observable, oldValue, newValue) -> {
+            reloadView();
+        });
+        settings.getThemeNameProperty().addListener((observable, oldValue, newValue) -> {
+            String theme = getClass().getResource("/styles/MainView_" + settings.getThemeName() + ".css").toExternalForm();
+            window.getScene().getStylesheets().setAll(theme);
+        });
+        isMenuVisibleProperty.set(settings.isMenuVisible());
+        settings.isMenuVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isMenuVisibleProperty.set(settings.isMenuVisible());
+        });
+        isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
+        settings.isInfoPanelSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
+        });
+        isToolbarSelectedProperty.set(settings.isToolbarVisible());
+        settings.isToolbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isToolbarSelectedProperty.set(settings.isToolbarVisible());
+        });
+        isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+        settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+        });
+        toolbarPosition.set(settings.getToolbarPosition());
+        settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) -> {
+            toolbarPosition.set(settings.getToolbarPosition());
+        });
+        thumbnailsPosition.set(settings.getThumbnailsPosition());
+        settings.getThumbnailsPositionProperty().addListener((observable, oldValue, newValue) -> {
+            thumbnailsPosition.set(settings.getThumbnailsPosition());
+        });
+    }
+
+    private void changeToolbarPosition() {
+        ((Pane) toolbar.getParent()).getChildren().remove(toolbar);
+        switch (toolbarPosition.get()) {
+            case "top": {
+                top.getChildren().add(1, toolbar);
+                toolbar.setOrientation(Orientation.HORIZONTAL);
+            }
+            break;
+            case "left": {
+                left.getChildren().add(0, toolbar);
+                toolbar.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "right": {
+                right.getChildren().add(right.getChildren().size(), toolbar);
+                toolbar.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "bottom": {
+                bottom.getChildren().add(bottom.getChildren().size(), toolbar);
+                toolbar.setOrientation(Orientation.HORIZONTAL);
+            }
+        }
+    }
+
+    private void changeThumbViewPosition() {
+        ((Pane) thumbView.getParent()).getChildren().remove(thumbView);
+        switch (thumbnailsPosition.get()) {
+            case "top": {
+                top.getChildren().add(2, thumbView);
+                thumbViewController.setOrientation(Orientation.HORIZONTAL);
+            }
+            break;
+            case "left": {
+                left.getChildren().add(1, thumbView);
+                thumbViewController.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "right": {
+                right.getChildren().add(0, thumbView);
+                thumbViewController.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "bottom": {
+                bottom.getChildren().add(0, thumbView);
+                thumbViewController.setOrientation(Orientation.HORIZONTAL);
+            }
+        }
+    }
+
+    private void reloadView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(settings.getLanguage())));
+            Parent root = fxmlLoader.load();
+            MainController controller = fxmlLoader.getController();
+            controller.setStage(window);
+            controller.setupView();
+            controller.loadSettings();
+            window.getScene().setRoot(root);
+            if (imageFile != null)
+                Platform.runLater(() -> controller.openImage(imageFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void openFile() {
@@ -165,8 +309,7 @@ public class MainController {
         alert.setContentText(resources.getString("del_conf_content"));
         ButtonType deleteBT = new ButtonType(resources.getString("w_delete"), ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBT = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(deleteBT, cancelBT);
+        alert.getButtonTypes().setAll(deleteBT, cancelBT);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == deleteBT;
     }
@@ -276,7 +419,31 @@ public class MainController {
         }
     }
 
-    void showImageInfo() {
-        imageInfoPanelController.togglePanelVisibility();
+    void showSettings() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SettingsPanel.fxml"), resources);
+        Parent root = null;
+        try {
+            root = loader.load();
+            SettingsPanelController settingsController = loader.getController();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().addAll(window.getScene().getStylesheets());
+            Stage stage = new Stage();
+            stage.setTitle(resources.getString("settings"));
+            stage.getIcons().addAll(window.getIcons());
+            stage.setScene(scene);
+            stage.initOwner(window);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            settingsController.setStage(stage);
+            stage.show();
+            GaussianBlur blurEffect = new GaussianBlur(5);
+            window.getScene().getRoot().setEffect(blurEffect);
+            stage.setOnHidden(event -> window.getScene().getRoot().setEffect(null));
+            stage.setOnCloseRequest(event -> {
+                event.consume();
+                settingsController.closeSettingsPanel();
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

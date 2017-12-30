@@ -197,3 +197,80 @@
 .thumbViewCellSelected {
     -fx-background-color: rgba(50,110,160,0.5);
 }
+
+/*********** Settings ***********************/
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #181818;
+}
+
+.tab-pane .tab-header-area .tab-down-button {
+    -fx-padding: 0;
+}
+
+.tab-pane .tab-header-area .tab-down-button .arrow {
+    -fx-padding: 0;
+}
+
+.tab-pane {
+    -fx-background-color: #383838;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #282828;
+    -fx-background-insets: 0 2 1 2;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #383838;
+    -fx-background-insets: 0 2 0 2;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #888;
+    -fx-alignment: center;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: steelblue;
+}
+
+.buttonsBox {
+    -fx-border-width: 0.5 0 0 0;
+    -fx-border-color: #585858;
+}
+
+.rightBoxBorder {
+    -fx-border-width: 0 0.5 0 0;
+    -fx-border-color: #585858;
+}
+
+.combo-box {
+    -fx-background-color: #585858;
+    -fx-pref-width: 200;
+}
+
+.combo-box .cell {
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #585858, -fx-control-inner-background;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #585858;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #DEDEDE;
+    -fx-text-fill: #1D1D1D;
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: steelblue;
+}
