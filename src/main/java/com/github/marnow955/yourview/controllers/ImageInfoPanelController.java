@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 public class ImageInfoPanelController {
 
     @FXML
-    private ScrollPane imageInfoPanel;
-    @FXML
     ResourceBundle resources;
     @FXML
     private Label fileName;
@@ -46,12 +44,16 @@ public class ImageInfoPanelController {
     private VBox allMetadataBox;
 
     private SimpleDateFormat dateFormatter;
+    private MainController mainController;
 
     @FXML
     private void initialize() {
         dateFormatter = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", resources.getLocale());
-        imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         allMetadataBox.managedProperty().bind(allMetadataBox.visibleProperty());
+    }
+
+    void injectMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     void setInfo(File imageFile) {
@@ -139,7 +141,7 @@ public class ImageInfoPanelController {
 
     @FXML
     void togglePanelVisibility() {
-        imageInfoPanel.setVisible(!imageInfoPanel.isVisible());
+        mainController.isImageInfoPanelSelectedProperty.set(!mainController.isImageInfoPanelSelectedProperty.get());
     }
 
     @FXML

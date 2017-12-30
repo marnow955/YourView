@@ -68,6 +68,9 @@ public class MainController {
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
+    BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
 
     public void setStage(Stage primaryStage) {
         window = primaryStage;
@@ -78,15 +81,23 @@ public class MainController {
         toolbarController.injectMainController(this);
         imagePanelController.injectMainController(this);
         thumbViewController.injectMainController(this);
+        imageInfoPanelController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
+        menuBar.managedProperty().bind(menuBar.visibleProperty());
+        menuBar.visibleProperty().bind(isMenuVisibleProperty);
+        toolbar.managedProperty().bind(toolbar.visibleProperty());
+        toolbar.visibleProperty().bind(isToolbarSelectedProperty);
+        imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
+        imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
     }
 
     public void loadSettings() {
         settings = Settings.getSettingsInstance();
+        settings = settings.removeListeners();
         isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
         settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
             isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
@@ -98,6 +109,22 @@ public class MainController {
         settings.getThemeNameProperty().addListener((observable, oldValue, newValue) -> {
             String theme = getClass().getResource("/styles/MainView_" + settings.getThemeName() + ".css").toExternalForm();
             window.getScene().getStylesheets().setAll(theme);
+        });
+        isMenuVisibleProperty.set(settings.isMenuVisible());
+        settings.isMenuVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isMenuVisibleProperty.set(settings.isMenuVisible());
+        });
+        isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
+        settings.isInfoPanelSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
+        });
+        isToolbarSelectedProperty.set(settings.isToolbarVisible());
+        settings.isToolbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isToolbarSelectedProperty.set(settings.isToolbarVisible());
+        });
+        isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+        settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
         });
     }
 
@@ -315,10 +342,6 @@ public class MainController {
                 }
             }
         }
-    }
-
-    void showImageInfo() {
-        imageInfoPanelController.togglePanelVisibility();
     }
 
     void showSettings() {

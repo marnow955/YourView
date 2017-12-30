@@ -10,7 +10,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:id="imageInfoPanel" fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
+            fx:controller="com.github.marnow955.yourview.controllers.ImageInfoPanelController"
             prefWidth="320.0" hbarPolicy="NEVER">
 
     <VBox prefWidth="300.0">

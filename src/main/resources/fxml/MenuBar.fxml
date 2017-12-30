@@ -17,6 +17,9 @@
     <Menu text="%menu_view">
         <CheckMenuItem fx:id="thView" text="%menu_th_view"/>
         <CheckMenuItem fx:id="chBackground" text="%menu_ch_background"/>
+        <CheckMenuItem fx:id="toolbar" text="%menu_toolbar"/>
+        <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel"/>
+        <CheckMenuItem fx:id="menu" text="%menu_menu"/>
     </Menu>
     <Menu text="%menu_help">
         <MenuItem text="%menu_about"/>

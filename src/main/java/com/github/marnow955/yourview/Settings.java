@@ -43,6 +43,22 @@ public class Settings {
         return settings;
     }
 
+    public Settings removeListeners() {
+        Settings tmp = new Settings();
+        tmp.setLanguage(settings.getLanguage());
+        tmp.setThemeName(settings.getThemeName());
+        tmp.setMenuVisible(settings.isMenuVisible());
+        tmp.setStatusbarVisible(settings.isStatusbarVisible());
+        tmp.setInfoPanelSelected(settings.isInfoPanelSelected());
+        tmp.setToolbarVisible(settings.isToolbarVisible());
+        tmp.setToolbarPosition(settings.getToolbarPosition());
+        tmp.setThumbViewSelected(settings.isThumbViewSelected());
+        tmp.setThumbnailsPosition(settings.getThumbnailsPosition());
+        tmp.setChBackgroundSelected(settings.isChBackgroundSelected());
+        settings = tmp;
+        return settings;
+    }
+
     public Map<String, String> getDifferencesFromDefaults() {
         Map<String, String> diffs = new HashMap<>();
         Settings defaultSettings = new Settings();
@@ -92,7 +108,7 @@ public class Settings {
         settings.setInfoPanelSelected(Boolean.parseBoolean(userSettingsAsMap.get("info_panel")));
         settings.setToolbarVisible(Boolean.parseBoolean(userSettingsAsMap.get("toolbar")));
         settings.setToolbarPosition(userSettingsAsMap.get("toolbar_position"));
-        settings.setThumbViewSelected(Boolean.parseBoolean(userSettingsAsMap.get("thumbails")));
+        settings.setThumbViewSelected(Boolean.parseBoolean(userSettingsAsMap.get("thumbnails")));
         settings.setThumbnailsPosition(userSettingsAsMap.get("thumbnails_position"));
         settings.setChBackgroundSelected(Boolean.parseBoolean(userSettingsAsMap.get("checked_bg")));
     }

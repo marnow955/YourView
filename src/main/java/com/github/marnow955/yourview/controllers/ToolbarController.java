@@ -8,6 +8,8 @@ import javafx.scene.control.ToggleButton;
 public class ToolbarController {
 
     @FXML
+    private ToggleButton shInfoPanel;
+    @FXML
     private ToggleButton shThumbView;
     @FXML
     private ToggleButton shBackgroundBtn;
@@ -32,6 +34,7 @@ public class ToolbarController {
         isDisabled.bind(mainController.isImageSelectedProperty.not());
         shThumbView.selectedProperty().bindBidirectional(mainController.isThumbViewSelectedProperty);
         shBackgroundBtn.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
+        shInfoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
     }
 
     @FXML
@@ -112,11 +115,6 @@ public class ToolbarController {
     @FXML
     private void actualSize() {
         mainController.actualSize();
-    }
-
-    @FXML
-    private void showImageInfo() {
-        mainController.showImageInfo();
     }
 
     @FXML

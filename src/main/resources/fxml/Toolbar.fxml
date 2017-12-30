@@ -197,14 +197,14 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false" onAction="#showImageInfo" disable="${controller.isDisabled}">
+    <ToggleButton fx:id="shInfoPanel" focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="info"/>
         </graphic>
         <tooltip>
             <Tooltip text="%info"/>
         </tooltip>
-    </Button>
+    </ToggleButton>
 
     <Button focusTraversable="false" mnemonicParsing="false" onAction="#showSettings">
         <graphic>
