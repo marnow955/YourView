@@ -158,22 +158,22 @@ public class MainController {
         switch (toolbarPosition.get()) {
             case "top": {
                 top.getChildren().add(1, toolbar);
-                toolbar.setOrientation(Orientation.HORIZONTAL);
+                toolbarController.setOrientation(Orientation.HORIZONTAL);
             }
             break;
             case "left": {
                 left.getChildren().add(0, toolbar);
-                toolbar.setOrientation(Orientation.VERTICAL);
+                toolbarController.setOrientation(Orientation.VERTICAL);
             }
             break;
             case "right": {
                 right.getChildren().add(right.getChildren().size(), toolbar);
-                toolbar.setOrientation(Orientation.VERTICAL);
+                toolbarController.setOrientation(Orientation.VERTICAL);
             }
             break;
             case "bottom": {
                 bottom.getChildren().add(bottom.getChildren().size(), toolbar);
-                toolbar.setOrientation(Orientation.HORIZONTAL);
+                toolbarController.setOrientation(Orientation.HORIZONTAL);
             }
         }
     }
@@ -368,7 +368,13 @@ public class MainController {
 
     void adjustWindow() {
         window.setMaximized(false);
-        toolbar.setPrefWidth(image.getWidth() + 2);
+        if (toolbar.getOrientation() == Orientation.HORIZONTAL) {
+            toolbar.setPrefWidth(image.getWidth() + 2);
+            toolbar.setPrefHeight(-1);
+        } else {
+            toolbar.setPrefWidth(-1);
+            toolbar.setPrefHeight(image.getHeight() + 2);
+        }
         imagePanelController.setImage(image);
         imagePanel.setPrefSize(image.getWidth() + 2, image.getHeight() + 2);
         window.sizeToScene();
