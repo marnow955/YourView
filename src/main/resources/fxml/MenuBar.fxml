@@ -6,9 +6,15 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.github.marnow955.yourview.controllers.MenuBarController">
 
+    <fx:define>
+        <ToggleGroup fx:id="toolbarPositionTG"/>
+    </fx:define>
+
     <Menu text="%menu_file">
         <MenuItem text="%menu_open_file" onAction="#openFile"/>
         <MenuItem text="%menu_save" onAction="#saveFile" disable="${controller.isDisabled}" accelerator="Shortcut+S"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="%menu_settings" onAction="#showSettings"/>
         <SeparatorMenuItem/>
         <MenuItem text="%menu_exit"/>
     </Menu>
@@ -18,6 +24,12 @@
         <CheckMenuItem fx:id="thView" text="%menu_th_view"/>
         <CheckMenuItem fx:id="chBackground" text="%menu_ch_background"/>
         <CheckMenuItem fx:id="toolbar" text="%menu_toolbar"/>
+        <Menu text="%menu_toolbar_position">
+            <RadioMenuItem text="%menu_top" fx:id="top" toggleGroup="$toolbarPositionTG"/>
+            <RadioMenuItem text="%menu_left" fx:id="left" toggleGroup="$toolbarPositionTG"/>
+            <RadioMenuItem text="%menu_right" fx:id="right" toggleGroup="$toolbarPositionTG"/>
+            <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$toolbarPositionTG"/>
+        </Menu>
         <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel"/>
         <CheckMenuItem fx:id="menu" text="%menu_menu"/>
     </Menu>

@@ -6,13 +6,11 @@ import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import com.sun.jna.platform.FileUtils;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -32,6 +33,14 @@ import java.util.ResourceBundle;
 
 public class MainController {
 
+    @FXML
+    private VBox bottom;
+    @FXML
+    private HBox left;
+    @FXML
+    private HBox right;
+    @FXML
+    private VBox top;
     private Settings settings;
     @FXML
     ResourceBundle resources;
@@ -71,6 +80,7 @@ public class MainController {
     BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
     BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
+    StringProperty toolbarPosition = new SimpleStringProperty("top");
 
     public void setStage(Stage primaryStage) {
         window = primaryStage;
@@ -93,6 +103,9 @@ public class MainController {
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
+        toolbarPosition.addListener((observable, oldValue, newValue) -> {
+            changeToolbarPosition();
+        });
     }
 
     public void loadSettings() {
@@ -126,9 +139,38 @@ public class MainController {
         settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) -> {
             isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
         });
+        toolbarPosition.set(settings.getToolbarPosition());
+        settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) -> {
+            toolbarPosition.set(settings.getToolbarPosition());
+        });
     }
 
-    public void reloadView() {
+    private void changeToolbarPosition() {
+        ((Pane) toolbar.getParent()).getChildren().remove(toolbar);
+        switch (toolbarPosition.get()) {
+            case "top": {
+                top.getChildren().add(1, toolbar);
+                toolbar.setOrientation(Orientation.HORIZONTAL);
+            }
+            break;
+            case "left": {
+                left.getChildren().add(0, toolbar);
+                toolbar.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "right": {
+                right.getChildren().add(right.getChildren().size(), toolbar);
+                toolbar.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "bottom": {
+                bottom.getChildren().add(bottom.getChildren().size(), toolbar);
+                toolbar.setOrientation(Orientation.HORIZONTAL);
+            }
+        }
+    }
+
+    private void reloadView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
             fxmlLoader.setResources(ResourceBundle.getBundle("bundles.lang", new Locale(settings.getLanguage())));
