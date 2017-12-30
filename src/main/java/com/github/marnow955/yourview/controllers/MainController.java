@@ -81,6 +81,7 @@ public class MainController {
     BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
     StringProperty toolbarPosition = new SimpleStringProperty("top");
+    StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
 
     public void setStage(Stage primaryStage) {
         window = primaryStage;
@@ -105,6 +106,9 @@ public class MainController {
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
         toolbarPosition.addListener((observable, oldValue, newValue) -> {
             changeToolbarPosition();
+        });
+        thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
+            changeThumbViewPosition();
         });
     }
 
@@ -143,6 +147,10 @@ public class MainController {
         settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) -> {
             toolbarPosition.set(settings.getToolbarPosition());
         });
+        thumbnailsPosition.set(settings.getThumbnailsPosition());
+        settings.getThumbnailsPositionProperty().addListener((observable, oldValue, newValue) -> {
+            thumbnailsPosition.set(settings.getThumbnailsPosition());
+        });
     }
 
     private void changeToolbarPosition() {
@@ -166,6 +174,31 @@ public class MainController {
             case "bottom": {
                 bottom.getChildren().add(bottom.getChildren().size(), toolbar);
                 toolbar.setOrientation(Orientation.HORIZONTAL);
+            }
+        }
+    }
+
+    private void changeThumbViewPosition() {
+        ((Pane) thumbView.getParent()).getChildren().remove(thumbView);
+        switch (thumbnailsPosition.get()) {
+            case "top": {
+                top.getChildren().add(2, thumbView);
+                thumbViewController.setOrientation(Orientation.HORIZONTAL);
+            }
+            break;
+            case "left": {
+                left.getChildren().add(1, thumbView);
+                thumbViewController.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "right": {
+                right.getChildren().add(0, thumbView);
+                thumbViewController.setOrientation(Orientation.VERTICAL);
+            }
+            break;
+            case "bottom": {
+                bottom.getChildren().add(0, thumbView);
+                thumbViewController.setOrientation(Orientation.HORIZONTAL);
             }
         }
     }

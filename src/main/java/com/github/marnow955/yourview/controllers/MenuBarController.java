@@ -23,10 +23,14 @@ public class MenuBarController {
     private CheckMenuItem chBackground;
     @FXML
     private ToggleGroup toolbarPositionTG;
+    @FXML
+    private ToggleGroup thumbViewPositionTG;
 
     private MainController mainController;
 
     private StringProperty toolbarPosition = new SimpleStringProperty("top");
+
+    private StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
 
     private BooleanProperty isDisabled = new SimpleBooleanProperty(false);
 
@@ -50,9 +54,14 @@ public class MenuBarController {
         infoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
         menu.selectedProperty().bindBidirectional(mainController.isMenuVisibleProperty);
         toolbarPosition.bindBidirectional(mainController.toolbarPosition);
+        thumbnailsPosition.bindBidirectional(mainController.thumbnailsPosition);
         selectToolbarPosition();
+        selectThumbnailsPosition();
         toolbarPosition.addListener((observable, oldValue, newValue) -> {
             selectToolbarPosition();
+        });
+        thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
+            selectThumbnailsPosition();
         });
         toolbarPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -60,11 +69,25 @@ public class MenuBarController {
                 toolbarPosition.set(selected.getId());
             }
         });
+        thumbViewPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                RadioMenuItem selected = (RadioMenuItem) thumbViewPositionTG.getSelectedToggle();
+                thumbnailsPosition.set(selected.getId());
+            }
+        });
     }
 
     private void selectToolbarPosition() {
         toolbarPositionTG.getToggles().forEach(toggle -> {
             if (((RadioMenuItem) toggle).getId().equals(toolbarPosition.get())) {
+                toggle.setSelected(true);
+            }
+        });
+    }
+
+    private void selectThumbnailsPosition() {
+        thumbViewPositionTG.getToggles().forEach(toggle -> {
+            if (((RadioMenuItem) toggle).getId().equals(thumbnailsPosition.get())) {
                 toggle.setSelected(true);
             }
         });
