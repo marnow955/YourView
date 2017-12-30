@@ -1,0 +1,15 @@
+@import "styles.css";
+
+* {
+    -fx-primary: #D8D8D8;
+    -fx-primary-focus: derive(-fx-primary, -25%);
+    -fx-primary-dark: #C8C8C8;
+    -fx-primary-dark-focus: derive(-fx-primary-dark, -30%);
+    -fx-background: #B8B8B8;
+    -fx-secondary: steelblue;
+    -fx-secondary-focus: derive(-fx-secondary, 25%);
+    -fx-primary-text: black;
+    -fx-primary-text-half: derive(-fx-primary-text, 50%);
+    -fx-primary-text-quarter: derive(-fx-primary-text, 75%);
+    -fx-canvas: #999;
+}

@@ -44,9 +44,9 @@
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder" text="%w_save" HBox.hgrow="ALWAYS"
+                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save" HBox.hgrow="ALWAYS"
                             maxWidth="Infinity"/>
-                    <Button onAction="#cancelChanges" styleClass="textButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
                 </HBox>
 
             </VBox>
@@ -83,9 +83,9 @@
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder" text="%w_save" HBox.hgrow="ALWAYS"
+                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save" HBox.hgrow="ALWAYS"
                             maxWidth="Infinity"/>
-                    <Button onAction="#cancelChanges" styleClass="textButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
                 </HBox>
 
             </VBox>

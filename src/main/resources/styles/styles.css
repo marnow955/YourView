@@ -1,0 +1,284 @@
+.root {
+    -fx-background-color: -fx-background;
+}
+
+/********** Menu style **********/
+.menu-bar {
+    -fx-background-color: -fx-primary;
+    -fx-border-width: 0 0 0.5 0;
+    -fx-border-color: derive(-fx-primary, -25%);
+}
+
+.menu .label {
+    -fx-text-fill: -fx-primary-text;
+}
+
+.menu-button:hover {
+    -fx-background-color: -fx-primary-focus;
+}
+
+.menu-button:showing {
+    -fx-background-color: -fx-secondary;
+}
+
+.menu-item .label {
+    -fx-text-fill: -fx-primary-text;
+}
+
+.menu-item:focused {
+    -fx-background-color: -fx-secondary;
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: -fx-primary;
+    -fx-border-width: 0.5;
+    -fx-border-color: -fx-primary-focus;
+    -fx-padding: 0 0 0 0;
+}
+
+.separator *.line {
+    -fx-border-width: 0.5;
+    -fx-border-color: -fx-primary-focus;
+}
+
+/********** End of menu style **********/
+
+/********** Toolbar **********/
+.tool-bar {
+    -fx-background-color: -fx-primary;
+    -fx-border-width: 0.5 0 0.5 0;
+    -fx-border-color: derive(-fx-primary, 15%) #000 derive(-fx-primary, -25%) #000;
+}
+
+.tool-bar .button, .toggle-button {
+    -fx-background-color: -fx-primary;
+}
+
+.tool-bar .button:hover, .toggle-button:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.tool-bar .button:pressed, .toggle-button:pressed {
+    -fx-background-color: -fx-secondary-focus;
+}
+
+.tool-bar .button .label, .toggle-button .label {
+    -fx-text-fill: -fx-primary-text;
+}
+
+.tool-bar .toggle-button:selected {
+    -fx-background-color: -fx-secondary;
+}
+
+/********** End of toolbar style **********/
+
+/********** Image Panel **********/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.checked {
+    -fx-background-color: -fx-canvas;
+    -fx-background-image: url('../images/ps-neutral.png');
+    -fx-background-repeat: repeat;
+}
+
+/*********Image Info Panel ***********/
+#imageInfoPanel {
+    -fx-background-color: -fx-primary-dark;
+    -fx-padding: 0 0 0 10;
+    -fx-border-width: 0 0.5 0 0;
+    -fx-border-color: -fx-primary-dark-focus;
+}
+
+.mainLabel {
+    -fx-text-fill: -fx-primary-text;
+    -fx-font-size: 20;
+}
+
+.infoLabel {
+    -fx-text-fill: -fx-primary-text-half;
+    -fx-font-size: 17;
+}
+
+.infoContent {
+    -fx-text-fill: -fx-primary-text;
+    -fx-font-size: 14;
+}
+
+.directoryName {
+    -fx-text-fill: -fx-primary-text-quarter;
+    -fx-font-size: 16;
+}
+
+.textButton, .smallTextButton {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-secondary;
+}
+
+.smallTextButton {
+    -fx-font-size: 16;
+    -fx-padding: 0;
+}
+
+.textButton:hover, .smallTextButton:hover {
+    -fx-text-fill: -fx-secondary-focus;
+}
+
+.textButton:pressed, .smallTextButton:pressed {
+    -fx-text-fill: -fx-secondary;
+}
+
+/************ Scroll Bar *************/
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-radius: 0;
+    -fx-background-color: -fx-primary-dark-focus;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-radius: 0;
+    -fx-background-color: derive(-fx-primary-dark-focus, 20%);
+}
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/*********** Thumbnails View ***************/
+.thumbView {
+    -fx-background-color: -fx-primary;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.thumbViewCell {
+    -fx-background-color: -fx-primary;
+}
+
+
+.thumbViewCell:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.thumbViewCell:pressed {
+    -fx-background-color: -fx-secondary-focus;
+}
+
+.thumbViewCellSelected {
+    -fx-background-color: -fx-secondary;
+}
+
+/*********** Settings ***********************/
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: derive(-fx-primary-dark, -40%);
+}
+
+.tab-pane .tab-header-area .tab-down-button {
+    -fx-padding: 0;
+}
+
+.tab-pane .tab-header-area .tab-down-button .arrow {
+    -fx-padding: 0;
+}
+
+.tab-pane {
+    -fx-background-color: -fx-primary;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: derive(-fx-primary, -20%);
+    -fx-background-insets: 0 2 1 2;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-primary;
+    -fx-background-insets: 0 2 0 2;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: -fx-primary-text-half;
+    -fx-alignment: center;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -fx-secondary;
+}
+
+.buttonsBox {
+    -fx-border-width: 0.5 0 0 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.rightBoxBorder {
+    -fx-border-width: 0 0.5 0 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.flatButton:hover {
+    -fx-background-color: -fx-secondary-focus;
+    -fx-text-fill: -fx-primary;
+}
+
+.flatButton:pressed {
+    -fx-background-color: derive(-fx-secondary-focus, 20%);
+    -fx-text-fill: -fx-primary;
+}
+
+.combo-box {
+    -fx-background-color: -fx-primary-focus;
+    -fx-pref-width: 200;
+}
+
+.combo-box .cell {
+    -fx-text-fill: -fx-primary-text;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-primary-focus, -fx-control-inner-background;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: -fx-primary-focus;
+    -fx-text-fill: -fx-primary-text;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: derive(-fx-primary, 80%);
+    -fx-text-fill: derive(-fx-primary-text, -80%);
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: -fx-secondary;
+}
