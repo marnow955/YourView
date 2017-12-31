@@ -36,6 +36,7 @@ public class ImagePanelController {
                     zoomOut();
                 }
                 mainController.updateWindowTitle();
+                mainController.updateStatusBarText();
             }
         });
     }

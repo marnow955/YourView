@@ -1,14 +1,16 @@
 package com.github.marnow955.yourview.controllers;
 
-import com.github.marnow955.yourview.settings.Settings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import org.controlsfx.control.StatusBar;
 
 public class StatusBarController {
 
+    @FXML
+    private StatusBar statusBar;
     @FXML
     private ToggleGroup toolbarPositionTG;
     @FXML
@@ -70,5 +72,33 @@ public class StatusBarController {
     @FXML
     private void toggleThumbnails() {
         mainController.isThumbViewSelectedProperty.set(!mainController.isThumbViewSelectedProperty.get());
+    }
+
+    void updateText(String name, int index, int nrOfElements, int width, int height, long size, int zoomPercent) {
+        String text = index + "/" + nrOfElements + "  ";
+        text += name + "  ";
+        text += width + "x" + height + " pixels  ";
+        int iteration = 0;
+        String bSizeText = "";
+        double bSize = size;
+        while (bSize >= 1024 && iteration < 3) {
+            bSize = bSize/1024;
+            iteration++;
+        }
+        bSize = Math.round(bSize*100.0)/100.0;
+        switch (iteration) {
+            case 0:
+                bSizeText = bSize + "B";
+                break;
+            case 1:
+                bSizeText = bSize + "KB";
+                break;
+            case 2:
+                bSizeText = bSize + "MB";
+                break;
+        }
+        text += bSizeText + "  ";
+        text += zoomPercent + "%";
+        statusBar.setText(text);
     }
 }

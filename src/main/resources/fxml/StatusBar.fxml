@@ -7,7 +7,8 @@
 
 <StatusBar xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.github.marnow955.yourview.controllers.StatusBarController" text="">
+           fx:controller="com.github.marnow955.yourview.controllers.StatusBarController"
+           fx:id="statusBar" text="">
 
     <fx:define>
         <ToggleGroup fx:id="toolbarPositionTG"/>

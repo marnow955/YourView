@@ -190,7 +190,7 @@ public class MainController {
             }
             break;
             case "bottom": {
-                bottom.getChildren().add(bottom.getChildren().size()-1, toolbar);
+                bottom.getChildren().add(bottom.getChildren().size() - 1, toolbar);
                 toolbarController.setOrientation(Orientation.HORIZONTAL);
             }
         }
@@ -205,7 +205,7 @@ public class MainController {
             }
             break;
             case "left": {
-                left.getChildren().add(left.getChildren().size()-1, thumbView);
+                left.getChildren().add(left.getChildren().size() - 1, thumbView);
                 thumbViewController.setOrientation(Orientation.VERTICAL);
             }
             break;
@@ -263,6 +263,7 @@ public class MainController {
                     thumbViewController.getCellWidth(), thumbViewController.getCellHeight());
             imageIndex.set(directory.getImageIndex(MainController.this.imageFile));
             updateWindowTitle();
+            updateStatusBarText();
             loadThumbView();
         }
     }
@@ -276,6 +277,7 @@ public class MainController {
         isImageSelectedProperty.set(true);
         imageInfoPanelController.setInfo(imageFile);
         updateWindowTitle();
+        updateStatusBarText();
         thumbViewController.setSelected(index);
     }
 
@@ -288,6 +290,12 @@ public class MainController {
         window.setTitle("Your View - " +
                 (imageIndex.get() + 1) + "/" + directory.getNrOfImagesInDirectory() + " - " +
                 imageFile.getName() + " | " + imagePanelController.getZoomPercent() + "%");
+    }
+
+    void updateStatusBarText() {
+        statusBarController.updateText(imageFile.getName(), imageIndex.get() + 1,
+                directory.getNrOfImagesInDirectory(), (int) image.getWidth(), (int) image.getHeight(),
+                imageFile.length(), imagePanelController.getZoomPercent());
     }
 
     void saveFile() {
@@ -357,31 +365,37 @@ public class MainController {
     void zoomOut() {
         imagePanelController.zoomOut();
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void zoomIn() {
         imagePanelController.zoomIn();
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void actualSize() {
         imagePanelController.setImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void scaleToWidth() {
         imagePanelController.scaleToWidth(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void scaleToHeight() {
         imagePanelController.scaleToHeight(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void adjustImage() {
         imagePanelController.adjustImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void adjustWindow() {
@@ -397,6 +411,7 @@ public class MainController {
         imagePanel.setPrefSize(image.getWidth() + 2, image.getHeight() + 2);
         window.sizeToScene();
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void rotateLeft() {
@@ -404,6 +419,7 @@ public class MainController {
         image = processingController.rotateLeft(image);
         imagePanelController.setImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void rotateRight() {
@@ -411,18 +427,21 @@ public class MainController {
         image = processingController.rotateRight(image);
         imagePanelController.setImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void horizontalFlip() {
         image = processingController.horizontalFlip(image);
         imagePanelController.setImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     void verticalFlip() {
         image = processingController.verticalFlip(image);
         imagePanelController.setImage(image);
         updateWindowTitle();
+        updateStatusBarText();
     }
 
     private void showCheckedBackground(Boolean newValue) {
