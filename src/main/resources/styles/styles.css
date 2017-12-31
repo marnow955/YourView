@@ -282,3 +282,42 @@
 .combo-box-popup .list-cell:filled:selected {
     -fx-background-color: -fx-secondary;
 }
+
+/********** Status Bar **********/
+.status-bar {
+    -fx-background-color: derive(-fx-primary, -20%);
+    -fx-text-fill: -fx-primary-text;
+    -fx-min-height: 20.0;
+    -fx-max-height: 20.0;
+    -fx-border-width: 0.5 0 0 0;
+    -fx-border-color: derive(-fx-primary-dark, -20%);
+}
+
+.status-bar .right-items {
+    -fx-spacing: 5;
+}
+
+.status-bar .split-menu-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-primary-text;
+    -fx-min-height: 18.0;
+    -fx-max-height: 18.0;
+}
+
+.status-bar .split-menu-button .label {
+    -fx-background-color: -fx-primary-dark;
+    -fx-text-fill: -fx-primary-text;
+    -fx-min-height: 18.0;
+    -fx-max-height: 18.0;
+}
+
+.status-bar .split-menu-button .arrow-button {
+    -fx-background-color: -fx-primary-dark;
+    -fx-text-fill: -fx-primary-text;
+    -fx-min-height: 18.0;
+    -fx-max-height: 18.0;
+}
+
+.status-bar .split-menu-button .menu-item .label{
+    -fx-background-color: transparent;
+}

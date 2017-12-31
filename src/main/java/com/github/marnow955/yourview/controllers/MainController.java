@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.StatusBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +69,10 @@ public class MainController {
     private ScrollPane thumbView;
     @FXML
     private ThumbViewController thumbViewController;
+    @FXML
+    private StatusBar statusBar;
+    @FXML
+    private StatusBarController statusBarController;
 
     private Stage window;
     private File imageFile;
@@ -75,13 +80,16 @@ public class MainController {
     private Image image;
     private ImageManipulationsController processingController;
 
-    BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
+    BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
+
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
     BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
+    BooleanProperty isStatusBarVisibleProperty = new SimpleBooleanProperty(false);
+
     StringProperty toolbarPosition = new SimpleStringProperty("top");
     StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
 
@@ -95,14 +103,18 @@ public class MainController {
         imagePanelController.injectMainController(this);
         thumbViewController.injectMainController(this);
         imageInfoPanelController.injectMainController(this);
+        statusBarController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
+        statusBarController.setupView();
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         menuBar.managedProperty().bind(menuBar.visibleProperty());
         menuBar.visibleProperty().bind(isMenuVisibleProperty);
         toolbar.managedProperty().bind(toolbar.visibleProperty());
         toolbar.visibleProperty().bind(isToolbarSelectedProperty);
+        statusBar.managedProperty().bind(statusBar.visibleProperty());
+        statusBar.visibleProperty().bind(isStatusBarVisibleProperty);
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
@@ -119,7 +131,7 @@ public class MainController {
         settings = settings.removeListeners();
         isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
         settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
+            isChBackgroundSelectedProperty.set(newValue);
         });
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
         settings.getLanguageProperty().addListener((observable, oldValue, newValue) -> {
@@ -131,27 +143,31 @@ public class MainController {
         });
         isMenuVisibleProperty.set(settings.isMenuVisible());
         settings.isMenuVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isMenuVisibleProperty.set(settings.isMenuVisible());
+            isMenuVisibleProperty.set(newValue);
         });
         isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
         settings.isInfoPanelSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
+            isImageInfoPanelSelectedProperty.set(newValue);
         });
         isToolbarSelectedProperty.set(settings.isToolbarVisible());
         settings.isToolbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isToolbarSelectedProperty.set(settings.isToolbarVisible());
+            isToolbarSelectedProperty.set(newValue);
         });
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
         settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
+            isThumbViewSelectedProperty.set(newValue);
         });
         toolbarPosition.set(settings.getToolbarPosition());
         settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) -> {
-            toolbarPosition.set(settings.getToolbarPosition());
+            toolbarPosition.set(newValue);
         });
         thumbnailsPosition.set(settings.getThumbnailsPosition());
         settings.getThumbnailsPositionProperty().addListener((observable, oldValue, newValue) -> {
-            thumbnailsPosition.set(settings.getThumbnailsPosition());
+            thumbnailsPosition.set(newValue);
+        });
+        isStatusBarVisibleProperty.set(settings.isStatusbarVisible());
+        settings.isStatusbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isStatusBarVisibleProperty.set(newValue);
         });
     }
 
@@ -174,7 +190,7 @@ public class MainController {
             }
             break;
             case "bottom": {
-                bottom.getChildren().add(bottom.getChildren().size(), toolbar);
+                bottom.getChildren().add(bottom.getChildren().size()-1, toolbar);
                 toolbarController.setOrientation(Orientation.HORIZONTAL);
             }
         }
@@ -184,12 +200,12 @@ public class MainController {
         ((Pane) thumbView.getParent()).getChildren().remove(thumbView);
         switch (thumbnailsPosition.get()) {
             case "top": {
-                top.getChildren().add(2, thumbView);
+                top.getChildren().add(top.getChildren().size(), thumbView);
                 thumbViewController.setOrientation(Orientation.HORIZONTAL);
             }
             break;
             case "left": {
-                left.getChildren().add(1, thumbView);
+                left.getChildren().add(left.getChildren().size()-1, thumbView);
                 thumbViewController.setOrientation(Orientation.VERTICAL);
             }
             break;

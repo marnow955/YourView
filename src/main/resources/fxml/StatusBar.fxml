@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import org.controlsfx.control.StatusBar?>
+<?import org.controlsfx.glyphfont.Glyph?>
+
+<StatusBar xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.github.marnow955.yourview.controllers.StatusBarController" text="">
+
+    <fx:define>
+        <ToggleGroup fx:id="toolbarPositionTG"/>
+        <ToggleGroup fx:id="thumbViewPositionTG"/>
+    </fx:define>
+
+    <rightItems>
+
+        <SplitMenuButton onAction="#toggleToolbar" focusTraversable="false" mnemonicParsing="false">
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="minus_square_alt" style="-fx-rotate: 90;"/>
+            </graphic>
+            <tooltip>
+                <Tooltip text="%show_toolbar"/>
+            </tooltip>
+            <items>
+                <RadioMenuItem text="%w_top" fx:id="top" toggleGroup="$toolbarPositionTG"/>
+                <RadioMenuItem text="%w_left" fx:id="left" toggleGroup="$toolbarPositionTG"/>
+                <RadioMenuItem text="%w_right" fx:id="right" toggleGroup="$toolbarPositionTG"/>
+                <RadioMenuItem text="%w_bottom" fx:id="bottom" toggleGroup="$toolbarPositionTG"/>
+            </items>
+        </SplitMenuButton>
+
+        <Separator orientation="VERTICAL"/>
+
+        <SplitMenuButton onAction="#toggleThumbnails" focusTraversable="false" mnemonicParsing="false">
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="th_large"/>
+            </graphic>
+            <tooltip>
+                <Tooltip text="%show_th"/>
+            </tooltip>
+            <items>
+                <RadioMenuItem text="%w_top" fx:id="top" toggleGroup="$thumbViewPositionTG"/>
+                <RadioMenuItem text="%w_left" fx:id="left" toggleGroup="$thumbViewPositionTG"/>
+                <RadioMenuItem text="%w_right" fx:id="right" toggleGroup="$thumbViewPositionTG"/>
+                <RadioMenuItem text="%w_bottom" fx:id="bottom" toggleGroup="$thumbViewPositionTG"/>
+            </items>
+        </SplitMenuButton>
+
+    </rightItems>
+</StatusBar>

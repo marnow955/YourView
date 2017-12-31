@@ -31,6 +31,7 @@
     <bottom>
         <VBox fx:id="bottom">
             <fx:include fx:id="thumbView" styleClass="thumbView" source="ThumbView.fxml" prefHeight="88"/>
+            <fx:include fx:id="statusBar" source="StatusBar.fxml" />
         </VBox>
     </bottom>
 
