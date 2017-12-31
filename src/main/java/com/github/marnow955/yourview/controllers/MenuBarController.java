@@ -107,4 +107,79 @@ public class MenuBarController {
     private void showSettings() {
         mainController.showSettings();
     }
+
+    @FXML
+    private void printImage() {
+        mainController.printImage();
+    }
+
+    @FXML
+    private void deleteFile() {
+        mainController.deleteFile();
+    }
+
+    @FXML
+    private void rotateLeft() {
+        mainController.rotateLeft();
+    }
+
+    @FXML
+    private void rotateRight() {
+        mainController.rotateRight();
+    }
+
+    @FXML
+    private void horizontalFlip() {
+        mainController.horizontalFlip();
+    }
+
+    @FXML
+    private void verticalFlip() {
+        mainController.verticalFlip();
+    }
+
+    @FXML
+    private void zoomOut() {
+        mainController.zoomOut();
+    }
+
+    @FXML
+    private void zoomIn() {
+        mainController.zoomIn();
+    }
+
+    @FXML
+    private void actualSize() {
+        mainController.actualSize();
+    }
+
+    @FXML
+    private void scaleToWidth() {
+        mainController.scaleToWidth();
+    }
+
+    @FXML
+    private void scaleToHeight() {
+        mainController.scaleToHeight();
+    }
+
+    @FXML
+    private void adjustImage() {
+        mainController.adjustImage();
+    }
+
+    @FXML
+    private void adjustWindow() {
+        mainController.adjustWindow();
+    }
+
+    @FXML
+    private void previousImage() {
+        mainController.previousImage();
+    }
+
+    @FXML
+    private void nextImage() {
+        mainController.nextImage();
+    }
 }

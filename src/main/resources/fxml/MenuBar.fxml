@@ -2,9 +2,10 @@
 
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.input.KeyCodeCombination?>
 <MenuBar xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.github.marnow955.yourview.controllers.MenuBarController">
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.github.marnow955.yourview.controllers.MenuBarController">
 
     <fx:define>
         <ToggleGroup fx:id="toolbarPositionTG"/>
@@ -12,35 +13,60 @@
     </fx:define>
 
     <Menu text="%menu_file">
-        <MenuItem text="%menu_open_file" onAction="#openFile"/>
+        <MenuItem text="%menu_open_file" onAction="#openFile" accelerator="Shortcut+O"/>
+        <MenuItem text="%menu_prev_img" onAction="#previousImage" disable="${controller.isDisabled}" accelerator="Left"/>
+        <MenuItem text="%menu_next_img" onAction="#nextImage" disable="${controller.isDisabled}" accelerator="Right"/>
         <MenuItem text="%menu_save" onAction="#saveFile" disable="${controller.isDisabled}" accelerator="Shortcut+S"/>
         <SeparatorMenuItem/>
-        <MenuItem text="%menu_settings" onAction="#showSettings"/>
+        <MenuItem text="%menu_settings" onAction="#showSettings" accelerator="Shortcut+K"/>
         <SeparatorMenuItem/>
-        <MenuItem text="%menu_exit"/>
+        <MenuItem text="%menu_print" onAction="#printImage" disable="${controller.isDisabled}" accelerator="Shortcut+P"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="%menu_exit" accelerator="Alt+F4"/>
     </Menu>
     <Menu text="%menu_edit">
+        <MenuItem text="%menu_copy" disable="${controller.isDisabled}" accelerator="Shortcut+C"/>
+        <MenuItem text="%menu_paste" accelerator="Shortcut+V"/>
+        <MenuItem text="%menu_delete" onAction="#deleteFile" disable="${controller.isDisabled}" accelerator="Delete"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="%menu_zoom_out" onAction="#zoomOut" disable="${controller.isDisabled}" accelerator="Shortcut+SUBTRACT"/>
+        <MenuItem text="%menu_zoom_in" onAction="#zoomIn" disable="${controller.isDisabled}" accelerator="Shortcut+ADD"/>
+        <MenuItem text="%menu_zoom_0" onAction="#actualSize" disable="${controller.isDisabled}">
+            <accelerator>
+                <KeyCodeCombination alt="UP" code="NUMPAD0" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+            </accelerator>
+        </MenuItem>
+        <SeparatorMenuItem/>
+        <MenuItem text="%menu_width_scale" onAction="#scaleToWidth" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+Left"/>
+        <MenuItem text="%menu_height_scale" onAction="#scaleToHeight" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+Up"/>
+        <MenuItem text="%menu_image_adjust" onAction="#adjustImage" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+Right"/>
+        <MenuItem text="%menu_window_adjust" onAction="#adjustWindow" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+Down"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="%menu_rotate_left" onAction="#rotateLeft" disable="${controller.isDisabled}" accelerator="Shortcut+,"/>
+        <MenuItem text="%menu_rotate_right" onAction="#rotateRight" disable="${controller.isDisabled}" accelerator="Shortcut+."/>
+        <MenuItem text="%menu_flip_h" onAction="#horizontalFlip" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+,"/>
+        <MenuItem text="%menu_flip_v" onAction="#verticalFlip" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+."/>
     </Menu>
     <Menu text="%menu_view">
-        <CheckMenuItem fx:id="chBackground" text="%menu_ch_background"/>
-        <CheckMenuItem fx:id="toolbar" text="%menu_toolbar"/>
+        <CheckMenuItem fx:id="chBackground" text="%menu_ch_background" accelerator="Shortcut+B"/>
+        <CheckMenuItem fx:id="toolbar" text="%menu_toolbar" accelerator="Shortcut+T"/>
         <Menu text="%menu_toolbar_position">
             <RadioMenuItem text="%menu_top" fx:id="top" toggleGroup="$toolbarPositionTG"/>
             <RadioMenuItem text="%menu_left" fx:id="left" toggleGroup="$toolbarPositionTG"/>
             <RadioMenuItem text="%menu_right" fx:id="right" toggleGroup="$toolbarPositionTG"/>
             <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$toolbarPositionTG"/>
         </Menu>
-        <CheckMenuItem fx:id="thView" text="%menu_th_view"/>
+        <CheckMenuItem fx:id="thView" text="%menu_th_view" accelerator="Shortcut+H"/>
         <Menu text="%menu_thumb_view_position">
             <RadioMenuItem text="%menu_top" fx:id="top" toggleGroup="$thumbViewPositionTG"/>
             <RadioMenuItem text="%menu_left" fx:id="left" toggleGroup="$thumbViewPositionTG"/>
             <RadioMenuItem text="%menu_right" fx:id="right" toggleGroup="$thumbViewPositionTG"/>
             <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$thumbViewPositionTG"/>
         </Menu>
-        <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel"/>
-        <CheckMenuItem fx:id="menu" text="%menu_menu"/>
+        <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel" accelerator="Shortcut+I"/>
+        <CheckMenuItem fx:id="menu" text="%menu_menu" accelerator="Shortcut+M"/>
     </Menu>
     <Menu text="%menu_help">
-        <MenuItem text="%menu_about"/>
+        <MenuItem text="%menu_about" accelerator="F1"/>
     </Menu>
 </MenuBar>

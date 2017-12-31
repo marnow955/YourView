@@ -197,7 +197,7 @@
         </tooltip>
     </Button>
 
-    <ToggleButton fx:id="shInfoPanel" focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
+    <ToggleButton fx:id="shInfoPanel" focusTraversable="false" mnemonicParsing="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="info"/>
         </graphic>
