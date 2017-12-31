@@ -48,6 +48,8 @@
         <MenuItem text="%menu_flip_v" onAction="#verticalFlip" disable="${controller.isDisabled}" accelerator="Shortcut+Shift+."/>
     </Menu>
     <Menu text="%menu_view">
+        <MenuItem text="%menu_slideshow" onAction="#playSlideshow" disable="${controller.isDisabled}" accelerator="F11"/>
+        <SeparatorMenuItem/>
         <CheckMenuItem fx:id="chBackground" text="%menu_ch_background" accelerator="Shortcut+B"/>
         <CheckMenuItem fx:id="toolbar" text="%menu_toolbar" accelerator="Shortcut+T"/>
         <Menu text="%menu_toolbar_position">

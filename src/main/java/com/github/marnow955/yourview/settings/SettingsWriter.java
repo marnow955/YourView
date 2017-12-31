@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview;
+package com.github.marnow955.yourview.settings;
 
 import java.io.File;
 import java.io.FileOutputStream;

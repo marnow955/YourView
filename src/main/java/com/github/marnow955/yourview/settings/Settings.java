@@ -1,4 +1,4 @@
-package com.github.marnow955.yourview;
+package com.github.marnow955.yourview.settings;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

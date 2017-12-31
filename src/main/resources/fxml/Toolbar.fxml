@@ -152,7 +152,7 @@
         </tooltip>
     </ToggleButton>
 
-    <Button focusTraversable="false" mnemonicParsing="false" disable="${controller.isDisabled}">
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#playSlideshow" disable="${controller.isDisabled}">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="desktop"/>
         </graphic>

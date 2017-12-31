@@ -1,6 +1,8 @@
 package com.github.marnow955.yourview;
 
 import com.github.marnow955.yourview.controllers.MainController;
+import com.github.marnow955.yourview.settings.Settings;
+import com.github.marnow955.yourview.settings.SettingsReader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,9 +1,10 @@
 package com.github.marnow955.yourview.controllers;
 
-import com.github.marnow955.yourview.Settings;
+import com.github.marnow955.yourview.Slideshow;
 import com.github.marnow955.yourview.data.DirectoryImageLoader;
 import com.github.marnow955.yourview.data.ImageReaderWriter;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
+import com.github.marnow955.yourview.settings.Settings;
 import com.sun.jna.platform.FileUtils;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -23,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -451,5 +453,10 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    void playSlideshow() {
+        Slideshow slideshow = new Slideshow(window, directory, Duration.millis(3000), "-fx-slideshow");
+        slideshow.play();
     }
 }

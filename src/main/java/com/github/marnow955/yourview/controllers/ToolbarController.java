@@ -134,4 +134,9 @@ public class ToolbarController {
             root.setPrefHeight(-1);
         }
     }
+
+    @FXML
+    private void playSlideshow() {
+        mainController.playSlideshow();
+    }
 }

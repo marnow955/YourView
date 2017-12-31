@@ -182,4 +182,9 @@ public class MenuBarController {
     private void nextImage() {
         mainController.nextImage();
     }
+
+    @FXML
+    private void playSlideshow() {
+        mainController.playSlideshow();
+    }
 }

@@ -1,7 +1,7 @@
 package com.github.marnow955.yourview.controllers;
 
-import com.github.marnow955.yourview.Settings;
-import com.github.marnow955.yourview.SettingsWriter;
+import com.github.marnow955.yourview.settings.Settings;
+import com.github.marnow955.yourview.settings.SettingsWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

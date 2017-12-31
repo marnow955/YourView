@@ -12,4 +12,5 @@
     -fx-primary-text-half: derive(-fx-primary-text, -50%);
     -fx-primary-text-quarter: derive(-fx-primary-text, -25%);
     -fx-canvas: #000;
+    -fx-slideshow: black;
 }
