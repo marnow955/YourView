@@ -42,6 +42,8 @@ public class SettingsPanelController {
     private CheckBox thumbnailsChBox;
     @FXML
     private ComboBox<String> thumbViewPosition;
+    @FXML
+    private CheckBox navigationBarChBox;
 
     @FXML
     private void initialize() {
@@ -74,6 +76,7 @@ public class SettingsPanelController {
         toolbarPosition.getSelectionModel().select(resources.getString("w_" + settings.getToolbarPosition()));
         thumbnailsChBox.setSelected(settings.isThumbViewSelected());
         thumbViewPosition.getSelectionModel().select(resources.getString("w_" + settings.getThumbnailsPosition()));
+        navigationBarChBox.setSelected(settings.isNavigationBarVisible());
     }
 
     void setStage(Stage stage) {
@@ -132,6 +135,7 @@ public class SettingsPanelController {
         settingsMap.put("thumbnails", String.valueOf(thumbnailsChBox.isSelected()));
         settingsMap.put("thumbnails_position", thumbViewPosition.getSelectionModel().getSelectedItem().toLowerCase());
         settingsMap.put("checked_bg", String.valueOf(checked_bg.isSelected()));
+        settingsMap.put("navigation_bar", String.valueOf(navigationBarChBox.isSelected()));
         return settingsMap;
     }
 

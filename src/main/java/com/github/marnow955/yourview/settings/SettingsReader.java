@@ -37,6 +37,8 @@ public class SettingsReader {
             settings.setThumbnailsPosition(properties.getProperty("thumbnails_position"));
         if (properties.containsKey("checked_bg"))
             settings.setChBackgroundSelected(Boolean.parseBoolean(properties.getProperty("checked_bg")));
+        if (properties.containsKey("navigation_bar"))
+            settings.setNavigationBarVisible(Boolean.parseBoolean(properties.getProperty("navigation_bar")));
         return settings;
     }
 }

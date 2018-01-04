@@ -80,6 +80,8 @@
                             <ComboBox fx:id="thumbViewPosition"/>
                         </HBox>
                     </VBox>
+
+                    <CheckBox fx:id="navigationBarChBox" text="%show_navigation_bar" styleClass="infoContent"/>
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">

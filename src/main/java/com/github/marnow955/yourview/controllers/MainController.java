@@ -7,6 +7,7 @@ import com.github.marnow955.yourview.data.processing.ImageManipulationsControlle
 import com.github.marnow955.yourview.settings.Settings;
 import com.sun.jna.platform.FileUtils;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -93,6 +94,7 @@ public class MainController {
     BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
     BooleanProperty isStatusBarVisibleProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isNavigationBarVisibleProperty = new SimpleBooleanProperty(true);
 
     StringProperty toolbarPosition = new SimpleStringProperty("top");
     StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
@@ -121,7 +123,7 @@ public class MainController {
         statusBar.managedProperty().bind(statusBar.visibleProperty());
         statusBar.visibleProperty().bind(isStatusBarVisibleProperty);
         navigationBar.managedProperty().bind(navigationBar.visibleProperty());
-        navigationBar.visibleProperty().bind(isImageSelectedProperty);
+        navigationBar.visibleProperty().bind(Bindings.and(isNavigationBarVisibleProperty,isImageSelectedProperty));
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
@@ -175,6 +177,10 @@ public class MainController {
         isStatusBarVisibleProperty.set(settings.isStatusbarVisible());
         settings.isStatusbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
             isStatusBarVisibleProperty.set(newValue);
+        });
+        isNavigationBarVisibleProperty.set(settings.isNavigationBarVisible());
+        settings.isNavigationBarVisibleProperty().addListener((observable, oldValue, newValue) -> {
+            isNavigationBarVisibleProperty.set(newValue);
         });
     }
 

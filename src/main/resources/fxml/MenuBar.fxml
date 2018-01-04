@@ -65,6 +65,7 @@
             <RadioMenuItem text="%menu_right" fx:id="right" toggleGroup="$thumbViewPositionTG"/>
             <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$thumbViewPositionTG"/>
         </Menu>
+        <CheckMenuItem fx:id="navigationBar" text="%menu_navigation_bar" accelerator="Shortcut+J"/>
         <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel" accelerator="Shortcut+I"/>
         <CheckMenuItem fx:id="menu" text="%menu_menu" accelerator="Shortcut+M"/>
         <CheckMenuItem fx:id="statusBar" text="%menu_statusbar" accelerator="Shortcut+A"/>

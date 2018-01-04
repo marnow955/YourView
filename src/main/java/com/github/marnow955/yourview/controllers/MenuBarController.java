@@ -12,6 +12,8 @@ import javafx.scene.control.ToggleGroup;
 public class MenuBarController {
 
     @FXML
+    private CheckMenuItem navigationBar;
+    @FXML
     private CheckMenuItem statusBar;
     @FXML
     private CheckMenuItem menu;
@@ -56,6 +58,7 @@ public class MenuBarController {
         infoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
         menu.selectedProperty().bindBidirectional(mainController.isMenuVisibleProperty);
         statusBar.selectedProperty().bindBidirectional(mainController.isStatusBarVisibleProperty);
+        navigationBar.selectedProperty().bindBidirectional(mainController.isNavigationBarVisibleProperty);
         toolbarPosition.bindBidirectional(mainController.toolbarPosition);
         thumbnailsPosition.bindBidirectional(mainController.thumbnailsPosition);
         selectToolbarPosition();
