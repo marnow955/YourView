@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.print.PrinterJob;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -98,6 +99,7 @@ public class MainController {
 
     StringProperty toolbarPosition = new SimpleStringProperty("top");
     StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
+    StringProperty navigationBarPosition = new SimpleStringProperty("center");
 
     public void setStage(Stage primaryStage) {
         window = primaryStage;
@@ -123,7 +125,7 @@ public class MainController {
         statusBar.managedProperty().bind(statusBar.visibleProperty());
         statusBar.visibleProperty().bind(isStatusBarVisibleProperty);
         navigationBar.managedProperty().bind(navigationBar.visibleProperty());
-        navigationBar.visibleProperty().bind(Bindings.and(isNavigationBarVisibleProperty,isImageSelectedProperty));
+        navigationBar.visibleProperty().bind(Bindings.and(isNavigationBarVisibleProperty, isImageSelectedProperty));
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
@@ -132,6 +134,9 @@ public class MainController {
         });
         thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
             changeThumbViewPosition();
+        });
+        navigationBarPosition.addListener((observable, oldValue, newValue) -> {
+            changeNavigationBarPosition();
         });
     }
 
@@ -182,6 +187,10 @@ public class MainController {
         settings.isNavigationBarVisibleProperty().addListener((observable, oldValue, newValue) -> {
             isNavigationBarVisibleProperty.set(newValue);
         });
+        navigationBarPosition.set(settings.getNavigationBarPosition());
+        settings.getNavigationBarPositionProperty().addListener((observable, oldValue, newValue) -> {
+            navigationBarPosition.set(newValue);
+        });
     }
 
     private void changeToolbarPosition() {
@@ -230,6 +239,25 @@ public class MainController {
             case "bottom": {
                 bottom.getChildren().add(0, thumbView);
                 thumbViewController.setOrientation(Orientation.HORIZONTAL);
+            }
+        }
+    }
+
+    private void changeNavigationBarPosition() {
+        switch (navigationBarPosition.get()) {
+            case "top": {
+                navigationBar.setAlignment(Pos.TOP_CENTER);
+                navigationBarController.setPosition(Pos.TOP_CENTER);
+            }
+            break;
+            case "center": {
+                navigationBar.setAlignment(Pos.CENTER);
+                navigationBarController.setPosition(Pos.CENTER);
+            }
+            break;
+            case "bottom": {
+                navigationBar.setAlignment(Pos.BOTTOM_CENTER);
+                navigationBarController.setPosition(Pos.BOTTOM_CENTER);
             }
         }
     }

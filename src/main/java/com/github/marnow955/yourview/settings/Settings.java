@@ -23,6 +23,7 @@ public class Settings {
     private StringProperty thumbnailsPosition;
     private BooleanProperty isChBackgroundSelected;
     private BooleanProperty isNavigationBarVisible;
+    private StringProperty navigationBarPosition;
 
     private Settings() {
         language = new SimpleStringProperty("en");
@@ -36,6 +37,7 @@ public class Settings {
         thumbnailsPosition = new SimpleStringProperty("bottom");
         isChBackgroundSelected = new SimpleBooleanProperty(false);
         isNavigationBarVisible = new SimpleBooleanProperty(true);
+        navigationBarPosition = new SimpleStringProperty("center");
     }
 
     public static Settings getSettingsInstance() {
@@ -58,6 +60,7 @@ public class Settings {
         tmp.setThumbnailsPosition(settings.getThumbnailsPosition());
         tmp.setChBackgroundSelected(settings.isChBackgroundSelected());
         tmp.setNavigationBarVisible(settings.isNavigationBarVisible());
+        tmp.setNavigationBarPosition(settings.getNavigationBarPosition());
         settings = tmp;
         return settings;
     }
@@ -87,6 +90,8 @@ public class Settings {
             diffs.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
         if (settings.isNavigationBarVisible() != defaultSettings.isNavigationBarVisible())
             diffs.put("navigation_bar", String.valueOf(settings.isNavigationBarVisible()));
+        if (!settings.getNavigationBarPosition().equals(defaultSettings.getNavigationBarPosition()))
+            diffs.put("navigation_bar_position", settings.getNavigationBarPosition());
         return diffs;
     }
 
@@ -103,6 +108,7 @@ public class Settings {
         settingsMap.put("thumbnails_position", settings.getThumbnailsPosition());
         settingsMap.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
         settingsMap.put("navigation_bar", String.valueOf(settings.isNavigationBarVisible()));
+        settingsMap.put("navigation_bar_position", settings.getNavigationBarPosition());
         return settingsMap;
     }
 
@@ -118,6 +124,7 @@ public class Settings {
         settings.setThumbnailsPosition(userSettingsAsMap.get("thumbnails_position"));
         settings.setChBackgroundSelected(Boolean.parseBoolean(userSettingsAsMap.get("checked_bg")));
         settings.setNavigationBarVisible(Boolean.parseBoolean(userSettingsAsMap.get("navigation_bar")));
+        settings.setNavigationBarPosition(userSettingsAsMap.get("navigation_bar_position"));
     }
 
     public String getLanguage() {
@@ -250,5 +257,17 @@ public class Settings {
 
     public void setNavigationBarVisible(boolean isNavigationBarVisible) {
         this.isNavigationBarVisible.set(isNavigationBarVisible);
+    }
+
+    public String getNavigationBarPosition() {
+        return navigationBarPosition.get();
+    }
+
+    public StringProperty getNavigationBarPositionProperty() {
+        return navigationBarPosition;
+    }
+
+    public void setNavigationBarPosition(String navigationBarPosition) {
+        this.navigationBarPosition.set(navigationBarPosition);
     }
 }

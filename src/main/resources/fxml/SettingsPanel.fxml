@@ -81,7 +81,13 @@
                         </HBox>
                     </VBox>
 
-                    <CheckBox fx:id="navigationBarChBox" text="%show_navigation_bar" styleClass="infoContent"/>
+                    <VBox spacing="5.0">
+                        <CheckBox fx:id="navigationBarChBox" text="%show_navigation_bar" styleClass="infoContent"/>
+                        <HBox>
+                            <Label text="%navigation_bar_position" styleClass="infoContent"/>
+                            <ComboBox fx:id="navigationBarPosition"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
 
                 <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">

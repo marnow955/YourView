@@ -39,6 +39,8 @@ public class SettingsReader {
             settings.setChBackgroundSelected(Boolean.parseBoolean(properties.getProperty("checked_bg")));
         if (properties.containsKey("navigation_bar"))
             settings.setNavigationBarVisible(Boolean.parseBoolean(properties.getProperty("navigation_bar")));
+        if (properties.containsKey("navigation_bar_position"))
+            settings.setNavigationBarPosition(properties.getProperty("navigation_bar_position"));
         return settings;
     }
 }

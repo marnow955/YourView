@@ -7,7 +7,7 @@
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.marnow955.yourview.controllers.NavigationBarController"
-      styleClass="navigation-bar">
+      styleClass="navigation-bar" pickOnBounds="false">
 
     <Button focusTraversable="false" mnemonicParsing="false" onAction="#previousImage">
         <graphic>
@@ -18,7 +18,9 @@
         </tooltip>
     </Button>
 
-    <Button focusTraversable="false" mnemonicParsing="false">
+    <HBox fx:id="posSpace" HBox.hgrow="ALWAYS" pickOnBounds="false"/>
+
+    <Button fx:id="fullScrAdditionalBtn" focusTraversable="false" mnemonicParsing="false" visible="false">
         <graphic>
             <Glyph fontFamily="FontAwesome" icon="arrows_alt" fontSize="30"/>
         </graphic>

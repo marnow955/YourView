@@ -24,7 +24,7 @@
     <center>
         <StackPane>
             <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
-            <fx:include fx:id="navigationBar" source="NavigationBar.fxml" alignment="BOTTOM_CENTER"/>
+            <fx:include fx:id="navigationBar" source="NavigationBar.fxml" alignment="CENTER"/>
         </StackPane>
     </center>
 

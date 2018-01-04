@@ -22,6 +22,7 @@ public class SettingsPanelController {
     private ResourceBundle resources;
     private ObservableList<String> languageOptions;
     private ObservableList<String> positionsOptions;
+    private ObservableList<String> navigationBarPositionOptions;
     @FXML
     private ToggleGroup themeTG;
     @FXML
@@ -44,6 +45,8 @@ public class SettingsPanelController {
     private ComboBox<String> thumbViewPosition;
     @FXML
     private CheckBox navigationBarChBox;
+    @FXML
+    private ComboBox<String> navigationBarPosition;
 
     @FXML
     private void initialize() {
@@ -58,9 +61,15 @@ public class SettingsPanelController {
                 resources.getString("w_right"),
                 resources.getString("w_bottom")
         );
+        navigationBarPositionOptions = FXCollections.observableArrayList(
+                resources.getString("w_top"),
+                resources.getString("w_center"),
+                resources.getString("w_bottom")
+        );
         langCB.setItems(languageOptions);
         toolbarPosition.setItems(positionsOptions);
         thumbViewPosition.setItems(positionsOptions);
+        navigationBarPosition.setItems(navigationBarPositionOptions);
 
         themeTG.getToggles().forEach(toggle -> {
             if (((Node) toggle).getId().equals(settings.getThemeName()))
@@ -77,6 +86,7 @@ public class SettingsPanelController {
         thumbnailsChBox.setSelected(settings.isThumbViewSelected());
         thumbViewPosition.getSelectionModel().select(resources.getString("w_" + settings.getThumbnailsPosition()));
         navigationBarChBox.setSelected(settings.isNavigationBarVisible());
+        navigationBarPosition.getSelectionModel().select(resources.getString("w_" + settings.getNavigationBarPosition()));
     }
 
     void setStage(Stage stage) {
@@ -136,6 +146,7 @@ public class SettingsPanelController {
         settingsMap.put("thumbnails_position", thumbViewPosition.getSelectionModel().getSelectedItem().toLowerCase());
         settingsMap.put("checked_bg", String.valueOf(checked_bg.isSelected()));
         settingsMap.put("navigation_bar", String.valueOf(navigationBarChBox.isSelected()));
+        settingsMap.put("navigation_bar_position", navigationBarPosition.getSelectionModel().getSelectedItem().toLowerCase());
         return settingsMap;
     }
 

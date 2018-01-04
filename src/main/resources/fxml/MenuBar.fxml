@@ -10,6 +10,7 @@
     <fx:define>
         <ToggleGroup fx:id="toolbarPositionTG"/>
         <ToggleGroup fx:id="thumbViewPositionTG"/>
+        <ToggleGroup fx:id="navigationBarPositionTG"/>
     </fx:define>
 
     <Menu text="%menu_file">
@@ -66,6 +67,11 @@
             <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$thumbViewPositionTG"/>
         </Menu>
         <CheckMenuItem fx:id="navigationBar" text="%menu_navigation_bar" accelerator="Shortcut+J"/>
+        <Menu text="%menu_navigation_bar_position">
+            <RadioMenuItem text="%menu_top" fx:id="top" toggleGroup="$navigationBarPositionTG"/>
+            <RadioMenuItem text="%menu_center" fx:id="center" toggleGroup="$navigationBarPositionTG"/>
+            <RadioMenuItem text="%menu_bottom" fx:id="bottom" toggleGroup="$navigationBarPositionTG"/>
+        </Menu>
         <CheckMenuItem fx:id="infoPanel" text="%menu_info_panel" accelerator="Shortcut+I"/>
         <CheckMenuItem fx:id="menu" text="%menu_menu" accelerator="Shortcut+M"/>
         <CheckMenuItem fx:id="statusBar" text="%menu_statusbar" accelerator="Shortcut+A"/>
