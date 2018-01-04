@@ -37,6 +37,8 @@ import java.util.ResourceBundle;
 public class MainController {
 
     @FXML
+    private HBox navigationBar;
+    @FXML
     private VBox bottom;
     @FXML
     private HBox left;
@@ -73,6 +75,8 @@ public class MainController {
     private StatusBar statusBar;
     @FXML
     private StatusBarController statusBarController;
+    @FXML
+    private NavigationBarController navigationBarController;
 
     private Stage window;
     private File imageFile;
@@ -104,6 +108,7 @@ public class MainController {
         thumbViewController.injectMainController(this);
         imageInfoPanelController.injectMainController(this);
         statusBarController.injectMainController(this);
+        navigationBarController.injectMainController(this);
         menuBarController.setupView();
         toolbarController.setupView();
         statusBarController.setupView();
@@ -115,6 +120,8 @@ public class MainController {
         toolbar.visibleProperty().bind(isToolbarSelectedProperty);
         statusBar.managedProperty().bind(statusBar.visibleProperty());
         statusBar.visibleProperty().bind(isStatusBarVisibleProperty);
+        navigationBar.managedProperty().bind(navigationBar.visibleProperty());
+        navigationBar.visibleProperty().bind(isImageSelectedProperty);
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));

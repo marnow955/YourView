@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.github.marnow955.yourview.controllers.MainController">
 
@@ -21,7 +22,10 @@
     </left>
 
     <center>
-        <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
+        <StackPane>
+            <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
+            <fx:include fx:id="navigationBar" source="NavigationBar.fxml" alignment="BOTTOM_CENTER"/>
+        </StackPane>
     </center>
 
     <right>

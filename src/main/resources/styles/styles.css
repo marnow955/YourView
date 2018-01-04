@@ -321,3 +321,25 @@
 .status-bar .split-menu-button .menu-item .label{
     -fx-background-color: transparent;
 }
+
+/********** Floating Panel ************/
+.navigation-bar {
+    -fx-spacing: 5;
+    -fx-padding: 0 0 20 0;
+}
+
+.navigation-bar .button {
+    -fx-background-color: -fx-primary;
+}
+
+.navigation-bar .button:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.navigation-bar .button:pressed {
+    -fx-background-color: -fx-secondary-focus;
+}
+
+.navigation-bar .button .label {
+    -fx-text-fill: -fx-primary-text;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.controlsfx.glyphfont.Glyph?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.github.marnow955.yourview.controllers.NavigationBarController"
+      styleClass="navigation-bar">
+
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#previousImage">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="chevron_left" fontSize="30"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="%prev_img"/>
+        </tooltip>
+    </Button>
+
+    <Button focusTraversable="false" mnemonicParsing="false">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="arrows_alt" fontSize="30"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="%full_scr"/>
+        </tooltip>
+    </Button>
+
+    <Button focusTraversable="false" mnemonicParsing="false" onAction="#nextImage">
+        <graphic>
+            <Glyph fontFamily="FontAwesome" icon="chevron_right" fontSize="30"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="%next_img"/>
+        </tooltip>
+    </Button>
+
+</HBox>
