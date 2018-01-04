@@ -14,10 +14,13 @@ public class StatusBarController {
     @FXML
     private ToggleGroup toolbarPositionTG;
     @FXML
+    private ToggleGroup navigationBarPositionTG;
+    @FXML
     private ToggleGroup thumbViewPositionTG;
     private MainController mainController;
     private StringProperty toolbarPosition = new SimpleStringProperty("top");
     private StringProperty thumbnailsPosition = new SimpleStringProperty("bottom");
+    private StringProperty navigationBarPosition = new SimpleStringProperty("center");
 
     void injectMainController(MainController mainController) {
         this.mainController = mainController;
@@ -26,13 +29,18 @@ public class StatusBarController {
     void setupView() {
         toolbarPosition.bindBidirectional(mainController.toolbarPosition);
         thumbnailsPosition.bindBidirectional(mainController.thumbnailsPosition);
+        navigationBarPosition.bindBidirectional(mainController.navigationBarPosition);
         selectToolbarPosition();
         selectThumbnailsPosition();
+        selectNavigationBarPosition();
         toolbarPosition.addListener((observable, oldValue, newValue) -> {
             selectToolbarPosition();
         });
         thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
             selectThumbnailsPosition();
+        });
+        navigationBarPosition.addListener((observable, oldValue, newValue) -> {
+            selectNavigationBarPosition();
         });
         toolbarPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -44,6 +52,12 @@ public class StatusBarController {
             if (newValue != null) {
                 RadioMenuItem selected = (RadioMenuItem) thumbViewPositionTG.getSelectedToggle();
                 thumbnailsPosition.set(selected.getId());
+            }
+        });
+        navigationBarPositionTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                RadioMenuItem selected = (RadioMenuItem) navigationBarPositionTG.getSelectedToggle();
+                navigationBarPosition.set(selected.getId());
             }
         });
     }
@@ -64,6 +78,14 @@ public class StatusBarController {
         });
     }
 
+    private void selectNavigationBarPosition() {
+        navigationBarPositionTG.getToggles().forEach(toggle -> {
+            if (((RadioMenuItem) toggle).getId().equals(navigationBarPosition.get())) {
+                toggle.setSelected(true);
+            }
+        });
+    }
+
     @FXML
     private void toggleToolbar() {
         mainController.isToolbarSelectedProperty.set(!mainController.isToolbarSelectedProperty.get());
@@ -72,6 +94,11 @@ public class StatusBarController {
     @FXML
     private void toggleThumbnails() {
         mainController.isThumbViewSelectedProperty.set(!mainController.isThumbViewSelectedProperty.get());
+    }
+
+    @FXML
+    private void toggleNavigationBar() {
+        mainController.isNavigationBarVisibleProperty.set(!mainController.isNavigationBarVisibleProperty.get());
     }
 
     void updateText(String name, int index, int nrOfElements, int width, int height, long size, int zoomPercent) {

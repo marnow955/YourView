@@ -13,6 +13,7 @@
     <fx:define>
         <ToggleGroup fx:id="toolbarPositionTG"/>
         <ToggleGroup fx:id="thumbViewPositionTG"/>
+        <ToggleGroup fx:id="navigationBarPositionTG"/>
     </fx:define>
 
     <rightItems>
@@ -46,6 +47,20 @@
                 <RadioMenuItem text="%w_left" fx:id="left" toggleGroup="$thumbViewPositionTG"/>
                 <RadioMenuItem text="%w_right" fx:id="right" toggleGroup="$thumbViewPositionTG"/>
                 <RadioMenuItem text="%w_bottom" fx:id="bottom" toggleGroup="$thumbViewPositionTG"/>
+            </items>
+        </SplitMenuButton>
+
+        <SplitMenuButton onAction="#toggleNavigationBar" focusTraversable="false" mnemonicParsing="false">
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="exchange"/>
+            </graphic>
+            <tooltip>
+                <Tooltip text="%show_navigation_bar"/>
+            </tooltip>
+            <items>
+                <RadioMenuItem text="%w_top" fx:id="top" toggleGroup="$navigationBarPositionTG"/>
+                <RadioMenuItem text="%w_center" fx:id="center" toggleGroup="$navigationBarPositionTG"/>
+                <RadioMenuItem text="%w_bottom" fx:id="bottom" toggleGroup="$navigationBarPositionTG"/>
             </items>
         </SplitMenuButton>
 
