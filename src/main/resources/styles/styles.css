@@ -330,6 +330,7 @@
 
 .navigation-bar .button {
     -fx-background-color: -fx-primary;
+    -fx-opacity: -fx-navigation-bar-opacity;
 }
 
 .navigation-bar .button:hover {

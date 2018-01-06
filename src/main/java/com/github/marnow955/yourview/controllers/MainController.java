@@ -535,4 +535,9 @@ public class MainController {
         Slideshow slideshow = new Slideshow(window, directory, Duration.millis(3000), "-fx-slideshow");
         slideshow.play();
     }
+
+    public void toggleNavigationBar() {
+        if (settings.isNavigationBarVisible())
+            isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
+    }
 }

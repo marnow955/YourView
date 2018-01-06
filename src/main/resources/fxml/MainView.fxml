@@ -22,7 +22,7 @@
     </left>
 
     <center>
-        <StackPane>
+        <StackPane onMouseClicked="#toggleNavigationBar">
             <fx:include fx:id="imagePanel" source="ImagePanel.fxml"/>
             <fx:include fx:id="navigationBar" source="NavigationBar.fxml" alignment="CENTER"/>
         </StackPane>

@@ -13,4 +13,5 @@
     -fx-primary-text-quarter: derive(-fx-primary-text, 75%);
     -fx-canvas: #999;
     -fx-slideshow: steelblue;
+    -fx-navigation-bar-opacity: 75%;
 }
