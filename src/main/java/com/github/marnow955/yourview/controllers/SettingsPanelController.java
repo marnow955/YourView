@@ -44,6 +44,8 @@ public class SettingsPanelController {
     private CheckBox navigationBarChBox;
     @FXML
     private ComboBox<String> navigationBarPosition;
+    @FXML
+    private CheckBox hideNavBarChBox;
 
     @FXML
     private void initialize() {
@@ -88,6 +90,7 @@ public class SettingsPanelController {
         thumbViewPosition.getSelectionModel().select(resources.getString("w_" + settings.getThumbnailsPosition()));
         navigationBarChBox.setSelected(settings.isNavigationBarVisible());
         navigationBarPosition.getSelectionModel().select(resources.getString("w_" + settings.getNavigationBarPosition()));
+        hideNavBarChBox.setSelected(settings.isHideNavBarOnClickSelected());
     }
 
     void setStage(Stage stage) {
@@ -111,8 +114,6 @@ public class SettingsPanelController {
 
     @FXML
     private void saveChanges() {
-        //TODO: load settings values in view
-        //TODO - maybe...reloadSettings? - so view is reloading because of binding
         if (isSettingsChanged()) {
             settings.setSettingsFromMap(getUserSettingsAsMap());
             SettingsWriter.writeSettingsToFile(settings, "settings.properties");
@@ -148,6 +149,7 @@ public class SettingsPanelController {
         settingsMap.put("checked_bg", String.valueOf(checked_bg.isSelected()));
         settingsMap.put("navigation_bar", String.valueOf(navigationBarChBox.isSelected()));
         settingsMap.put("navigation_bar_position", navigationBarPosition.getSelectionModel().getSelectedItem().toLowerCase());
+        settingsMap.put("hide_nav_bar", String.valueOf(hideNavBarChBox.isSelected()));
         return settingsMap;
     }
 

@@ -99,6 +99,7 @@
                         <Label text="%navigation_bar_position" styleClass="infoContent"/>
                         <ComboBox fx:id="navigationBarPosition"/>
                     </HBox>
+                    <CheckBox fx:id="hideNavBarChBox" text="%hide_nav_bar" styleClass="infoContent"/>
                 </VBox>
             </VBox>
 

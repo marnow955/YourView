@@ -41,6 +41,8 @@ public class SettingsReader {
             settings.setNavigationBarVisible(Boolean.parseBoolean(properties.getProperty("navigation_bar")));
         if (properties.containsKey("navigation_bar_position"))
             settings.setNavigationBarPosition(properties.getProperty("navigation_bar_position"));
+        if (properties.containsKey("hide_nav_bar"))
+            settings.setHideNavBarOnClickSelected(Boolean.parseBoolean(properties.getProperty("hide_nav_bar")));
         return settings;
     }
 }

@@ -24,6 +24,7 @@ public class Settings {
     private BooleanProperty isChBackgroundSelected;
     private BooleanProperty isNavigationBarVisible;
     private StringProperty navigationBarPosition;
+    private BooleanProperty isHideNavBarOnClickSelected;
 
     private Settings() {
         language = new SimpleStringProperty("en");
@@ -38,6 +39,7 @@ public class Settings {
         isChBackgroundSelected = new SimpleBooleanProperty(false);
         isNavigationBarVisible = new SimpleBooleanProperty(true);
         navigationBarPosition = new SimpleStringProperty("center");
+        isHideNavBarOnClickSelected = new SimpleBooleanProperty(true);
     }
 
     public static Settings getSettingsInstance() {
@@ -65,6 +67,7 @@ public class Settings {
         tmp.setChBackgroundSelected(settings.isChBackgroundSelected());
         tmp.setNavigationBarVisible(settings.isNavigationBarVisible());
         tmp.setNavigationBarPosition(settings.getNavigationBarPosition());
+        tmp.setHideNavBarOnClickSelected(settings.isHideNavBarOnClickSelected());
         settings = tmp;
         return settings;
     }
@@ -96,6 +99,8 @@ public class Settings {
             diffs.put("navigation_bar", String.valueOf(settings.isNavigationBarVisible()));
         if (!settings.getNavigationBarPosition().equals(defaultSettings.getNavigationBarPosition()))
             diffs.put("navigation_bar_position", settings.getNavigationBarPosition());
+        if (settings.isHideNavBarOnClickSelected() != defaultSettings.isHideNavBarOnClickSelected())
+            diffs.put("hide_nav_bar", String.valueOf(settings.isHideNavBarOnClickSelected()));
         return diffs;
     }
 
@@ -113,6 +118,7 @@ public class Settings {
         settingsMap.put("checked_bg", String.valueOf(settings.isChBackgroundSelected()));
         settingsMap.put("navigation_bar", String.valueOf(settings.isNavigationBarVisible()));
         settingsMap.put("navigation_bar_position", settings.getNavigationBarPosition());
+        settingsMap.put("hide_nav_bar", String.valueOf(settings.isHideNavBarOnClickSelected()));
         return settingsMap;
     }
 
@@ -129,6 +135,7 @@ public class Settings {
         settings.setChBackgroundSelected(Boolean.parseBoolean(userSettingsAsMap.get("checked_bg")));
         settings.setNavigationBarVisible(Boolean.parseBoolean(userSettingsAsMap.get("navigation_bar")));
         settings.setNavigationBarPosition(userSettingsAsMap.get("navigation_bar_position"));
+        settings.setHideNavBarOnClickSelected(Boolean.parseBoolean(userSettingsAsMap.get("hide_nav_bar")));
     }
 
     public String getLanguage() {
@@ -273,5 +280,17 @@ public class Settings {
 
     void setNavigationBarPosition(String navigationBarPosition) {
         this.navigationBarPosition.set(navigationBarPosition);
+    }
+
+    public boolean isHideNavBarOnClickSelected() {
+        return isHideNavBarOnClickSelected.get();
+    }
+
+    public BooleanProperty isHideNavBarOnClickSelectedProperty() {
+        return isHideNavBarOnClickSelected;
+    }
+
+    void setHideNavBarOnClickSelected(boolean isHideNavBarOnClickSelected) {
+        this.isHideNavBarOnClickSelected.set(isHideNavBarOnClickSelected);
     }
 }

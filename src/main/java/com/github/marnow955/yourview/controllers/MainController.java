@@ -191,6 +191,10 @@ public class MainController {
         settings.getNavigationBarPositionProperty().addListener((observable, oldValue, newValue) -> {
             navigationBarPosition.set(newValue);
         });
+        settings.isHideNavBarOnClickSelectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue)
+                isNavigationBarVisibleProperty.set(true);
+        });
     }
 
     private void changeToolbarPosition() {
@@ -537,7 +541,7 @@ public class MainController {
     }
 
     public void toggleNavigationBar() {
-        if (settings.isNavigationBarVisible())
+        if (settings.isNavigationBarVisible() && settings.isHideNavBarOnClickSelected())
             isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
     }
 }
