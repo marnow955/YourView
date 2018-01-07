@@ -47,6 +47,10 @@ public class Settings {
         return settings;
     }
 
+    public Settings getDefaultSettings() {
+        return new Settings();
+    }
+
     public Settings removeListeners() {
         Settings tmp = new Settings();
         tmp.setLanguage(settings.getLanguage());
@@ -65,7 +69,7 @@ public class Settings {
         return settings;
     }
 
-    public Map<String, String> getDifferencesFromDefaults() {
+    Map<String, String> getDifferencesFromDefaults() {
         Map<String, String> diffs = new HashMap<>();
         Settings defaultSettings = new Settings();
         if (!settings.getLanguage().equals(defaultSettings.getLanguage()))
@@ -135,7 +139,7 @@ public class Settings {
         return language;
     }
 
-    public void setLanguage(String language) {
+    void setLanguage(String language) {
         this.language.set(language);
     }
 
@@ -147,7 +151,7 @@ public class Settings {
         return themeName;
     }
 
-    public void setThemeName(String themeName) {
+    void setThemeName(String themeName) {
         this.themeName.set(themeName);
     }
 
@@ -159,7 +163,7 @@ public class Settings {
         return isMenuVisible;
     }
 
-    public void setMenuVisible(boolean isMenuVisible) {
+    void setMenuVisible(boolean isMenuVisible) {
         this.isMenuVisible.set(isMenuVisible);
     }
 
@@ -171,7 +175,7 @@ public class Settings {
         return isStatusbarVisible;
     }
 
-    public void setStatusbarVisible(boolean isStatusbarVisible) {
+    void setStatusbarVisible(boolean isStatusbarVisible) {
         this.isStatusbarVisible.set(isStatusbarVisible);
     }
 
@@ -183,7 +187,7 @@ public class Settings {
         return isInfoPanelSelected;
     }
 
-    public void setInfoPanelSelected(boolean isInfoPanelSelected) {
+    void setInfoPanelSelected(boolean isInfoPanelSelected) {
         this.isInfoPanelSelected.set(isInfoPanelSelected);
     }
 
@@ -195,7 +199,7 @@ public class Settings {
         return isToolbarVisible;
     }
 
-    public void setToolbarVisible(boolean isToolbarVisible) {
+    void setToolbarVisible(boolean isToolbarVisible) {
         this.isToolbarVisible.set(isToolbarVisible);
     }
 
@@ -207,7 +211,7 @@ public class Settings {
         return toolbarPosition;
     }
 
-    public void setToolbarPosition(String toolbarPosition) {
+    void setToolbarPosition(String toolbarPosition) {
         this.toolbarPosition.set(toolbarPosition);
     }
 
@@ -219,7 +223,7 @@ public class Settings {
         return isThumbViewSelected;
     }
 
-    public void setThumbViewSelected(boolean isThumbViewSelected) {
+    void setThumbViewSelected(boolean isThumbViewSelected) {
         this.isThumbViewSelected.set(isThumbViewSelected);
     }
 
@@ -231,7 +235,7 @@ public class Settings {
         return thumbnailsPosition;
     }
 
-    public void setThumbnailsPosition(String thumbnailsPosition) {
+    void setThumbnailsPosition(String thumbnailsPosition) {
         this.thumbnailsPosition.set(thumbnailsPosition);
     }
 
@@ -243,7 +247,7 @@ public class Settings {
         return isChBackgroundSelected;
     }
 
-    public void setChBackgroundSelected(boolean isChBackgroundSelected) {
+    void setChBackgroundSelected(boolean isChBackgroundSelected) {
         this.isChBackgroundSelected.set(isChBackgroundSelected);
     }
 
@@ -255,7 +259,7 @@ public class Settings {
         return isNavigationBarVisible;
     }
 
-    public void setNavigationBarVisible(boolean isNavigationBarVisible) {
+    void setNavigationBarVisible(boolean isNavigationBarVisible) {
         this.isNavigationBarVisible.set(isNavigationBarVisible);
     }
 
@@ -267,7 +271,7 @@ public class Settings {
         return navigationBarPosition;
     }
 
-    public void setNavigationBarPosition(String navigationBarPosition) {
+    void setNavigationBarPosition(String navigationBarPosition) {
         this.navigationBarPosition.set(navigationBarPosition);
     }
 }

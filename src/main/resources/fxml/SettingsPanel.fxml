@@ -13,93 +13,104 @@
         <ToggleGroup fx:id="themeTG"/>
     </fx:define>
 
-    <tabs>
-        <Tab text="%general">
-            <VBox>
-                <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+
+    <Tab text="%general">
+        <VBox>
+            <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets topRightBottomLeft="10.0"/>
+                </padding>
+
+                <Label text="%appearance" styleClass="infoLabel"/>
+
+                <VBox spacing="5.0">
                     <padding>
-                        <Insets topRightBottomLeft="10.0"/>
+                        <Insets left="10.0"/>
                     </padding>
-
-                    <Label text="%appearance" styleClass="infoLabel"/>
-
-                    <VBox spacing="5.0">
-                        <padding>
-                            <Insets left="10.0"/>
-                        </padding>
-                        <RadioButton fx:id="dark" text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <RadioButton fx:id="light" text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
-                        <CheckBox fx:id="checked_bg" text="%show_background" styleClass="infoContent"/>
-                    </VBox>
+                    <RadioButton fx:id="dark" text="%dark_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                    <RadioButton fx:id="light" text="%light_theme" toggleGroup="$themeTG" styleClass="infoContent"/>
+                    <CheckBox fx:id="checked_bg" text="%show_background" styleClass="infoContent"/>
+                </VBox>
 
 
-                    <Label text="%language" styleClass="infoLabel"/>
+                <Label text="%language" styleClass="infoLabel"/>
+                <HBox>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <Label text="%choose_language" styleClass="infoContent"/>
+                    <ComboBox fx:id="langCB"/>
+                </HBox>
+
+                <Label text="%default_settings" styleClass="infoLabel"/>
+                <VBox>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <Button onAction="#loadDefault" text="%load_default_settings" styleClass="smallTextButton"/>
+                    <Label text="%default_settings_info"/>
+                </VBox>
+
+            </VBox>
+
+            <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
+                <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save"
+                        HBox.hgrow="ALWAYS"
+                        maxWidth="Infinity"/>
+                <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel"
+                        HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+
+        </VBox>
+    </Tab>
+
+    <Tab text="%menus_toolbars">
+        <VBox>
+            <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets topRightBottomLeft="10.0"/>
+                </padding>
+
+                <CheckBox fx:id="menuChBox" text="%show_menu" styleClass="infoContent"/>
+
+                <CheckBox fx:id="statusbarChBox" text="%show_status_bar" styleClass="infoContent"/>
+
+                <CheckBox fx:id="infoPanelChBox" text="%show_info_panel" styleClass="infoContent"/>
+
+                <VBox spacing="5.0">
+                    <CheckBox fx:id="toolbarChBox" text="%show_toolbar" styleClass="infoContent"/>
                     <HBox>
-                        <padding>
-                            <Insets left="10.0"/>
-                        </padding>
-                        <Label text="%choose_language" styleClass="infoContent"/>
-                        <ComboBox fx:id="langCB"/>
+                        <Label text="%toolbar_position" styleClass="infoContent"/>
+                        <ComboBox fx:id="toolbarPosition"/>
                     </HBox>
                 </VBox>
 
-                <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save" HBox.hgrow="ALWAYS"
-                            maxWidth="Infinity"/>
-                    <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
-                </HBox>
-
-            </VBox>
-        </Tab>
-
-        <Tab text="%menus_toolbars">
-            <VBox>
-                <VBox spacing="15.0" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets topRightBottomLeft="10.0"/>
-                    </padding>
-
-                    <CheckBox fx:id="menuChBox" text="%show_menu" styleClass="infoContent"/>
-
-                    <CheckBox fx:id="statusbarChBox" text="%show_status_bar" styleClass="infoContent"/>
-
-                    <CheckBox fx:id="infoPanelChBox" text="%show_info_panel" styleClass="infoContent"/>
-
-                    <VBox spacing="5.0">
-                        <CheckBox fx:id="toolbarChBox" text="%show_toolbar" styleClass="infoContent"/>
-                        <HBox>
-                            <Label text="%toolbar_position" styleClass="infoContent"/>
-                            <ComboBox fx:id="toolbarPosition"/>
-                        </HBox>
-                    </VBox>
-
-                    <VBox spacing="5.0">
-                        <CheckBox fx:id="thumbnailsChBox" text="%show_th" styleClass="infoContent"/>
-                        <HBox>
-                            <Label text="%thumb_view_position" styleClass="infoContent"/>
-                            <ComboBox fx:id="thumbViewPosition"/>
-                        </HBox>
-                    </VBox>
-
-                    <VBox spacing="5.0">
-                        <CheckBox fx:id="navigationBarChBox" text="%show_navigation_bar" styleClass="infoContent"/>
-                        <HBox>
-                            <Label text="%navigation_bar_position" styleClass="infoContent"/>
-                            <ComboBox fx:id="navigationBarPosition"/>
-                        </HBox>
-                    </VBox>
+                <VBox spacing="5.0">
+                    <CheckBox fx:id="thumbnailsChBox" text="%show_th" styleClass="infoContent"/>
+                    <HBox>
+                        <Label text="%thumb_view_position" styleClass="infoContent"/>
+                        <ComboBox fx:id="thumbViewPosition"/>
+                    </HBox>
                 </VBox>
 
-                <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-                    <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save" HBox.hgrow="ALWAYS"
-                            maxWidth="Infinity"/>
-                    <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
-                </HBox>
-
+                <VBox spacing="5.0">
+                    <CheckBox fx:id="navigationBarChBox" text="%show_navigation_bar" styleClass="infoContent"/>
+                    <HBox>
+                        <Label text="%navigation_bar_position" styleClass="infoContent"/>
+                        <ComboBox fx:id="navigationBarPosition"/>
+                    </HBox>
+                </VBox>
             </VBox>
-        </Tab>
 
-    </tabs>
+            <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
+                <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save"
+                        HBox.hgrow="ALWAYS"
+                        maxWidth="Infinity"/>
+                <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel"
+                        HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
 
+        </VBox>
+    </Tab>
 
 </TabPane>

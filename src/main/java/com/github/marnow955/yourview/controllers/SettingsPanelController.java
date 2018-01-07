@@ -20,9 +20,6 @@ public class SettingsPanelController {
     private Stage stage;
     @FXML
     private ResourceBundle resources;
-    private ObservableList<String> languageOptions;
-    private ObservableList<String> positionsOptions;
-    private ObservableList<String> navigationBarPositionOptions;
     @FXML
     private ToggleGroup themeTG;
     @FXML
@@ -51,17 +48,17 @@ public class SettingsPanelController {
     @FXML
     private void initialize() {
         settings = Settings.getSettingsInstance();
-        languageOptions = FXCollections.observableArrayList(
+        ObservableList<String> languageOptions = FXCollections.observableArrayList(
                 resources.getString("english"),
                 resources.getString("polish")
         );
-        positionsOptions = FXCollections.observableArrayList(
+        ObservableList<String> positionsOptions = FXCollections.observableArrayList(
                 resources.getString("w_top"),
                 resources.getString("w_left"),
                 resources.getString("w_right"),
                 resources.getString("w_bottom")
         );
-        navigationBarPositionOptions = FXCollections.observableArrayList(
+        ObservableList<String> navigationBarPositionOptions = FXCollections.observableArrayList(
                 resources.getString("w_top"),
                 resources.getString("w_center"),
                 resources.getString("w_bottom")
@@ -71,6 +68,10 @@ public class SettingsPanelController {
         thumbViewPosition.setItems(positionsOptions);
         navigationBarPosition.setItems(navigationBarPositionOptions);
 
+        loadValuesFromSettings(settings);
+    }
+
+    private void loadValuesFromSettings(Settings settings) {
         themeTG.getToggles().forEach(toggle -> {
             if (((Node) toggle).getId().equals(settings.getThemeName()))
                 toggle.setSelected(true);
@@ -162,7 +163,12 @@ public class SettingsPanelController {
         ButtonType cancelButton = new ButtonType(resources.getString("w_cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(yesButton, noButton, cancelButton);
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result;
+        return alert.showAndWait();
+    }
+
+    @FXML
+    private void loadDefault() {
+        Settings defaultSettings = settings.getDefaultSettings();
+        loadValuesFromSettings(defaultSettings);
     }
 }
