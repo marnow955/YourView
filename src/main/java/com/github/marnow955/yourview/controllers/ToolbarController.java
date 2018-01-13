@@ -17,6 +17,8 @@ public class ToolbarController {
     private ToggleButton shThumbView;
     @FXML
     private ToggleButton shBackgroundBtn;
+    @FXML
+    private ToggleButton fullScreenTB;
 
     private MainController mainController;
 
@@ -39,6 +41,7 @@ public class ToolbarController {
         shThumbView.selectedProperty().bindBidirectional(mainController.isThumbViewSelectedProperty);
         shBackgroundBtn.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
         shInfoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
+        fullScreenTB.selectedProperty().bindBidirectional(mainController.isFullScreenSelectedProperty);
     }
 
     @FXML

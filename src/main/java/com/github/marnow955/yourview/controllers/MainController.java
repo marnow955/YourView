@@ -89,6 +89,7 @@ public class MainController {
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
 
+    BooleanProperty isFullScreenSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isChBackgroundSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
@@ -137,6 +138,14 @@ public class MainController {
         });
         navigationBarPosition.addListener((observable, oldValue, newValue) -> {
             changeNavigationBarPosition();
+        });
+        window.setFullScreenExitHint("");
+        isFullScreenSelectedProperty.addListener((observable, oldValue, newValue) -> {
+            toggleFullScreen();
+        });
+        window.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue)
+                isFullScreenSelectedProperty.set(false);
         });
     }
 
@@ -542,6 +551,22 @@ public class MainController {
 
     public void toggleNavigationBar() {
         if (settings.isNavigationBarVisible() && settings.isHideNavBarOnClickSelected())
+            isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
+    }
+
+    void toggleFullScreen() {
+        //TODO: Add toggle in menu bar in view
+        if (isFullScreenSelectedProperty.get())
+            window.setFullScreen(true);
+        if (settings.isMenuVisible())
+            isMenuVisibleProperty.set(!isMenuVisibleProperty.get());
+        if (settings.isToolbarVisible())
+            isToolbarSelectedProperty.set(!isToolbarSelectedProperty.get());
+        if (settings.isStatusbarVisible())
+            isStatusBarVisibleProperty.set(!isStatusBarVisibleProperty.get());
+        if (settings.isThumbViewSelected())
+            isThumbViewSelectedProperty.set(!isThumbViewSelectedProperty.get());
+        if (settings.isNavigationBarVisible())
             isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
     }
 }
