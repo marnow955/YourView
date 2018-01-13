@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.github.marnow955.yourview.controllers.EditPanelController"
+      prefWidth="400.0">
+
+    <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+        <Accordion>
+            <panes>
+                <TitledPane text="Crop image" animated="false" prefWidth="400" >
+
+                </TitledPane>
+            </panes>
+        </Accordion>
+    </ScrollPane>
+
+    <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
+        <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save"
+                HBox.hgrow="ALWAYS"
+                maxWidth="Infinity"/>
+        <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel"
+                HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+    </HBox>
+
+</VBox>

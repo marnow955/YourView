@@ -6,11 +6,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 
 public class MenuBarController {
 
+    @FXML
+    private MenuBar root;
     @FXML
     private CheckMenuItem navigationBar;
     @FXML
@@ -60,6 +63,7 @@ public class MenuBarController {
         chBackground.selectedProperty().bindBidirectional(mainController.isChBackgroundSelectedProperty);
         toolbar.selectedProperty().bindBidirectional(mainController.isToolbarSelectedProperty);
         infoPanel.selectedProperty().bindBidirectional(mainController.isImageInfoPanelSelectedProperty);
+
         menu.selectedProperty().bindBidirectional(mainController.isMenuVisibleProperty);
         statusBar.selectedProperty().bindBidirectional(mainController.isStatusBarVisibleProperty);
         navigationBar.selectedProperty().bindBidirectional(mainController.isNavigationBarVisibleProperty);
@@ -119,6 +123,25 @@ public class MenuBarController {
             if (((RadioMenuItem) toggle).getId().equals(navigationBarPosition.get())) {
                 toggle.setSelected(true);
             }
+        });
+    }
+
+    void setAllItemsDisable(boolean value) {
+        isDisabledProperty().unbind();
+        if (value) {
+            isDisabledProperty().set(true);
+
+        } else {
+            isDisabledProperty().bind(mainController.isImageSelectedProperty.not());
+        }
+        root.getMenus().forEach(menu1 -> {
+            menu1.getItems().forEach(menuItem -> {
+                try {
+                    menuItem.setDisable(value);
+                } catch (Exception e) {
+                    /* Menu items with bind (isDisabled) */
+                }
+            });
         });
     }
 
@@ -215,5 +238,10 @@ public class MenuBarController {
     @FXML
     private void playSlideshow() {
         mainController.playSlideshow();
+    }
+
+    @FXML
+    private void showEditPanel() {
+        mainController.showEditPanel();
     }
 }

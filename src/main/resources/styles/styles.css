@@ -138,6 +138,37 @@
     -fx-text-fill: -fx-secondary;
 }
 
+/************ Edit Panel *************/
+#editPanel {
+    -fx-background-color: -fx-primary-dark;
+    -fx-border-width: 0 0 0 0.5;
+    -fx-border-color: -fx-primary-dark-focus;
+}
+
+#editPanel .scroll-pane {
+    -fx-padding: 0 0 0 0;
+}
+
+.titled-pane {
+    -fx-text-fill: -fx-secondary-focus;
+    -fx-font-size: 20;
+}
+.titled-pane:hover {
+    -fx-text-fill: -fx-primary;
+}
+
+.titled-pane .title{
+    -fx-background-color: -fx-primary;
+}
+
+.titled-pane .title:hover {
+    -fx-background-color: -fx-secondary-focus;
+}
+
+.titled-pane .title:pressed {
+    -fx-background-color: derive(-fx-secondary-focus, 20%);
+}
+
 /************ Scroll Bar *************/
 .scroll-bar {
     -fx-background-color: transparent;

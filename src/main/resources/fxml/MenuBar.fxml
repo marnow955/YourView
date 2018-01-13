@@ -5,7 +5,7 @@
 <?import javafx.scene.input.KeyCodeCombination?>
 <MenuBar xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         fx:controller="com.github.marnow955.yourview.controllers.MenuBarController">
+         fx:id="root" fx:controller="com.github.marnow955.yourview.controllers.MenuBarController">
 
     <fx:define>
         <ToggleGroup fx:id="toolbarPositionTG"/>
@@ -26,6 +26,8 @@
         <MenuItem text="%menu_exit" accelerator="Alt+F4"/>
     </Menu>
     <Menu text="%menu_edit">
+        <MenuItem text="%menu_edit_image" onAction="#showEditPanel" disable="${controller.isDisabled}" accelerator="Shortcut+E"/>
+        <SeparatorMenuItem/>
         <MenuItem text="%menu_copy" disable="${controller.isDisabled}" accelerator="Shortcut+C"/>
         <MenuItem text="%menu_paste" accelerator="Shortcut+V"/>
         <MenuItem text="%menu_delete" onAction="#deleteFile" disable="${controller.isDisabled}" accelerator="Delete"/>

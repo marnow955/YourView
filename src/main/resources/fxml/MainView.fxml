@@ -29,7 +29,9 @@
     </center>
 
     <right>
-        <HBox fx:id="right"/>
+        <HBox fx:id="right">
+            <fx:include fx:id="editPanel" source="EditPanel.fxml" visible="false"/>
+        </HBox>
     </right>
 
     <bottom>

@@ -64,6 +64,10 @@ public class MainController {
     @FXML
     private ImageInfoPanelController imageInfoPanelController;
     @FXML
+    private VBox editPanel;
+    @FXML
+    private EditPanelController editPanelController;
+    @FXML
     private ScrollPane imagePanel;
     @FXML
     private ImagePanelController imagePanelController;
@@ -94,6 +98,7 @@ public class MainController {
     BooleanProperty isThumbViewSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isMenuVisibleProperty = new SimpleBooleanProperty(true);
     BooleanProperty isImageInfoPanelSelectedProperty = new SimpleBooleanProperty(false);
+    BooleanProperty isEditPanelSelectedProperty = new SimpleBooleanProperty(false);
     BooleanProperty isToolbarSelectedProperty = new SimpleBooleanProperty(true);
     BooleanProperty isStatusBarVisibleProperty = new SimpleBooleanProperty(false);
     BooleanProperty isNavigationBarVisibleProperty = new SimpleBooleanProperty(true);
@@ -112,6 +117,7 @@ public class MainController {
         imagePanelController.injectMainController(this);
         thumbViewController.injectMainController(this);
         imageInfoPanelController.injectMainController(this);
+        editPanelController.injectMainController(this);
         statusBarController.injectMainController(this);
         navigationBarController.injectMainController(this);
         menuBarController.setupView();
@@ -129,6 +135,8 @@ public class MainController {
         navigationBar.visibleProperty().bind(Bindings.and(isNavigationBarVisibleProperty, isImageSelectedProperty));
         imageInfoPanel.managedProperty().bind(imageInfoPanel.visibleProperty());
         imageInfoPanel.visibleProperty().bind(isImageInfoPanelSelectedProperty);
+        editPanel.managedProperty().bind(editPanel.visibleProperty());
+        editPanel.visibleProperty().bind(isEditPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
         toolbarPosition.addListener((observable, oldValue, newValue) -> {
             changeToolbarPosition();
@@ -147,6 +155,7 @@ public class MainController {
             if (!newValue)
                 isFullScreenSelectedProperty.set(false);
         });
+        isEditPanelSelectedProperty.addListener(observable -> toggleEditModeView());
     }
 
     public void loadSettings() {
@@ -245,7 +254,7 @@ public class MainController {
             }
             break;
             case "right": {
-                right.getChildren().add(0, thumbView);
+                right.getChildren().add(1, thumbView);
                 thumbViewController.setOrientation(Orientation.VERTICAL);
             }
             break;
@@ -353,10 +362,11 @@ public class MainController {
     }
 
     void saveFile() {
-        imageFile = ImageReaderWriter.showSaveDialog(window, imageFile);
-        if (imageFile == null)
+        File newImageFile = ImageReaderWriter.showSaveDialog(window, imageFile);
+        if (newImageFile == null)
             return;
-        ImageReaderWriter.saveImage(image, imageFile);
+        ImageReaderWriter.saveImage(image, newImageFile);
+        imageFile = newImageFile;
         openImage(imageFile);
     }
 
@@ -394,7 +404,7 @@ public class MainController {
         return result.get() == deleteBT;
     }
 
-    void clearWorkspace() {
+    private void clearWorkspace() {
         imageFile = null;
         imageIndex.set(-1);
         directory = null;
@@ -503,12 +513,12 @@ public class MainController {
     }
 
     void printImage() {
-        ImageView printableContener = new ImageView(image);
+        ImageView printableContainer = new ImageView(image);
         PrinterJob printerJob = PrinterJob.createPrinterJob();
         if (printerJob != null) {
             boolean confirm = printerJob.showPrintDialog(window);
             if (confirm) {
-                boolean succeeded = printerJob.printPage(printableContener);
+                boolean succeeded = printerJob.printPage(printableContainer);
                 if (succeeded) {
                     printerJob.endJob();
                 }
@@ -518,7 +528,7 @@ public class MainController {
 
     void showSettings() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SettingsPanel.fxml"), resources);
-        Parent root = null;
+        Parent root;
         try {
             root = loader.load();
             SettingsPanelController settingsController = loader.getController();
@@ -550,7 +560,9 @@ public class MainController {
     }
 
     public void toggleNavigationBar() {
-        if (settings.isNavigationBarVisible() && settings.isHideNavBarOnClickSelected())
+        if (settings.isNavigationBarVisible()
+                && settings.isHideNavBarOnClickSelected()
+                && !isEditPanelSelectedProperty.get())
             isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
     }
 
@@ -558,6 +570,24 @@ public class MainController {
         //TODO: Add toggle in menu bar in view
         if (isFullScreenSelectedProperty.get())
             window.setFullScreen(true);
+        if (settings.isMenuVisible())
+            isMenuVisibleProperty.set(!isMenuVisibleProperty.get());
+        if (settings.isToolbarVisible())
+            isToolbarSelectedProperty.set(!isToolbarSelectedProperty.get());
+        if (settings.isStatusbarVisible())
+            isStatusBarVisibleProperty.set(!isStatusBarVisibleProperty.get());
+        if (settings.isThumbViewSelected())
+            isThumbViewSelectedProperty.set(!isThumbViewSelectedProperty.get());
+        if (settings.isNavigationBarVisible())
+            isNavigationBarVisibleProperty.set(!isNavigationBarVisibleProperty.get());
+    }
+
+    void showEditPanel() {
+        isEditPanelSelectedProperty.set(true);
+    }
+
+    private void toggleEditModeView() {
+        menuBarController.setAllItemsDisable(isEditPanelSelectedProperty.get());
         if (settings.isMenuVisible())
             isMenuVisibleProperty.set(!isMenuVisibleProperty.get());
         if (settings.isToolbarVisible())
