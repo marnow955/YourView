@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.glyphfont.Glyph?>
+<?import java.lang.Integer?>
+
+<TitledPane animated="false" prefWidth="400" text="Crop image"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.marnow955.yourview.controllers.edit_panes.CropController">
+
+    <fx:define>
+        <Integer fx:id="maxX" fx:value="10"/>
+        <Integer fx:id="maxY" fx:value="10"/>
+        <Integer fx:id="maxWidth" fx:value="10"/>
+        <Integer fx:id="maxHeight" fx:value="10"/>
+        <ToggleGroup fx:id="lockTG"/>
+    </fx:define>
+
+    <VBox styleClass="removePadding" spacing="15.0">
+        <VBox spacing="5.0">
+            <HBox spacing="10.0">
+                <VBox layoutX="10.0" layoutY="10.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                    <HBox alignment="BASELINE_LEFT">
+                        <RadioButton fx:id="xyStartLock" toggleGroup="$lockTG">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="unlock"/>
+                            </graphic>
+                        </RadioButton>
+                        <Label text="Start in:"/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <Label text="X:   "/>
+                        <Spinner fx:id="xStart" editable="true" max="$maxX"/>
+
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <Label text="Y:   "/>
+                        <Spinner fx:id="yStart" editable="true" max="$maxY"/>
+                    </HBox>
+                </VBox>
+                <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                    <Label text="Image info: "/>
+                    <Label fx:id="infoWidth" text="Width: "/>
+                    <Label fx:id="infoHeight" text="Height: "/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="10.0">
+                <VBox layoutX="10.0" layoutY="10.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                    <HBox alignment="BASELINE_LEFT">
+                        <RadioButton fx:id="xyEndLock" toggleGroup="$lockTG" selected="true">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="lock"/>
+                            </graphic>
+                        </RadioButton>
+                        <Label text="Ends in: "/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <Label maxWidth="Infinity" text="X: " HBox.hgrow="ALWAYS"/>
+                        <Spinner fx:id="xEnd" editable="true" max="$maxX"/>
+                    </HBox>
+                    <HBox layoutX="10.0" layoutY="10.0" alignment="BASELINE_LEFT">
+                        <Label maxWidth="Infinity" text="Y: " HBox.hgrow="ALWAYS"/>
+                        <Spinner fx:id="yEnd" editable="true" max="$maxY"/>
+                    </HBox>
+                </VBox>
+                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                    <HBox alignment="BASELINE_LEFT">
+                        <RadioButton fx:id="whLock" toggleGroup="$lockTG">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="unlock"/>
+                            </graphic>
+                        </RadioButton>
+                        <Label text="Dimensions:"/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <Label maxWidth="Infinity" text="Width: " HBox.hgrow="ALWAYS"/>
+                        <Spinner fx:id="width" editable="true" max="$maxWidth"/>
+                    </HBox>
+                    <HBox layoutX="10.0" layoutY="10.0" alignment="BASELINE_LEFT">
+                        <Label maxWidth="Infinity" text="Height: " HBox.hgrow="ALWAYS"/>
+                        <Spinner fx:id="height" editable="true" max="$maxHeight"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+            <padding>
+                <Insets topRightBottomLeft="10.0"/>
+            </padding>
+        </VBox>
+        <HBox>
+            <Button onAction="#crop" text="Crop" styleClass="topBottomBorder, smallTextButton, flatButton"
+                    maxWidth="Infinity" mnemonicParsing="false" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </VBox>
+</TitledPane>

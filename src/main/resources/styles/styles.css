@@ -153,23 +153,74 @@
     -fx-text-fill: -fx-secondary-focus;
     -fx-font-size: 20;
 }
+
 .titled-pane:hover {
     -fx-text-fill: -fx-primary;
 }
 
-.titled-pane .title{
+.titled-pane .title {
     -fx-background-color: -fx-primary;
 }
 
-.titled-pane .title:hover {
+.titled-pane:hover .title {
     -fx-background-color: -fx-secondary-focus;
+}
+
+.titled-pane .title:hover .label{
+    -fx-text-fill: -fx-secondary-focus;
 }
 
 .titled-pane .title:pressed {
     -fx-background-color: derive(-fx-secondary-focus, 20%);
 }
 
-/************ Scroll Bar *************/
+.titled-pane *.content {
+    -fx-border-width: 0;
+    -fx-font-size: 12;
+    -fx-background-color: -fx-primary-dark;
+}
+
+.titled-pane .toggle-button {
+    -fx-background-color: transparent;
+}
+
+.titled-pane .toggle-button:hover .label {
+    -fx-text-fill: -fx-secondary;
+}
+
+.titled-pane .toggle-button:pressed .label {
+    -fx-text-fill: -fx-secondary-focus;
+}
+
+.spinner {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.spinner .text-field{
+    -fx-background-color: -fx-primary-focus;
+    -fx-text-fill: -fx-primary-text;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: -fx-primary-dark;
+    -fx-border-width: 0.5;
+    -fx-border-radius: 5%;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.spinner .increment-arrow-button:pressed,
+.spinner .decrement-arrow-button:pressed {
+    -fx-background-color: -fx-secondary-focus;
+}
+
+    /************ Scroll Bar *************/
 .scroll-bar {
     -fx-background-color: transparent;
 }
@@ -265,16 +316,6 @@
 
 .tab-pane .tab:selected .tab-label {
     -fx-text-fill: -fx-secondary;
-}
-
-.buttonsBox {
-    -fx-border-width: 0.5 0 0 0;
-    -fx-border-color: -fx-primary-focus;
-}
-
-.rightBoxBorder {
-    -fx-border-width: 0 0.5 0 0;
-    -fx-border-color: -fx-primary-focus;
 }
 
 .flatButton:hover {
@@ -374,4 +415,28 @@
 
 .navigation-bar .button .label {
     -fx-text-fill: -fx-primary-text;
+}
+
+.removePadding {
+    -fx-padding: 0;
+}
+
+.topBorder {
+    -fx-border-width: 0.5 0 0 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.bottomBorder {
+    -fx-border-width: 0 0 0.5 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.topBottomBorder {
+    -fx-border-width: 0.5 0 0.5 0;
+    -fx-border-color: -fx-primary-focus;
+}
+
+.rightBorder {
+    -fx-border-width: 0 0.5 0 0;
+    -fx-border-color: -fx-primary-focus;
 }

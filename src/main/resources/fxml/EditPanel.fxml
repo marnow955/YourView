@@ -4,23 +4,31 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import org.controlsfx.glyphfont.Glyph?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.marnow955.yourview.controllers.EditPanelController"
       prefWidth="400.0">
 
-    <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-        <Accordion>
-            <panes>
-                <TitledPane text="Crop image" animated="false" prefWidth="400" >
+    <HBox styleClass="bottomBorder">
+        <Button styleClass="textButton, rightBorder, flatButton" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="undo"/>
+            </graphic>
+        </Button>
+        <Button styleClass="textButton, flatButton" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <graphic>
+                <Glyph fontFamily="FontAwesome" icon="repeat"/>
+            </graphic>
+        </Button>
+    </HBox>
 
-                </TitledPane>
-            </panes>
-        </Accordion>
+    <ScrollPane hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+        <Accordion fx:id="panes"/>
     </ScrollPane>
 
-    <HBox alignment="BOTTOM_CENTER" styleClass="buttonsBox">
-        <Button onAction="#saveChanges" styleClass="textButton, rightBoxBorder, flatButton" text="%w_save"
+    <HBox alignment="BOTTOM_CENTER" styleClass="topBorder">
+        <Button onAction="#saveChanges" styleClass="textButton, rightBorder, flatButton" text="%w_save"
                 HBox.hgrow="ALWAYS"
                 maxWidth="Infinity"/>
         <Button onAction="#cancelChanges" styleClass="textButton, flatButton" text="%w_cancel"

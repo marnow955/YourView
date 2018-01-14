@@ -123,6 +123,7 @@ public class MainController {
         menuBarController.setupView();
         toolbarController.setupView();
         statusBarController.setupView();
+        editPanelController.setupView();
         thumbView.managedProperty().bind(thumbView.visibleProperty());
         thumbView.visibleProperty().bind(isThumbViewSelectedProperty);
         menuBar.managedProperty().bind(menuBar.visibleProperty());
@@ -584,6 +585,7 @@ public class MainController {
 
     void showEditPanel() {
         isEditPanelSelectedProperty.set(true);
+        editPanelController.loadEditView(image, processingController);
     }
 
     private void toggleEditModeView() {
