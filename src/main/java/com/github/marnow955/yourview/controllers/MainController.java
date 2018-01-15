@@ -317,7 +317,7 @@ public class MainController {
             return;
         this.imageFile = imageFile;
         image = ImageReaderWriter.openImage(this.imageFile, false);
-        processingController = new ImageManipulationsController();
+        processingController = new ImageManipulationsController(image);
         if (image != null) {
             imagePanelController.setImage(image);
             imagePanelController.adjustImage(image);
@@ -336,6 +336,7 @@ public class MainController {
         imageIndex.set(index);
         imageFile = directory.getImageFile(index);
         image = ImageReaderWriter.openImage(imageFile, false);
+        processingController = new ImageManipulationsController(image);
         imagePanelController.setImage(image);
         imagePanelController.adjustImage(image);
         isImageSelectedProperty.set(true);
@@ -343,6 +344,12 @@ public class MainController {
         updateWindowTitle();
         updateStatusBarText();
         thumbViewController.setSelected(index);
+    }
+
+    public void setImage(Image image) {
+        imagePanelController.setImage(image);
+        updateWindowTitle();
+        updateStatusBarText();
     }
 
     private void loadThumbView() {
@@ -376,6 +383,11 @@ public class MainController {
             FileUtils fileUtils = FileUtils.getInstance();
             if (fileUtils.hasTrash()) {
                 try {
+                    //TODO: bug
+                    /* java.io.IOException: Move to trash failed:
+                        C:\Users\Marek Noworolnik\Lenna.png:
+                        Proces nie może uzyskać dostępu do pliku, ponieważ jest on używany przez inny proces.
+                     */
                     fileUtils.moveToTrash(new File[]{imageFile});
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -415,6 +427,7 @@ public class MainController {
         thumbViewController.setThumbView(FXCollections.observableList(new ArrayList<>()));
         imagePanelController.setImage(null);
         window.setTitle("Your View");
+        statusBar.setText("");
     }
 
     void previousImage() {
@@ -440,9 +453,7 @@ public class MainController {
     }
 
     void actualSize() {
-        imagePanelController.setImage(image);
-        updateWindowTitle();
-        updateStatusBarText();
+        setImage(image);
     }
 
     void scaleToWidth() {
@@ -481,32 +492,24 @@ public class MainController {
 
     void rotateLeft() {
         //TODO: change to imageview rotate and save exif rotate flag tag (if user click save roate permanently)
-        image = processingController.rotateLeft(image);
-        imagePanelController.setImage(image);
-        updateWindowTitle();
-        updateStatusBarText();
+        image = processingController.rotateLeft();
+        setImage(image);
     }
 
     void rotateRight() {
         //TODO: same as rotateLeft
-        image = processingController.rotateRight(image);
-        imagePanelController.setImage(image);
-        updateWindowTitle();
-        updateStatusBarText();
+        image = processingController.rotateRight();
+        setImage(image);
     }
 
     void horizontalFlip() {
-        image = processingController.horizontalFlip(image);
-        imagePanelController.setImage(image);
-        updateWindowTitle();
-        updateStatusBarText();
+        image = processingController.horizontalFlip();
+        setImage(image);
     }
 
     void verticalFlip() {
-        image = processingController.verticalFlip(image);
-        imagePanelController.setImage(image);
-        updateWindowTitle();
-        updateStatusBarText();
+        image = processingController.verticalFlip();
+        setImage(image);
     }
 
     private void showCheckedBackground(Boolean newValue) {

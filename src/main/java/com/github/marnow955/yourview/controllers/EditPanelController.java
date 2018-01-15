@@ -40,6 +40,7 @@ public class EditPanelController {
 
     void loadEditView(Image image, ImageManipulationsController processingController) {
         cropController.setupValuesFromImage(image);
+        cropController.injectImageProcessingController(processingController);
     }
 
     @FXML

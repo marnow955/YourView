@@ -1,25 +1,20 @@
 package com.github.marnow955.yourview.controllers.edit_panes;
 
 import com.github.marnow955.yourview.controllers.MainController;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.util.converter.NumberStringConverter;
 import org.controlsfx.glyphfont.Glyph;
 
 public class CropController {
 
     @FXML
+    private Label error;
+    @FXML
     private Label infoHeight;
     @FXML
     private Label infoWidth;
-    @FXML
-    private Integer maxX;
-    @FXML
-    private Integer maxY;
     @FXML
     private Integer maxWidth;
     @FXML
@@ -40,15 +35,14 @@ public class CropController {
     private Spinner<Integer> height;
 
     private MainController mainController;
-    private IntegerProperty xStartProperty;
-    private IntegerProperty yStartProperty;
-    private IntegerProperty xEndProperty;
-    private IntegerProperty yEndProperty;
-    private IntegerProperty widtProperty;
-    private IntegerProperty heightProperty;
+    private ImageManipulationsController processingController;
 
     public void injectMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public void injectImageProcessingController(ImageManipulationsController imageManipulationsController) {
+        this.processingController = imageManipulationsController;
     }
 
     public void setupView() {
@@ -87,50 +81,78 @@ public class CropController {
             ((RadioButton) toggle).getStyleClass().add("toggle-button");
         });
         lockTG.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            setEditable(true);
+            setEditable(false);
             lockTG.getToggles().forEach(toggle -> {
                 if (toggle.isSelected()) {
-                    ((ToggleButton) toggle).setGraphic(new Glyph("FontAwesome", "lock"));
-                    setEditable(false, ((ToggleButton) toggle).getId());
-                } else {
                     ((ToggleButton) toggle).setGraphic(new Glyph("FontAwesome", "unlock"));
+                    setEditable(true, ((ToggleButton) toggle).getId());
+                } else {
+                    ((ToggleButton) toggle).setGraphic(new Glyph("FontAwesome", "lock"));
                 }
             });
         });
     }
 
     public void setupValuesFromImage(Image image) {
-        maxX = (int) image.getWidth();
-        maxY = (int) image.getHeight();
         maxWidth = (int) image.getWidth();
         maxHeight = (int) image.getHeight();
-        infoWidth.setText(infoWidth.getText() + (int) image.getWidth());
-        infoHeight.setText(infoHeight.getText() + (int) image.getHeight());
-        xStart.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxX));
-        yStart.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxY));
-        xEnd.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxX));
-        yEnd.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxY));
-        width.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxWidth));
-        height.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxHeight));
-        xStartProperty = new SimpleIntegerProperty(0);
-        yStartProperty = new SimpleIntegerProperty(0);
-        xEndProperty = new SimpleIntegerProperty(maxWidth);
-        yEndProperty = new SimpleIntegerProperty(maxHeight);
-        widtProperty = new SimpleIntegerProperty(maxWidth);
-        heightProperty = new SimpleIntegerProperty(maxHeight);
-        Bindings.bindBidirectional(xStart.getEditor().textProperty(), xStartProperty, new NumberStringConverter());
-        Bindings.bindBidirectional(yStart.getEditor().textProperty(), yStartProperty, new NumberStringConverter());
-        Bindings.bindBidirectional(xEnd.getEditor().textProperty(), xEndProperty, new NumberStringConverter());
-        Bindings.bindBidirectional(yEnd.getEditor().textProperty(), yEndProperty, new NumberStringConverter());
-        Bindings.bindBidirectional(width.getEditor().textProperty(), widtProperty, new NumberStringConverter());
-        Bindings.bindBidirectional(height.getEditor().textProperty(), heightProperty, new NumberStringConverter());
-        setEditable(false, ((RadioButton) lockTG.getSelectedToggle()).getId());
+        updateImageInfo();
+        updateValueFactory();
+        updateEditorsValues();
+        setEditable(false);
+        setEditable(true, ((RadioButton) lockTG.getSelectedToggle()).getId());
     }
 
     @FXML
     private void crop() {
-        System.out.println(widtProperty);
-        System.out.println(((RadioButton) lockTG.getSelectedToggle()).getId());
+        error.setVisible(false);
+        int x = xStart.getValue();
+        int y = yStart.getValue();
+        int resultWidth;
+        int resultHeight;
+        if (((RadioButton) lockTG.getSelectedToggle()).getId().equals("whLock")) {
+            resultWidth = width.getValue();
+            resultHeight = height.getValue();
+        } else {
+            resultWidth = xEnd.getValue() - xStart.getValue();
+            resultHeight = yEnd.getValue() - yStart.getValue();
+        }
+        if (resultWidth > 0 && resultHeight > 0 && x + resultWidth <= maxWidth && y + maxHeight <= maxHeight) {
+            Image image = processingController.cropImage(x, y, resultWidth, resultHeight);
+            mainController.setImage(image);
+            maxWidth = resultWidth;
+            maxHeight = resultHeight;
+            updateImageInfo();
+            updateValueFactory();
+            updateEditorsValues();
+        } else if (resultWidth <= 0 || resultHeight <= 0) {
+            error.setText("End coordinates must be bigger than starts");
+            error.setVisible(true);
+        } else if (x + resultWidth > maxWidth || y + maxHeight > maxHeight) {
+            error.setText("Dimensions cannot be bigger than image dimensions");
+            error.setVisible(true);
+        }
+    }
+
+    private void updateImageInfo() {
+        infoWidth.setText(maxWidth.toString());
+        infoHeight.setText(maxHeight.toString());
+    }
+
+    private void updateValueFactory() {
+        xStart.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxWidth));
+        yStart.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxHeight));
+        xEnd.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxWidth));
+        yEnd.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxHeight));
+        width.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxWidth));
+        height.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxHeight));
+    }
+
+    private void updateEditorsValues() {
+        xEnd.getEditor().setText(maxWidth.toString());
+        yEnd.getEditor().setText(maxHeight.toString());
+        width.getEditor().setText(maxWidth.toString());
+        height.getEditor().setText(maxHeight.toString());
     }
 
     private void numberFormatter(Spinner spinner, String oldValue, String newValue) {
@@ -150,13 +172,11 @@ public class CropController {
     private void setMinValue(Spinner spinner) {
         if (spinner.getEditor().getText().equals(""))
             spinner.getEditor().setText("0");
+        int width;
+        int height;
     }
 
     private void setEditable(boolean value) {
-        xStart.setEditable(value);
-        xStart.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
-        yStart.setEditable(value);
-        yStart.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
         xEnd.setEditable(value);
         xEnd.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
         yEnd.setEditable(value);
@@ -169,13 +189,7 @@ public class CropController {
 
     private void setEditable(boolean value, String lockItemId) {
         switch (lockItemId) {
-            case "xyStartLock":
-                xStart.setEditable(value);
-                xStart.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
-                yStart.setEditable(value);
-                yStart.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
-                break;
-            case "xyEndLock":
+            case "xyLock":
                 xEnd.setEditable(value);
                 xEnd.getChildrenUnmodifiable().forEach(node -> node.setDisable(!value));
                 yEnd.setEditable(value);
