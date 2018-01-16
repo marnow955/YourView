@@ -1,6 +1,6 @@
 package com.github.marnow955.yourview.controllers.edit_panes;
 
-import com.github.marnow955.yourview.controllers.MainController;
+import com.github.marnow955.yourview.controllers.EditPanelController;
 import com.github.marnow955.yourview.data.processing.ImageManipulationsController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,10 +34,10 @@ public class CropController {
     @FXML
     private Spinner<Integer> height;
 
-    private MainController mainController;
+    private EditPanelController mainController;
     private ImageManipulationsController processingController;
 
-    public void injectMainController(MainController mainController) {
+    public void injectMainController(EditPanelController mainController) {
         this.mainController = mainController;
     }
 
@@ -117,7 +117,7 @@ public class CropController {
             resultWidth = xEnd.getValue() - xStart.getValue();
             resultHeight = yEnd.getValue() - yStart.getValue();
         }
-        if (resultWidth > 0 && resultHeight > 0 && x + resultWidth <= maxWidth && y + maxHeight <= maxHeight) {
+        if (resultWidth > 0 && resultHeight > 0 && x + resultWidth <= maxWidth && y + resultHeight <= maxHeight) {
             Image image = processingController.cropImage(x, y, resultWidth, resultHeight);
             mainController.setImage(image);
             maxWidth = resultWidth;
@@ -128,7 +128,7 @@ public class CropController {
         } else if (resultWidth <= 0 || resultHeight <= 0) {
             error.setText("End coordinates must be bigger than starts");
             error.setVisible(true);
-        } else if (x + resultWidth > maxWidth || y + maxHeight > maxHeight) {
+        } else if (x + resultWidth > maxWidth || y + resultHeight > maxHeight) {
             error.setText("Dimensions cannot be bigger than image dimensions");
             error.setVisible(true);
         }
@@ -172,8 +172,6 @@ public class CropController {
     private void setMinValue(Spinner spinner) {
         if (spinner.getEditor().getText().equals(""))
             spinner.getEditor().setText("0");
-        int width;
-        int height;
     }
 
     private void setEditable(boolean value) {

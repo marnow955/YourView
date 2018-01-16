@@ -11,12 +11,16 @@
       prefWidth="400.0">
 
     <HBox styleClass="bottomBorder">
-        <Button styleClass="textButton, rightBorder, flatButton" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+        <Button fx:id="undoB" onAction="#undo" styleClass="textButton, rightBorder, flatButton"
+                disable="${controller.hasPreviousDisabled}"
+                HBox.hgrow="ALWAYS" maxWidth="Infinity">
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="undo"/>
             </graphic>
         </Button>
-        <Button styleClass="textButton, flatButton" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+        <Button fx:id="redoB" onAction="#redo" styleClass="textButton, flatButton"
+                disable="${controller.hasNextDisabled}"
+                HBox.hgrow="ALWAYS" maxWidth="Infinity">
             <graphic>
                 <Glyph fontFamily="FontAwesome" icon="repeat"/>
             </graphic>

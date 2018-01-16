@@ -88,7 +88,6 @@ public class MainController {
     private File imageFile;
     private DirectoryImageLoader directory;
     private Image image;
-    private ImageManipulationsController processingController;
 
     private IntegerProperty imageIndex = new SimpleIntegerProperty(-1);
     BooleanProperty isImageSelectedProperty = new SimpleBooleanProperty(false);
@@ -139,19 +138,11 @@ public class MainController {
         editPanel.managedProperty().bind(editPanel.visibleProperty());
         editPanel.visibleProperty().bind(isEditPanelSelectedProperty);
         isChBackgroundSelectedProperty.addListener(((observable, oldValue, newValue) -> showCheckedBackground(newValue)));
-        toolbarPosition.addListener((observable, oldValue, newValue) -> {
-            changeToolbarPosition();
-        });
-        thumbnailsPosition.addListener((observable, oldValue, newValue) -> {
-            changeThumbViewPosition();
-        });
-        navigationBarPosition.addListener((observable, oldValue, newValue) -> {
-            changeNavigationBarPosition();
-        });
+        toolbarPosition.addListener((observable, oldValue, newValue) -> changeToolbarPosition());
+        thumbnailsPosition.addListener((observable, oldValue, newValue) -> changeThumbViewPosition());
+        navigationBarPosition.addListener((observable, oldValue, newValue) -> changeNavigationBarPosition());
         window.setFullScreenExitHint("");
-        isFullScreenSelectedProperty.addListener((observable, oldValue, newValue) -> {
-            toggleFullScreen();
-        });
+        isFullScreenSelectedProperty.addListener((observable, oldValue, newValue) -> toggleFullScreen());
         window.fullScreenProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue)
                 isFullScreenSelectedProperty.set(false);
@@ -163,53 +154,41 @@ public class MainController {
         settings = Settings.getSettingsInstance();
         settings = settings.removeListeners();
         isChBackgroundSelectedProperty.set(settings.isChBackgroundSelected());
-        settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isChBackgroundSelectedProperty.set(newValue);
-        });
+        settings.isChBackgroundSelectedProperty().addListener((observable, oldValue, newValue) ->
+                isChBackgroundSelectedProperty.set(newValue));
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
-        settings.getLanguageProperty().addListener((observable, oldValue, newValue) -> {
-            reloadView();
-        });
+        settings.getLanguageProperty().addListener((observable, oldValue, newValue) -> reloadView());
         settings.getThemeNameProperty().addListener((observable, oldValue, newValue) -> {
             String theme = getClass().getResource("/styles/MainView_" + settings.getThemeName() + ".css").toExternalForm();
             window.getScene().getStylesheets().setAll(theme);
         });
         isMenuVisibleProperty.set(settings.isMenuVisible());
-        settings.isMenuVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isMenuVisibleProperty.set(newValue);
-        });
+        settings.isMenuVisibleProperty().addListener((observable, oldValue, newValue) ->
+                isMenuVisibleProperty.set(newValue));
         isImageInfoPanelSelectedProperty.set(settings.isInfoPanelSelected());
-        settings.isInfoPanelSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isImageInfoPanelSelectedProperty.set(newValue);
-        });
+        settings.isInfoPanelSelectedProperty().addListener((observable, oldValue, newValue) ->
+                isImageInfoPanelSelectedProperty.set(newValue));
         isToolbarSelectedProperty.set(settings.isToolbarVisible());
-        settings.isToolbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isToolbarSelectedProperty.set(newValue);
-        });
+        settings.isToolbarVisibleProperty().addListener((observable, oldValue, newValue) ->
+                isToolbarSelectedProperty.set(newValue));
         isThumbViewSelectedProperty.set(settings.isThumbViewSelected());
-        settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) -> {
-            isThumbViewSelectedProperty.set(newValue);
-        });
+        settings.isThumbViewSelectedProperty().addListener((observable, oldValue, newValue) ->
+                isThumbViewSelectedProperty.set(newValue));
         toolbarPosition.set(settings.getToolbarPosition());
-        settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) -> {
-            toolbarPosition.set(newValue);
-        });
+        settings.getToolbarPositionProperty().addListener((observable, oldValue, newValue) ->
+                toolbarPosition.set(newValue));
         thumbnailsPosition.set(settings.getThumbnailsPosition());
-        settings.getThumbnailsPositionProperty().addListener((observable, oldValue, newValue) -> {
-            thumbnailsPosition.set(newValue);
-        });
+        settings.getThumbnailsPositionProperty().addListener((observable, oldValue, newValue) ->
+                thumbnailsPosition.set(newValue));
         isStatusBarVisibleProperty.set(settings.isStatusbarVisible());
-        settings.isStatusbarVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isStatusBarVisibleProperty.set(newValue);
-        });
+        settings.isStatusbarVisibleProperty().addListener((observable, oldValue, newValue) ->
+                isStatusBarVisibleProperty.set(newValue));
         isNavigationBarVisibleProperty.set(settings.isNavigationBarVisible());
-        settings.isNavigationBarVisibleProperty().addListener((observable, oldValue, newValue) -> {
-            isNavigationBarVisibleProperty.set(newValue);
-        });
+        settings.isNavigationBarVisibleProperty().addListener((observable, oldValue, newValue) ->
+                isNavigationBarVisibleProperty.set(newValue));
         navigationBarPosition.set(settings.getNavigationBarPosition());
-        settings.getNavigationBarPositionProperty().addListener((observable, oldValue, newValue) -> {
-            navigationBarPosition.set(newValue);
-        });
+        settings.getNavigationBarPositionProperty().addListener((observable, oldValue, newValue) ->
+                navigationBarPosition.set(newValue));
         settings.isHideNavBarOnClickSelectedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue)
                 isNavigationBarVisibleProperty.set(true);
@@ -317,7 +296,6 @@ public class MainController {
             return;
         this.imageFile = imageFile;
         image = ImageReaderWriter.openImage(this.imageFile, false);
-        processingController = new ImageManipulationsController(image);
         if (image != null) {
             imagePanelController.setImage(image);
             imagePanelController.adjustImage(image);
@@ -336,7 +314,6 @@ public class MainController {
         imageIndex.set(index);
         imageFile = directory.getImageFile(index);
         image = ImageReaderWriter.openImage(imageFile, false);
-        processingController = new ImageManipulationsController(image);
         imagePanelController.setImage(image);
         imagePanelController.adjustImage(image);
         isImageSelectedProperty.set(true);
@@ -370,24 +347,25 @@ public class MainController {
     }
 
     void saveFile() {
+        saveImage(image);
+    }
+
+    boolean saveImage(Image image) {
         File newImageFile = ImageReaderWriter.showSaveDialog(window, imageFile);
         if (newImageFile == null)
-            return;
+            return false;
         ImageReaderWriter.saveImage(image, newImageFile);
         imageFile = newImageFile;
         openImage(imageFile);
+        return true;
     }
 
     void deleteFile() {
         if (deleteConfirm()) {
             FileUtils fileUtils = FileUtils.getInstance();
+            image = null;
             if (fileUtils.hasTrash()) {
                 try {
-                    //TODO: bug
-                    /* java.io.IOException: Move to trash failed:
-                        C:\Users\Marek Noworolnik\Lenna.png:
-                        Proces nie może uzyskać dostępu do pliku, ponieważ jest on używany przez inny proces.
-                     */
                     fileUtils.moveToTrash(new File[]{imageFile});
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -422,7 +400,6 @@ public class MainController {
         imageIndex.set(-1);
         directory = null;
         image = null;
-        processingController = null;
         isImageSelectedProperty.set(false);
         thumbViewController.setThumbView(FXCollections.observableList(new ArrayList<>()));
         imagePanelController.setImage(null);
@@ -492,23 +469,23 @@ public class MainController {
 
     void rotateLeft() {
         //TODO: change to imageview rotate and save exif rotate flag tag (if user click save roate permanently)
-        image = processingController.rotateLeft();
+        image = new ImageManipulationsController(image).rotateLeft();
         setImage(image);
     }
 
     void rotateRight() {
         //TODO: same as rotateLeft
-        image = processingController.rotateRight();
+        image = new ImageManipulationsController(image).rotateRight();
         setImage(image);
     }
 
     void horizontalFlip() {
-        image = processingController.horizontalFlip();
+        image = new ImageManipulationsController(image).horizontalFlip();
         setImage(image);
     }
 
     void verticalFlip() {
-        image = processingController.verticalFlip();
+        image = new ImageManipulationsController(image).verticalFlip();
         setImage(image);
     }
 
@@ -588,7 +565,7 @@ public class MainController {
 
     void showEditPanel() {
         isEditPanelSelectedProperty.set(true);
-        editPanelController.loadEditView(image, processingController);
+        editPanelController.loadEditView(image);
     }
 
     private void toggleEditModeView() {

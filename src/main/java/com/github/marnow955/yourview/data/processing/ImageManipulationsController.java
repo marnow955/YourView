@@ -11,12 +11,34 @@ import java.awt.image.BufferedImage;
 
 public class ImageManipulationsController {
 
-    Image image;
-    OperationsResults history;
+    private Image image;
+    private OperationsResults history;
 
     public ImageManipulationsController(Image image) {
         this.image = image;
-        history = new OperationsResults();
+        history = new OperationsResults(image);
+    }
+
+    public Image getCurrentImage() {
+        return image;
+    }
+
+    public boolean hasPrevious() {
+        return history.canUndo();
+    }
+
+    public boolean hasNext() {
+        return history.canRedo();
+    }
+
+    public Image previous() throws Exception {
+        this.image = history.undo();
+        return this.image;
+    }
+
+    public Image next() throws Exception {
+        this.image = history.redo();
+        return this.image;
     }
 
     public Image rotateLeft() {
@@ -48,7 +70,8 @@ public class ImageManipulationsController {
         BufferedImage result = processor.getTransformedImage(toBufferedImage(image));
         Image resultImage = toFXImage(result);
         history.addToHistory(resultImage);
-        return resultImage;
+        this.image = resultImage;
+        return this.image;
     }
 
     private BufferedImage toBufferedImage(Image image) {
