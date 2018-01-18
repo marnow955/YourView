@@ -79,7 +79,7 @@ public class SettingsPanelController {
                 toggle.setSelected(true);
         });
         checked_bg.setSelected(settings.isChBackgroundSelected());
-        langCB.getSelectionModel().select(resources.getString("lang_name"));
+        langCB.getSelectionModel().select(resources.getString(resources.getString("lang_name")));
 
         menuChBox.setSelected(settings.isMenuVisible());
         statusbarChBox.setSelected(settings.isStatusbarVisible());
@@ -143,14 +143,32 @@ public class SettingsPanelController {
         settingsMap.put("statusbar", String.valueOf(statusbarChBox.isSelected()));
         settingsMap.put("info_panel", String.valueOf(infoPanelChBox.isSelected()));
         settingsMap.put("toolbar", String.valueOf(toolbarChBox.isSelected()));
-        settingsMap.put("toolbar_position", toolbarPosition.getSelectionModel().getSelectedItem().toLowerCase());
+        String pos = toolbarPosition.getSelectionModel().getSelectedItem();
+        settingsMap.put("toolbar_position", getPositionString(pos));
         settingsMap.put("thumbnails", String.valueOf(thumbnailsChBox.isSelected()));
-        settingsMap.put("thumbnails_position", thumbViewPosition.getSelectionModel().getSelectedItem().toLowerCase());
+        pos = thumbViewPosition.getSelectionModel().getSelectedItem();
+        settingsMap.put("thumbnails_position", getPositionString(pos));
         settingsMap.put("checked_bg", String.valueOf(checked_bg.isSelected()));
         settingsMap.put("navigation_bar", String.valueOf(navigationBarChBox.isSelected()));
-        settingsMap.put("navigation_bar_position", navigationBarPosition.getSelectionModel().getSelectedItem().toLowerCase());
+        pos = navigationBarPosition.getSelectionModel().getSelectedItem();
+        settingsMap.put("navigation_bar_position", getPositionString(pos));
         settingsMap.put("hide_nav_bar", String.valueOf(hideNavBarChBox.isSelected()));
         return settingsMap;
+    }
+
+    private String getPositionString(String pos) {
+        if (pos.equals(resources.getString("w_top")))
+            return "top";
+        else if (pos.equals(resources.getString("w_left")))
+            return "left";
+        else if (pos.equals(resources.getString("w_right")))
+            return "right";
+        else if (pos.equals(resources.getString("w_bottom")))
+            return "bottom";
+        else if (pos.equals(resources.getString("w_center")))
+            return "center";
+        else
+            return "top";
     }
 
     private Optional<ButtonType> askToSave() {

@@ -12,9 +12,12 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class EditPanelController {
 
+    @FXML
+    private ResourceBundle resources;
     @FXML
     private Button undoB;
     @FXML
@@ -46,6 +49,7 @@ public class EditPanelController {
 
     void setupView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit_panes/Crop.fxml"));
+        loader.setResources(resources);
         try {
             cropPanel = loader.load();
         } catch (IOException e) {

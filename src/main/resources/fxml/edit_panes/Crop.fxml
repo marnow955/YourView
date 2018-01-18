@@ -6,7 +6,7 @@
 <?import org.controlsfx.glyphfont.Glyph?>
 <?import java.lang.Integer?>
 
-<TitledPane animated="false" prefWidth="400" text="Crop image"
+<TitledPane animated="false" prefWidth="400" text="%crop_crop_image"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.github.marnow955.yourview.controllers.edit_panes.CropController">
 
@@ -20,7 +20,7 @@
         <VBox spacing="5.0">
             <HBox spacing="10.0">
                 <VBox layoutX="10.0" layoutY="10.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                    <Label text="Start in:"/>
+                    <Label text="%crop_start_in"/>
                     <HBox alignment="BASELINE_LEFT">
                         <Label text="X:   "/>
                         <Spinner fx:id="xStart" editable="true" max="$maxWidth"/>
@@ -32,13 +32,13 @@
                     </HBox>
                 </VBox>
                 <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-                    <Label text="Image info: "/>
+                    <Label text="%crop_img_info"/>
                     <HBox alignment="BASELINE_LEFT">
-                        <Label text="Width: "/>
+                        <Label text="%crop_width"/>
                         <Label fx:id="infoWidth"/>
                     </HBox>
                     <HBox alignment="BASELINE_LEFT">
-                        <Label text="Height: "/>
+                        <Label text="%crop_height"/>
                         <Label fx:id="infoHeight"/>
                     </HBox>
                 </VBox>
@@ -52,7 +52,7 @@
                                 <Glyph fontFamily="FontAwesome" icon="lock"/>
                             </graphic>
                         </RadioButton>
-                        <Label text="Ends in: "/>
+                        <Label text="%crop_ends_in"/>
                     </HBox>
                     <HBox alignment="BASELINE_LEFT">
                         <Label maxWidth="Infinity" text="X: " HBox.hgrow="ALWAYS"/>
@@ -70,14 +70,14 @@
                                 <Glyph fontFamily="FontAwesome" icon="unlock"/>
                             </graphic>
                         </RadioButton>
-                        <Label text="Dimensions:"/>
+                        <Label text="%crop_dimensions"/>
                     </HBox>
                     <HBox alignment="BASELINE_LEFT">
-                        <Label maxWidth="Infinity" text="Width: " HBox.hgrow="ALWAYS"/>
+                        <Label maxWidth="Infinity" text="%crop_width" HBox.hgrow="ALWAYS"/>
                         <Spinner fx:id="width" editable="true" max="$maxWidth"/>
                     </HBox>
                     <HBox layoutX="10.0" layoutY="10.0" alignment="BASELINE_LEFT">
-                        <Label maxWidth="Infinity" text="Height: " HBox.hgrow="ALWAYS"/>
+                        <Label maxWidth="Infinity" text="%crop_height" HBox.hgrow="ALWAYS"/>
                         <Spinner fx:id="height" editable="true" max="$maxHeight"/>
                     </HBox>
                 </VBox>

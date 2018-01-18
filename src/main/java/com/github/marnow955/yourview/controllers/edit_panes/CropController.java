@@ -7,8 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import org.controlsfx.glyphfont.Glyph;
 
+import java.util.ResourceBundle;
+
 public class CropController {
 
+    @FXML
+    ResourceBundle resources;
     @FXML
     private Label error;
     @FXML
@@ -126,10 +130,10 @@ public class CropController {
             updateValueFactory();
             updateEditorsValues();
         } else if (resultWidth <= 0 || resultHeight <= 0) {
-            error.setText("End coordinates must be bigger than starts");
+            error.setText(resources.getString("crop_coordinates_error"));
             error.setVisible(true);
         } else if (x + resultWidth > maxWidth || y + resultHeight > maxHeight) {
-            error.setText("Dimensions cannot be bigger than image dimensions");
+            error.setText(resources.getString("crop_dimensions_error"));
             error.setVisible(true);
         }
     }
