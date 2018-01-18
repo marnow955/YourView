@@ -3,3 +3,5 @@
 *.iml
 target/*
 !target/*.jar
+!target/jfx/native/*.msi
+!target/jfx/native/*deb

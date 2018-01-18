@@ -1,5 +1,6 @@
 package com.github.marnow955.yourview.controllers;
 
+import com.github.marnow955.yourview.Main;
 import com.github.marnow955.yourview.settings.Settings;
 import com.github.marnow955.yourview.settings.SettingsWriter;
 import javafx.collections.FXCollections;
@@ -116,7 +117,7 @@ public class SettingsPanelController {
     private void saveChanges() {
         if (isSettingsChanged()) {
             settings.setSettingsFromMap(getUserSettingsAsMap());
-            SettingsWriter.writeSettingsToFile(settings, "settings.properties");
+            SettingsWriter.writeSettingsToFile(settings, Main.getUserDataDirectory() + "settings.properties");
         }
         stage.close();
     }
